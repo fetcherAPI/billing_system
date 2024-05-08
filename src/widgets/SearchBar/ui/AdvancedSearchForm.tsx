@@ -1,4 +1,5 @@
-import { Input, Button, Form } from "antd";
+import { Input, Form } from "antd";
+import { FindServiceBtn } from "entities/FindServiceBtn";
 import { useTranslation } from "react-i18next";
 
 export const AdvancedSearchForm = () => {
@@ -35,9 +36,7 @@ export const AdvancedSearchForm = () => {
         {() => (
           <>
             <p style={{ opacity: 0 }}>{"d"}</p>
-            <Button type="primary" htmlType="submit">
-              {t("search")}
-            </Button>
+            <FindServiceBtn type="submit" />
           </>
         )}
       </Form.Item>

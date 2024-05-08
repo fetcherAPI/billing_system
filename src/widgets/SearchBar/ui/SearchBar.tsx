@@ -6,6 +6,7 @@ import { useTranslation } from "react-i18next";
 import { useState } from "react";
 import { animated, config, useSpring } from "@react-spring/web";
 import AdvancedSearchForm from "./AdvancedSearchForm";
+import { FindServiceBtn } from "entities/FindServiceBtn";
 
 export const SearchBar = () => {
   const { t } = useTranslation("main");
@@ -29,7 +30,7 @@ export const SearchBar = () => {
           <AppstoreOutlined width={140} color="#cdcdcd" />
           <p>{t("advSearch")}</p>
         </MyButton>
-        {!advancedSearch && <MyButton>{t("search")}</MyButton>}
+        {!advancedSearch && <FindServiceBtn />}
       </div>
       {advancedSearch && <AdvancedSearchForm />}
     </animated.div>

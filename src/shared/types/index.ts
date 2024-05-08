@@ -1,2 +1,3 @@
-import { IBaseSliceSchema } from "./baseTypes";
-export type { IBaseSliceSchema };
+import { IBaseSliceSchema, IBaseProps } from "./baseTypes";
+
+export type { IBaseSliceSchema, IBaseProps };

@@ -4,3 +4,7 @@ export interface IBaseSliceSchema {
   isLoading: boolean;
   error: string | undefined | AxiosError;
 }
+
+export interface IBaseProps {
+  className?: string;
+}

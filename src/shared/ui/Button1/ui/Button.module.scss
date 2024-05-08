@@ -1,0 +1,52 @@
+.Button {
+    cursor: pointer;
+    border: none;
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: center;
+    align-items: center;
+    background: none;
+    outline: none;
+    padding: 0px 15px;
+    border-radius: 5px;
+    color: var(--primary-color);
+    min-height: 30px;
+    
+ }
+ 
+ .clear {
+    padding: 0;
+    border: none;
+    background: none;
+    outline: none;
+ }
+ 
+ .yellow {
+    background-color: var(--button-primary-color);
+    color: #000;
+    column-gap: 20px;
+    &:hover {
+       background-color: var(--hover-button-primary-color);
+    }
+ }
+ 
+ .action {
+    background-color: var(--action-btn-bg-color);
+    color: white;
+    min-height: 30px;
+    
+    &:hover {
+       background-color: var(--action-btn-hover-bg-color);
+    }
+    transition: background-color 0.5s;
+ }
+ 
+ .green {
+    background-color: var(--success-color);
+    color: var(--main-color);
+    column-gap: 20px;
+    &:hover {
+       background-color: var(--active-step-background-color);
+    }
+ }
+ 

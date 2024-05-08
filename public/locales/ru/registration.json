@@ -1,0 +1,12 @@
+{
+  "companyInn": "ИНН организации",
+  "companyPin": "ПИН руководителя",
+  "position": "Должность",
+  "site": "Сайт",
+  "legalAddress": "Юр адрес",
+  "companyName": "Наименование организации ",
+  "headFullname": "ФИО руководителя",
+  "eaddress": "Электронный адрес",
+  "locality": "Населенный пункт",
+  "actualAddress": "Фактический адрес"
+}

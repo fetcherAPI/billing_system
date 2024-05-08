@@ -34,4 +34,52 @@
     --overlay-color: rgba(0 0 0 / 60%);
     --red-light: #f00;
     --red-dark: #ce0505;
+
+
+    //Colors
+    --main-color: #fff;
+    --line-color: rgba(255, 255, 255, 0.1);
+    --button-primary-color: #FFC73A;
+    --hover-button-primary-color: #fcd36b;
+    --button-primary-transparet-color: rgba(251, 204, 0, 0.1);
+    --button-secondary-color: #54617A;
+    --modal-bg-color: #fff;
+    --modal-title-color: #1A2546;
+    --input-border-color: #D3E1F1;
+    --input-label-text-color: #2A3657;
+    --error-color: #D63717;
+    --jut: #ff9f8b;
+    --error-transparet-color: rgba(255, 81, 65, 0.1);
+    --input-placeholder-color: #8695AF;
+    --selected-nav-link-color: #2a60b7;
+
+    --active-step-background-color: #4ab453;
+    --active-step-background-transparent-color: rgba(
+                                                    74,
+                                                    180,
+                                                    83,
+                                                    0.15
+                                                    );
+    --active-step-text-color: #1c822f;
+    --success-color: #1c822f;
+    --success-transparet-color: rgba(66, 255, 65, 0.1);
+    --side-bar-btn-border-color: #e8f0f8;
+    --waiting-step-background-color: #aebfd7;
+    --waiting-step-background-transparent-color: rgba(
+                                                    174,
+                                                    191,
+                                                    215,
+                                                    0.15
+                                                    );
+    --waiting-step-text-color: #54617a;
+    --img_picker_btn: #54617a;
+
+    --cancel-order-color: #2A60B7;
+
+    --border-radius: 5px;
+
+    --action-btn-bg-color: #1785aa;
+    --action-btn-hover-bg-color: #075069;
+
+    --box-shadow: 0px 0px 25px 0px rgba(34, 60, 80, 0.2);
 }
