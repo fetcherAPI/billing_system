@@ -6,9 +6,14 @@ import cls from "./RegistrationSteps.module.scss";
 
 export const RegistrationSteps = ({ className }: IBaseProps) => {
   const [current, setCurrent] = useState(0);
+  const [click, setClick] = useState(false);
 
   const next = () => {
     setCurrent(current + 1);
+  };
+
+  const handleSubmitFormNext = () => {
+    setClick((prev) => !prev);
   };
 
   const prev = () => {
@@ -18,7 +23,13 @@ export const RegistrationSteps = ({ className }: IBaseProps) => {
   const steps = [
     {
       title: "First",
-      content: <RegistrationComanyForm />,
+      content: (
+        <RegistrationComanyForm
+          handleNext={next}
+          isClicked={click}
+          setClick={() => setClick((prev) => !prev)}
+        />
+      ),
     },
     {
       title: "Second",
@@ -42,7 +53,7 @@ export const RegistrationSteps = ({ className }: IBaseProps) => {
       <div className={cls.content}>{steps[current].content}</div>
       <div style={{ marginTop: 24 }}>
         {current < steps.length - 1 && (
-          <Button type="primary" onClick={() => next()}>
+          <Button type="primary" onClick={handleSubmitFormNext}>
             Next
           </Button>
         )}

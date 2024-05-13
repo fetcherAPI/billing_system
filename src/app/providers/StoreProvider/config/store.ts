@@ -1,15 +1,18 @@
+import $api from "shared/api/api";
 import { configureStore } from "@reduxjs/toolkit";
 import { StateSchema } from "./StateSchema";
 import { counterReducer } from "entities/Counter/";
-import $api from "shared/api/api";
+
 import { useDispatch } from "react-redux";
 import { LoginSliceReducer } from "features/Login";
+import { RegisterSliceReducer } from "features/Register";
 
 export function createReduxStore(initialState?: StateSchema) {
   return configureStore({
     reducer: {
       counter: counterReducer,
       login: LoginSliceReducer,
+      register: RegisterSliceReducer,
     },
     preloadedState: initialState,
     middleware: (getDefaultMiddleware) =>

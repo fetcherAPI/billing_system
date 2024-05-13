@@ -1,21 +1,54 @@
 import { Button, Col, Form, Input, Row } from "antd";
 import { useTranslation } from "react-i18next";
 import { classNames } from "shared/lib/classNames/classNames";
+import { useEffect } from "react";
+import { useAppDispatch } from "app/providers/StoreProvider";
+import { setRegisterProperty } from "features/Register/model/slice/RegisterSlice";
+import { keyOfRegisterSliceSchema } from "features/Register/types/SliceSchema";
 import cls from "./style.module.scss";
+import { useSelector } from "react-redux";
+import { registerData } from "../../model/selectors";
 
 interface IProps {
   className?: string;
-  handleSubmit?: any;
+  handleNext: any;
+  isClicked: boolean;
+  setClick: any;
 }
 
-export const RegistrationComanyForm = ({ className }: IProps) => {
+export const RegistrationComanyForm = ({
+  className,
+  isClicked,
+  handleNext,
+  setClick,
+}: IProps) => {
   const { t } = useTranslation("registration");
   const [form] = Form.useForm();
+  const dispatch = useAppDispatch();
+
+  const formFields = useSelector(registerData);
+
+  useEffect(() => {
+    if (isClicked) {
+      form.submit();
+    }
+  }, [form, isClicked]);
+
+  const handleFinish = () => {
+    handleNext();
+    setClick((prev: boolean) => !prev);
+  };
+
+  const handleChangeInput = (key: keyOfRegisterSliceSchema, data: any) => {
+    dispatch(setRegisterProperty({ key: key, data }));
+  };
 
   return (
     <Form
+      initialValues={formFields}
       layout={"vertical"}
       form={form}
+      onFinish={handleFinish}
       className={classNames(cls.from, {}, [className])}
     >
       <Row gutter={200} className={cls.row}>
@@ -25,14 +58,20 @@ export const RegistrationComanyForm = ({ className }: IProps) => {
             label={t("companyInn")}
             rules={[{ required: true, message: t("loginUsernameRuleText") }]}
           >
-            <Input placeholder="input placeholder" />
+            <Input
+              placeholder="input placeholder"
+              onChange={(e) => handleChangeInput("inn", e.target.value)}
+            />
           </Form.Item>
           <Form.Item
-            name={"password"}
+            name={"factAddress"}
             label={t("companyPin")}
             rules={[{ required: true, message: t("loginPassRuleText") }]}
           >
-            <Input placeholder="input placeholder" />
+            <Input
+              placeholder="input placeholder"
+              onChange={(e) => handleChangeInput("factAddress", e.target.value)}
+            />
           </Form.Item>
           <Form.Item
             name={"password"}

@@ -13,7 +13,6 @@ export const errorHandler = (error: AxiosError<any | unknown>): string => {
     [409, message || RESPONSE_ERRORS.CONFLICT],
     [500, message || RESPONSE_ERRORS.SERVER_ERROR],
   ]);
-  console.log("error", error);
   if (error.response?.status) {
     return (
       errors.get(error.response?.status) || RESPONSE_ERRORS.UNEXPECTED_ERROR

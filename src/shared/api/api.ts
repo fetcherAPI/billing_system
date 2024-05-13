@@ -46,7 +46,6 @@ $api.interceptors.response.use(
     if (error.response.status === 401 && !originalRequest._retry) {
       originalRequest._retry = true; // Помечаем, что мы уже пытались повторить запрос
       const newAccessToken = await refreshAccessToken(); // Получаем новый access токен
-      console.log(newAccessToken);
       axios.defaults.headers.common[
         "Authorization"
       ] = `Bearer ${newAccessToken}`; // Обновляем токен в заголовках
