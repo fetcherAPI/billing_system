@@ -1,9 +1,8 @@
 import { useTranslation } from "react-i18next";
-import { memo } from "react";
-import { MyButton } from "../Button/Button";
 import { GlobalOutlined } from "@ant-design/icons";
+import { Button1, ThemeButton } from "../Button1";
 
-export const LangSwitcher = memo(() => {
+export const LangSwitcher = () => {
   const { t, i18n } = useTranslation("main");
 
   const toggle = () => {
@@ -22,9 +21,9 @@ export const LangSwitcher = memo(() => {
     i18n.changeLanguage(getLanguage(i18n.language));
   };
   return (
-    <MyButton onClick={toggle}>
+    <Button1 onClick={toggle} theme={ThemeButton.CLEAR}>
       {t("lang")}
       <GlobalOutlined />
-    </MyButton>
+    </Button1>
   );
-});
+};
