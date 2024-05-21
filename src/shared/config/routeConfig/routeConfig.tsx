@@ -1,13 +1,18 @@
-import { RouteProps } from "react-router-dom";
-import { MainPage } from "../../../pages/MainPage/ui/MainPage";
+import { Outlet, RouteProps } from "react-router-dom";
+import { MainPage } from "pages/MainPage/ui/MainPage";
 import { LoginPage } from "pages/LoginPage/ui/LoginPage";
-import { RegistrationPage } from "pages/RegistrationPage/ui/RegistrationPage";
+import { RegistrationPageLazy } from "pages/RegistrationPage";
 
 export enum AppRoutes {
   MAIN = "main",
-  LOGIN = "login",
   ADMIN = "admin",
+  PUBLIC = "public",
+}
+
+export enum ChildRoutes {
   REGISTRATION = "registration",
+  LOGIN = "login",
+  COMPANY = "company",
 }
 
 export type AppRoutesProps = RouteProps & {
@@ -19,9 +24,15 @@ export type AppRoutesProps = RouteProps & {
 
 export const RoutePath: Record<AppRoutes, string> = {
   [AppRoutes.MAIN]: "/",
-  [AppRoutes.LOGIN]: "login",
   [AppRoutes.ADMIN]: "admin",
-  [AppRoutes.REGISTRATION]: "registration",
+  [AppRoutes.PUBLIC]: "public",
+  // последний
+};
+
+export const ChildRoutePath: Record<ChildRoutes, string> = {
+  [ChildRoutes.REGISTRATION]: "registration",
+  [ChildRoutes.LOGIN]: "login",
+  [ChildRoutes.COMPANY]: "company",
   // последний
 };
 
@@ -30,16 +41,30 @@ export const routeConfig: Record<AppRoutes, AppRoutesProps> = {
     path: RoutePath.main,
     element: <MainPage />,
   },
-  [AppRoutes.LOGIN]: {
-    path: RoutePath.login,
-    element: <LoginPage />,
-  },
+
   [AppRoutes.ADMIN]: {
     path: RoutePath.admin,
     element: <h1>admin</h1>,
   },
-  [AppRoutes.REGISTRATION]: {
-    path: RoutePath.registration,
-    element: <RegistrationPage />,
+
+  [AppRoutes.PUBLIC]: {
+    path: "public",
+    element: <Outlet />,
+    child: {
+      [ChildRoutes.REGISTRATION]: {
+        path: ChildRoutePath.registration,
+        element: <RegistrationPageLazy />,
+        child: {
+          ["type"]: {
+            path: ":type",
+            element: <RegistrationPageLazy />,
+          },
+        },
+      },
+      [ChildRoutes.LOGIN]: {
+        path: ChildRoutePath.login,
+        element: <LoginPage />,
+      },
+    },
   },
 };

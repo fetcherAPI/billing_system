@@ -1,6 +1,6 @@
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
-import { AppRoutes } from "shared/config";
+import { routes } from "shared/config";
 
 interface IProps {
   path?: string;
@@ -8,5 +8,5 @@ interface IProps {
 
 export const LoginBtn = ({ path }: IProps) => {
   const { t } = useTranslation("header");
-  return <Link to={path || AppRoutes.LOGIN}>{t("login")}</Link>;
+  return <Link to={path || routes.getLogin()}>{t("login")}</Link>;
 };

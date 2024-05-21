@@ -13,6 +13,8 @@ export const LangSwitcher = memo(() => {
           return "en";
         case "en":
           return "ru";
+        case "en-US":
+          return "ru";
         default:
           break;
       }

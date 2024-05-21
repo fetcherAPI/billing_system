@@ -2,3 +2,31 @@
     width: 70%;
     margin: 0 auto;
 }
+
+.inner {
+    background-color: white;
+    border-radius: 15px ;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    column-gap: 10%;
+    padding: 2%;
+    height: 80vh;
+}
+
+.type {
+    background-color: antiquewhite;
+    width: 25%;
+    height: 20%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    font-size: 1.3vw;
+   
+    transition: all 1s;
+    &:hover {
+        scale: 1.1;
+        box-shadow: var(--box-shadow);
+    }
+}
