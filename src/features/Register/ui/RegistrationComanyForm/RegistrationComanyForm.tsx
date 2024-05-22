@@ -49,6 +49,7 @@ export const RegistrationComanyForm = ({
       layout={"vertical"}
       form={form}
       onFinish={handleFinish}
+      onFinishFailed={() => setClick(false)}
       className={classNames(cls.from, {}, [className])}
     >
       <Row gutter={200} className={cls.row}>
