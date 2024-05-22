@@ -12,7 +12,6 @@ const { Header: HeaderAntd } = Layout;
 
 export const Header = () => {
   const { t } = useTranslation("header");
-  const [visible, setVisible] = useState(false);
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
 
   useEffect(() => {
@@ -24,12 +23,6 @@ export const Header = () => {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  const showDrawer = () => {
-    setVisible(true);
-  };
-  const closeDrawer = () => {
-    setVisible(false);
-  };
   return (
     <HeaderAntd>
       <Row align={"middle"} justify={"space-between"}>
@@ -55,11 +48,7 @@ export const Header = () => {
             </Row>
           </>
         ) : (
-          <BurgerMenu
-            closeDrawer={closeDrawer}
-            showDrawer={showDrawer}
-            isOpen={visible}
-          />
+          <BurgerMenu />
         )}
       </Row>
     </HeaderAntd>

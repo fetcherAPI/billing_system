@@ -3,6 +3,7 @@
     margin: 0 auto;
 }
 
+
 .inner {
     background-color: white;
     border-radius: 15px ;
@@ -14,6 +15,8 @@
     height: 80vh;
 }
 
+
+
 .type {
     background-color: antiquewhite;
     width: 25%;
@@ -23,10 +26,27 @@
     justify-content: center;
     border-radius: 10px;
     font-size: 1.3vw;
-   
     transition: all 1s;
     &:hover {
         scale: 1.1;
         box-shadow: var(--box-shadow);
     }
 }
+
+@media only screen and (max-width: 767px) {
+    .wrapper {
+        width: 100%;
+    }
+
+    .inner {
+        height: 200px;
+        flex-direction: column;
+        row-gap: 20px;
+    }
+
+    .type {
+        width: 90%;
+        height: 40%;
+        font-size: 3vw;
+    }
+  }

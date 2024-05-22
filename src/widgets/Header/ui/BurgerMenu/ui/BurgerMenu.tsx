@@ -5,18 +5,17 @@ import { RegisterBtn } from "features/Register";
 import { Link } from "react-router-dom";
 import { LangSwitcher } from "shared/ui/LangSwitcher";
 import { useTranslation } from "react-i18next";
+import { useState } from "react";
 
-interface IBurgerMenuProps {
-  showDrawer: () => void;
-  closeDrawer: () => void;
-  isOpen: boolean;
-}
+export const BurgerMenu = () => {
+  const [visible, setVisible] = useState(false);
 
-export const BurgerMenu = ({
-  closeDrawer,
-  isOpen,
-  showDrawer,
-}: IBurgerMenuProps) => {
+  const showDrawer = () => {
+    setVisible(true);
+  };
+  const closeDrawer = () => {
+    setVisible(false);
+  };
   const { t } = useTranslation("header");
 
   const items: MenuProps["items"] = [
@@ -56,9 +55,9 @@ export const BurgerMenu = ({
         title="Menu"
         placement="right"
         onClose={closeDrawer}
-        open={isOpen}
+        open={visible}
       >
-        <Menu mode="vertical" items={items} />
+        <Menu mode="vertical" items={items} onClick={() => setVisible(false)} />
       </Drawer>
     </>
   );

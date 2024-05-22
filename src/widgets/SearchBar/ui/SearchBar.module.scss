@@ -20,10 +20,16 @@
     }
 }
 
+@media only screen and (max-width: 767px) {
+    .blur {
+     width: 100%;
+    }
+  }
+
 .advancedSearch {
    
     p{
-        font-size: 0.9vw;
+        font-size:calc(5px + 8 * (100vw - 320px) / 880);
         white-space: nowrap;
         color: gray;
         &:hover{
