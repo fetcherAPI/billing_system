@@ -1,7 +1,7 @@
+import { forwardRef, useImperativeHandle } from "react";
 import { Button, Col, Form, Input, Row } from "antd";
 import { useTranslation } from "react-i18next";
 import { classNames } from "shared/lib/classNames/classNames";
-import { useEffect } from "react";
 import { useAppDispatch } from "app/providers/StoreProvider";
 import { setRegisterProperty } from "features/Register/model/slice/RegisterSlice";
 import { keyOfRegisterSliceSchema } from "features/Register/types/SliceSchema";
@@ -11,36 +11,35 @@ import { registerData } from "../../model/selectors";
 
 interface IProps {
   className?: string;
-  handleNext: any;
-  isClicked: boolean;
-  setClick: any;
+  handleNext: () => void;
 }
 
-export const RegistrationComanyForm = ({
-  className,
-  isClicked,
-  handleNext,
-  setClick,
-}: IProps) => {
+export interface RegistrationComanyFormRef {
+  submit: () => void;
+}
+
+export const RegistrationComanyForm = forwardRef<
+  RegistrationComanyFormRef,
+  IProps
+>(({ className, handleNext }, ref) => {
   const { t } = useTranslation("registration");
   const [form] = Form.useForm();
   const dispatch = useAppDispatch();
 
   const formFields = useSelector(registerData);
 
-  useEffect(() => {
-    if (isClicked) {
+  useImperativeHandle(ref, () => ({
+    submit() {
       form.submit();
-    }
-  }, [form, isClicked]);
+    },
+  }));
 
   const handleFinish = () => {
     handleNext();
-    setClick((prev: boolean) => !prev);
   };
 
   const handleChangeInput = (key: keyOfRegisterSliceSchema, data: any) => {
-    dispatch(setRegisterProperty({ key: key, data }));
+    dispatch(setRegisterProperty({ key, data }));
   };
 
   return (
@@ -49,7 +48,6 @@ export const RegistrationComanyForm = ({
       layout={"vertical"}
       form={form}
       onFinish={handleFinish}
-      onFinishFailed={() => setClick(false)}
       className={classNames(cls.from, {}, [className])}
     >
       <Row gutter={200} className={cls.row}>
@@ -95,16 +93,6 @@ export const RegistrationComanyForm = ({
           >
             <Input placeholder="input placeholder" />
           </Form.Item>
-          <Form.Item>
-            <Button
-              type="primary"
-              htmlType="submit"
-              size="small"
-              style={{ opacity: 0 }}
-            >
-              {t("login")}
-            </Button>
-          </Form.Item>
         </Col>
 
         <Col style={{ width: "50%" }}>
@@ -116,21 +104,14 @@ export const RegistrationComanyForm = ({
             <Input placeholder="input placeholder" />
           </Form.Item>
           <Form.Item
-            name={"username"}
+            name={"headFullname"}
             label={t("headFullname")}
             rules={[{ required: true, message: t("loginUsernameRuleText") }]}
           >
             <Input placeholder="input placeholder" />
           </Form.Item>
           <Form.Item
-            name={"username"}
-            label={t("companyName")}
-            rules={[{ required: true, message: t("loginUsernameRuleText") }]}
-          >
-            <Input placeholder="input placeholder" />
-          </Form.Item>
-          <Form.Item
-            name={"username"}
+            name={"locality"}
             label={t("locality")}
             rules={[{ required: true, message: t("loginUsernameRuleText") }]}
           >
@@ -145,6 +126,11 @@ export const RegistrationComanyForm = ({
           </Form.Item>
         </Col>
       </Row>
+      <Form.Item style={{ display: "none" }}>
+        <Button type="primary" htmlType="submit">
+          {t("login")}
+        </Button>
+      </Form.Item>
     </Form>
   );
-};
+});

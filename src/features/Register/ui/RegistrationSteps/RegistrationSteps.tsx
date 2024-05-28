@@ -1,24 +1,25 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { Button, message, Steps } from "antd";
 import { IBaseProps } from "shared/types";
-import { RegistrationComanyForm } from "../RegistrationComanyForm/RegistrationComanyForm";
+import {
+  RegistrationComanyForm,
+  RegistrationComanyFormRef,
+} from "../RegistrationComanyForm/RegistrationComanyForm";
 import cls from "./RegistrationSteps.module.scss";
 import { BackButton } from "shared/ui";
 
 export const RegistrationSteps = ({ className }: IBaseProps) => {
   const [current, setCurrent] = useState(0);
-  const [click, setClick] = useState(false);
+  const formRef = useRef<RegistrationComanyFormRef>(null);
 
   const next = () => {
-    setCurrent(current + 1);
-  };
-
-  const handleSubmitFormNext = () => {
-    setClick((prev) => !prev);
+    if (formRef.current) {
+      formRef.current.submit();
+    }
   };
 
   const prev = () => {
-    setCurrent(current - 1);
+    setCurrent((prev) => prev - 1);
   };
 
   const steps = [
@@ -26,19 +27,14 @@ export const RegistrationSteps = ({ className }: IBaseProps) => {
       title: "First",
       content: (
         <RegistrationComanyForm
-          handleNext={next}
-          isClicked={click}
-          setClick={() => setClick((prev) => !prev)}
+          ref={formRef}
+          handleNext={() => setCurrent(current + 1)}
         />
       ),
     },
     {
       title: "Second",
       content: "Second-content",
-    },
-    {
-      title: "Last",
-      content: "Last-content",
     },
     {
       title: "Last",
@@ -56,7 +52,7 @@ export const RegistrationSteps = ({ className }: IBaseProps) => {
         <BackButton>
           <>
             {current < steps.length - 1 && (
-              <Button type="primary" onClick={handleSubmitFormNext}>
+              <Button type="primary" onClick={next}>
                 Next
               </Button>
             )}
@@ -69,7 +65,7 @@ export const RegistrationSteps = ({ className }: IBaseProps) => {
               </Button>
             )}
             {current > 0 && (
-              <Button style={{ margin: "0 8px" }} onClick={() => prev()}>
+              <Button style={{ margin: "0 8px" }} onClick={prev}>
                 Previous
               </Button>
             )}
