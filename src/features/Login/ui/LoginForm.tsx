@@ -20,7 +20,7 @@ export const LoginForm = () => {
   };
 
   useEffect(() => {
-    userRole && navigate(`../${userRole}`);
+    userRole && navigate(`../../${userRole}`);
   }, [navigate, userRole]);
   return (
     <Form

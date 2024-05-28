@@ -3,7 +3,7 @@ import { GlobalOutlined } from "@ant-design/icons";
 import { Button1, ThemeButton } from "../Button1";
 
 export const LangSwitcher = () => {
-  const { t, i18n } = useTranslation("main");
+  const { t, i18n } = useTranslation();
 
   const toggle = () => {
     function getLanguage(key: string) {
