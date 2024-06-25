@@ -48,7 +48,7 @@ export const routeConfig: Record<AppRoutes, AppRoutesProps> = {
   },
 
   [AppRoutes.PUBLIC]: {
-    path: "public",
+    path: AppRoutes.PUBLIC,
     element: <Outlet />,
     child: {
       [ChildRoutes.REGISTRATION]: {

@@ -15,6 +15,7 @@
     "@reduxjs/toolkit": "^2.2.3",
     "antd": "^5.16.4",
     "axios": "^1.6.8",
+    "dayjs": "^1.11.11",
     "i18next-browser-languagedetector": "^7.2.1",
     "i18next-http-backend": "^2.5.1",
     "path": "^0.12.7",
