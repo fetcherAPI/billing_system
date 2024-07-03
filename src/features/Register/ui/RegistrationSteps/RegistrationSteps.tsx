@@ -2,15 +2,15 @@ import { useState, useRef } from "react";
 import { Button, message, Steps } from "antd";
 import { IBaseProps } from "shared/types";
 import {
-  RegistrationComanyForm,
-  RegistrationComanyFormRef,
-} from "../RegistrationComanyForm/RegistrationComanyForm";
+  RegistrationCompanyForm,
+  RegistrationCompanyFormRef,
+} from "../RegistrationComanyForm/RegistrationCompanyForm.tsx";
 import cls from "./RegistrationSteps.module.scss";
 import { BackButton } from "shared/ui";
 
 export const RegistrationSteps = ({ className }: IBaseProps) => {
   const [current, setCurrent] = useState(0);
-  const formRef = useRef<RegistrationComanyFormRef>(null);
+  const formRef = useRef<RegistrationCompanyFormRef>(null);
 
   const next = () => {
     if (formRef.current) {
@@ -26,7 +26,7 @@ export const RegistrationSteps = ({ className }: IBaseProps) => {
     {
       title: "First",
       content: (
-        <RegistrationComanyForm
+        <RegistrationCompanyForm
           ref={formRef}
           handleNext={() => setCurrent(current + 1)}
         />

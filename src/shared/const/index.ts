@@ -1,0 +1,1 @@
+export const INN_LENGTH = 14

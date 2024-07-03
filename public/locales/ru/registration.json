@@ -8,5 +8,6 @@
   "headFullname": "ФИО руководителя",
   "eaddress": "Электронный адрес",
   "locality": "Населенный пункт",
-  "actualAddress": "Фактический адрес"
+  "actualAddress": "Фактический адрес",
+  "workPhone": "Рабочий телефон"
 }

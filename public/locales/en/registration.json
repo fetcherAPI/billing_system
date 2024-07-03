@@ -8,5 +8,6 @@
   "headFullname": "Head Fullname",
   "eaddress": "E-address",
   "locality": "Locality",
-  "actualAddress": "Actual address"
+  "actualAddress": "Actual address",
+  "workPhone": "Work phone"
 }

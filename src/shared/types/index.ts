@@ -1,3 +1,4 @@
-import { IBaseSliceSchema, IBaseProps } from "./baseTypes";
+import { IBaseSliceSchema, IBaseProps } from './baseTypes'
+import { IResponseList } from './List.ts'
 
-export type { IBaseSliceSchema, IBaseProps };
+export type { IBaseSliceSchema, IBaseProps, IResponseList }

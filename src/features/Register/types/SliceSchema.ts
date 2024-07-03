@@ -1,18 +1,10 @@
+import { ICompanyCreate } from './Company.ts'
+
 export interface IRegisterSliceSchema {
-  registerData: IRegisterCompany;
-  isLoading: boolean;
-  error: string | undefined;
+    registerData: ICompanyCreate
+    createdCompanyId?: string
+    isLoading: boolean
+    error: string | undefined
 }
 
-export interface IRegisterCompany {
-  inn: string;
-  title: string;
-  notes: string;
-  legalAddress: string;
-  factAddress: string;
-  website: string;
-  workPhone: string;
-  ateId: number;
-}
-
-export type keyOfRegisterSliceSchema = keyof IRegisterCompany;
+export type keyOfRegisterSliceSchema = keyof ICompanyCreate
