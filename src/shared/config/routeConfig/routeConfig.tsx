@@ -3,6 +3,7 @@ import { MainPage } from 'pages/MainPage/ui/MainPage'
 import { LoginPage } from 'pages/LoginPage/ui/LoginPage'
 import { RegistrationPageLazy } from 'pages/RegistrationPage'
 import { AdminPageAsync } from '../../../pages/AdminPage'
+import { GovernmentOrganizationsAsync } from '../../../pages/AdminPage/GovernmentOrganizations/GovernmentOrganizations.async.ts'
 
 export enum AppRoutes {
     MAIN = 'main',
@@ -54,7 +55,7 @@ export const routeConfig: Record<AppRoutes, AppRoutesProps> = {
         child: {
             [ChildRoutes.GOV_ORGANIZATIONS]: {
                 path: ChildRoutePath['gov-organizations'],
-                element: <h1>Children of admin</h1>,
+                element: <GovernmentOrganizationsAsync />,
             },
             [ChildRoutes.PAYMENTS]: {
                 path: ChildRoutePath.payments,
