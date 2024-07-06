@@ -1,53 +1,89 @@
 .Button {
-    cursor: pointer;
-    border: none;
-    display: flex;
-    flex-direction: row-reverse;
-    justify-content: center;
-    align-items: center;
-    background: none;
-    outline: none;
-    padding: 0px 15px;
-    border-radius: 5px;
-    color: var(--primary-color);
-    min-height: 30px;
-    
- }
- 
- .clear {
-    padding: 0;
-    border: none;
-    color: #000;
-    background: none;
-    outline: none;
- }
- 
- .yellow {
-    background-color: var(--button-primary-color);
-    color: #000;
-    column-gap: 20px;
-    &:hover {
-       background-color: var(--hover-button-primary-color);
-    }
- }
- 
- .action {
-    background-color: var(--action-btn-bg-color);
-    color: white;
-    min-height: 30px;
-    
-    &:hover {
-       background-color: var(--action-btn-hover-bg-color);
-    }
-    transition: background-color 0.5s;
- }
- 
- .green {
-    background-color: var(--success-color);
-    color: var(--main-color);
-    column-gap: 20px;
-    &:hover {
-       background-color: var(--active-step-background-color);
-    }
- }
- 
+  cursor: pointer;
+  border: none;
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: center;
+  align-items: center;
+  background: none;
+  outline: none;
+  padding: 0px 15px;
+  border-radius: 5px;
+  color: var(--primary-color);
+  min-height: 30px;
+
+}
+
+.clear {
+  padding: 0;
+  border: none;
+  color: #000;
+  background: none;
+  outline: none;
+}
+
+.yellow {
+  background-color: var(--button-primary-color);
+  color: #000;
+  column-gap: 20px;
+
+  &:hover {
+    background-color: var(--hover-button-primary-color);
+  }
+}
+
+.action {
+  background-color: var(--action-btn-bg-color);
+  color: white;
+  min-height: 30px;
+
+  &:hover {
+    background-color: var(--action-btn-hover-bg-color);
+  }
+
+  transition: background-color 0.5s;
+}
+
+.green {
+  background-color: var(--success-color);
+  color: var(--main-color);
+  column-gap: 20px;
+
+  &:hover {
+    background-color: var(--active-step-background-color);
+  }
+}
+
+.primary {
+  background-color: #14213D;
+  color: #FCA311;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+
+  &:hover {
+    background-color: #FCA311;
+    color: #14213D;
+  }
+}
+
+
+.secondary {
+  background-color: #457B9D;
+  color: #FFFFFF;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: #1D3557;
+  }
+}

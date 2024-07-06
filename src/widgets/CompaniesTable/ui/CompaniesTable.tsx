@@ -1,11 +1,16 @@
 import { useCallback } from 'react';
 import { useSelector } from 'react-redux';
-import { Table, TableProps, Tag } from 'antd';
+import { Divider, Table, TableProps, Tag } from 'antd';
 import { useAppDispatch } from 'app/providers/StoreProvider';
 import { ICompany } from 'entities/Admin/type';
-import { getCompanies } from 'entities/Admin/model/service/getCompanies.ts';
-import { $companiesList, $companiesTotalCount } from 'entities/Admin/model/selector';
-import { Pagination } from 'shared/ui';
+import { BluredBackGround, Pagination } from 'shared/ui';
+import {
+    $companiesList,
+    $companiesTotalCount,
+    getCompanies,
+    useHandleGetCompanyDetails,
+} from 'entities/Admin';
+import cls from './CompaniesTable.module.scss';
 
 const columns: TableProps<ICompany>['columns'] = [
     {
@@ -20,9 +25,9 @@ const columns: TableProps<ICompany>['columns'] = [
         key: 'inn',
     },
     {
-        title: 'managerФорма/собPosition',
-        dataIndex: 'managerPosition',
-        key: 'managerPosition',
+        title: 'Форма/соб',
+        dataIndex: 'companyName',
+        key: 'companyName',
     },
     {
         title: 'Статаус',
@@ -40,6 +45,7 @@ export const CompaniesTable = () => {
     const dispatch = useAppDispatch();
     const companies = useSelector($companiesList);
     const companiesTotalCount = useSelector($companiesTotalCount);
+    const { handleGet } = useHandleGetCompanyDetails();
 
     const handleGetCompaniesList = useCallback(
         (page: number, size: number) => {
@@ -49,9 +55,21 @@ export const CompaniesTable = () => {
     );
 
     return (
-        <div>
-            <Table columns={columns} dataSource={companies} pagination={false} />
-            <Pagination onChange={handleGetCompaniesList} total={companiesTotalCount} />
+        <div className={cls.CompaniesTable}>
+            <Table
+                columns={columns}
+                dataSource={companies}
+                pagination={false}
+                onRow={(record) => {
+                    return {
+                        onClick: () => handleGet(record.id),
+                    };
+                }}
+            />
+            <Divider />
+            <BluredBackGround width={15} height={10} className={cls.blur}>
+                <Pagination onChange={handleGetCompaniesList} total={companiesTotalCount} />
+            </BluredBackGround>
         </div>
     );
 };

@@ -1,5 +1,7 @@
-export { Pagination } from './Pagination/Pagination.tsx'
+export { BluredBackGround } from './BluredBackgound';
 
-export { ConfirmModal } from './ConfirmModal/ConfrimModal'
+export { Pagination } from './Pagination/Pagination.tsx';
 
-export { BackButton } from './BackButon/BackButton'
+export { ConfirmModal } from './ConfirmModal/ConfrimModal';
+
+export { BackButton } from './BackButon/BackButton';

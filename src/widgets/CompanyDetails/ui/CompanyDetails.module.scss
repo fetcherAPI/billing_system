@@ -1,0 +1,20 @@
+.blur {
+  border-radius: var(--border-radius);
+}
+
+.detailsWrapper {
+  margin: 20px;
+  background: white;
+  padding: 20px;
+  border-radius: var(--border-radius);
+
+  tr {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+.controlBtnWrapper {
+  margin: 20px auto 0;
+  width: 90%;
+}

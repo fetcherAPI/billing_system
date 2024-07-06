@@ -1,9 +1,9 @@
-import { Outlet, RouteProps } from 'react-router-dom'
-import { MainPage } from 'pages/MainPage/ui/MainPage'
-import { LoginPage } from 'pages/LoginPage/ui/LoginPage'
-import { RegistrationPageLazy } from 'pages/RegistrationPage'
-import { AdminPageAsync } from '../../../pages/AdminPage'
-import { GovernmentOrganizationsAsync } from '../../../pages/AdminPage/GovernmentOrganizations/GovernmentOrganizations.async.ts'
+import { Outlet, RouteProps } from 'react-router-dom';
+import { MainPage } from 'pages/MainPage/ui/MainPage';
+import { LoginPage } from 'pages/LoginPage/ui/LoginPage';
+import { RegistrationPageLazy } from 'pages/RegistrationPage';
+import { AdminPageAsync, CompaniesAsync } from 'pages/AdminPage';
+import { CompanyDetailsAsync } from 'pages/CompanyDetialsPage';
 
 export enum AppRoutes {
     MAIN = 'main',
@@ -15,33 +15,36 @@ export enum ChildRoutes {
     REGISTRATION = 'registration',
     LOGIN = 'login',
     COMPANY = 'company',
-    GOV_ORGANIZATIONS = 'gov-organizations',
+    COMPANIES = 'companies',
+    COMPANY_DETAILS = 'companyDetails',
     PAYMENTS = 'payments',
 }
 
 export type AppRoutesProps = RouteProps & {
-    authOnly?: boolean
-    child?: Record<string, AppRoutesProps>
-    roles?: string[]
-    preQualification?: boolean
-}
+    authOnly?: boolean;
+    child?: Record<string, AppRoutesProps>;
+    roles?: string[];
+    preQualification?: boolean;
+};
 
+export const getRouteCompanyDetail = (param: string) => `${ChildRoutes.COMPANIES}/${param}`;
 export const RoutePath: Record<AppRoutes, string> = {
     [AppRoutes.MAIN]: '/',
     [AppRoutes.ADMIN]: 'admin',
     [AppRoutes.PUBLIC]: 'public',
     // последний
-}
+};
 
 export const ChildRoutePath: Record<ChildRoutes, string> = {
     [ChildRoutes.REGISTRATION]: 'registration',
     [ChildRoutes.LOGIN]: 'login',
     [ChildRoutes.COMPANY]: 'company',
-    [ChildRoutes.GOV_ORGANIZATIONS]: ChildRoutes.GOV_ORGANIZATIONS,
+    [ChildRoutes.COMPANIES]: ChildRoutes.COMPANIES,
     [ChildRoutes.PAYMENTS]: ChildRoutes.PAYMENTS,
+    [ChildRoutes.COMPANY_DETAILS]: getRouteCompanyDetail(':id'),
 
     // последний
-}
+};
 
 export const routeConfig: Record<AppRoutes, AppRoutesProps> = {
     [AppRoutes.MAIN]: {
@@ -52,10 +55,16 @@ export const routeConfig: Record<AppRoutes, AppRoutesProps> = {
     [AppRoutes.ADMIN]: {
         path: RoutePath.admin,
         element: <AdminPageAsync />,
+        // roles: ['admin'],
+        // authOnly: true,
         child: {
-            [ChildRoutes.GOV_ORGANIZATIONS]: {
-                path: ChildRoutePath['gov-organizations'],
-                element: <GovernmentOrganizationsAsync />,
+            [ChildRoutes.COMPANIES]: {
+                path: ChildRoutePath.companies,
+                element: <CompaniesAsync />,
+            },
+            [ChildRoutes.COMPANY_DETAILS]: {
+                path: ChildRoutePath.companyDetails,
+                element: <CompanyDetailsAsync />,
             },
             [ChildRoutes.PAYMENTS]: {
                 path: ChildRoutePath.payments,
@@ -84,4 +93,4 @@ export const routeConfig: Record<AppRoutes, AppRoutesProps> = {
             },
         },
     },
-}
+};

@@ -1,7 +1,7 @@
 import { AxiosResponse } from 'axios';
 import api from 'shared/api/api';
 import { IResponseList } from 'shared/types';
-import { ICompany } from '../type';
+import { ICompany, ICompanyDetails } from '../type';
 
 export class AdminApi {
     static async getCompanies({
@@ -14,7 +14,7 @@ export class AdminApi {
         return api.get(`/api/admin/company/getCompany?first=${first - 1}&rows=${row}`);
     }
 
-    static async refreshToken(): Promise<AxiosResponse> {
-        return api.get(`/api/auth/refresh_token`);
+    static async getCompanyDetails(id: number): Promise<AxiosResponse<ICompanyDetails>> {
+        return api.get(`api/admin/company/${id}`);
     }
 }
