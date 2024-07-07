@@ -58,8 +58,7 @@
   background-color: #14213D;
   color: #FCA311;
   border-radius: 5px;
-  padding: 10px 20px;
-  font-size: 16px;
+  font-size: calc(4px + 8 * (100vw / 1280));
   font-weight: bold;
   border: none;
   cursor: pointer;

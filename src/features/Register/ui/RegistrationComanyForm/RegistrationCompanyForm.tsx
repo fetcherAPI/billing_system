@@ -1,57 +1,57 @@
-import { ChangeEvent, forwardRef, useEffect, useImperativeHandle } from 'react'
-import { Button, Col, Form, Input, Row } from 'antd'
-import { useTranslation } from 'react-i18next'
-import { classNames } from 'shared/lib/classNames/classNames'
-import { useAppDispatch } from 'app/providers/StoreProvider'
-import { setRegisterProperty } from 'features/Register/model/slice/RegisterSlice'
-import { keyOfRegisterSliceSchema } from 'features/Register/types/SliceSchema'
-import cls from './style.module.scss'
-import { useSelector } from 'react-redux'
-import { $createdCompanyId, $registerData } from '../../model/selectors'
-import { Inn } from './FormFields/Inn.tsx'
-import { fieldsMaker } from 'shared/lib/fieldsMaker/fieldsMaker.ts'
-import { SelectLocality } from './FormFields/SelectLocality.tsx'
-import { registerCompany } from '../../model/service/registerCompany.ts'
+import { ChangeEvent, forwardRef, useEffect, useImperativeHandle } from 'react';
+import { useSelector } from 'react-redux';
+import { Button, Col, Form, Input, Row } from 'antd';
+import { useTranslation } from 'react-i18next';
+import { useAppDispatch } from 'app/providers/StoreProvider';
+import { classNames } from 'shared/lib/classNames/classNames';
+import { fieldsMaker } from 'shared/lib/fieldsMaker/fieldsMaker.ts';
+import { setRegisterProperty } from 'features/Register/model/slice/RegisterSlice';
+import { keyOfRegisterSliceSchema } from 'features/Register/types/SliceSchema';
+import { $createdCompanyId, $registerData } from '../../model/selectors';
+import { SelectLocality } from '../FormFields/SelectLocality.tsx';
+import { registerCompany } from '../../model/service/registerCompany.ts';
+import { Inn } from '../FormFields/Inn.tsx';
+import cls from './style.module.scss';
 
 interface IProps {
-    className?: string
-    handleNext: () => void
+    className?: string;
+    handleNext: () => void;
 }
 
 export interface RegistrationCompanyFormRef {
-    submit: () => void
+    submit: () => void;
 }
 
 export const RegistrationCompanyForm = forwardRef<RegistrationCompanyFormRef, IProps>(
     ({ className, handleNext }, ref) => {
-        const { t } = useTranslation('registration')
-        const [form] = Form.useForm()
-        const dispatch = useAppDispatch()
+        const { t } = useTranslation('registration');
+        const [form] = Form.useForm();
+        const dispatch = useAppDispatch();
 
-        const formFields = useSelector($registerData)
-        const createdCompanyId = useSelector($createdCompanyId)
+        const formFields = useSelector($registerData);
+        const createdCompanyId = useSelector($createdCompanyId);
 
         useImperativeHandle(ref, () => ({
             submit() {
-                form.submit()
+                form.submit();
             },
-        }))
+        }));
 
         const handleFinish = () => {
             createdCompanyId
                 ? handleNext()
                 : dispatch(registerCompany({ param: formFields })).then(
                       (res) => res.meta.requestStatus === 'fulfilled' && handleNext()
-                  )
-        }
+                  );
+        };
 
         useEffect(() => {
-            form.setFieldValue('title', formFields.title)
-        }, [formFields])
+            form.setFieldValue('title', formFields.title);
+        }, [formFields]);
 
         const handleChangeInput = (e: ChangeEvent<HTMLInputElement>, key: keyOfRegisterSliceSchema) => {
-            dispatch(setRegisterProperty({ key, data: e.target.value }))
-        }
+            dispatch(setRegisterProperty({ key, data: e.target.value }));
+        };
 
         return (
             <Form
@@ -169,6 +169,6 @@ export const RegistrationCompanyForm = forwardRef<RegistrationCompanyFormRef, IP
                     </Button>
                 </Form.Item>
             </Form>
-        )
+        );
     }
-)
+);
