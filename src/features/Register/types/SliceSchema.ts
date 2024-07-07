@@ -1,5 +1,4 @@
-import { ICompanyRegister } from './Company.ts';
-import { IUserRegister } from './User.ts';
+import { ICompanyRegister, IUserRegister } from 'shared/types';
 
 export interface IRegisterSliceSchema {
     companyData: ICompanyRegister;

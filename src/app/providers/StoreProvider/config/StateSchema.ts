@@ -1,21 +1,23 @@
-import { AxiosInstance } from 'axios'
-import { CounterSchema } from 'entities/Counter'
-import { ILoginSliceSchema } from 'features/Login/types/SliceSchema'
-import { IRegisterSliceSchema } from 'features/Register'
-import { IAdminSliceSchema } from 'entities/Admin/type/AdminSliceSchema.ts'
+import { AxiosInstance } from 'axios';
+import { CounterSchema } from 'entities/Counter';
+import { ILoginSliceSchema } from 'features/Login/types/SliceSchema';
+import { IRegisterSliceSchema } from 'features/Register';
+import { ICompanyUsersSliceSchema } from 'features/GetCompanyUsers';
+import { IAdminSliceSchema } from 'entities/Admin';
 
 export interface StateSchema {
-    counter: CounterSchema
-    login: ILoginSliceSchema
-    register: IRegisterSliceSchema
-    admin: IAdminSliceSchema
+    counter: CounterSchema;
+    login: ILoginSliceSchema;
+    register: IRegisterSliceSchema;
+    users: ICompanyUsersSliceSchema;
+    admin: IAdminSliceSchema;
 }
 
 export interface ThunkExtraArg {
-    api: AxiosInstance
+    api: AxiosInstance;
 }
 
 export interface ThunkConfig<T> {
-    rejectValue: T
-    extra: ThunkExtraArg
+    rejectValue: T;
+    extra: ThunkExtraArg;
 }

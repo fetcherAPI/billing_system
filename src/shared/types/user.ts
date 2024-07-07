@@ -12,8 +12,11 @@ export interface IUserRegister {
 
 export interface IUser extends IUserRegister {
     id: number;
+    status: string;
     datePasswordExpired: string;
     roleId: number;
     roleName: string;
     companyName: string;
 }
+
+

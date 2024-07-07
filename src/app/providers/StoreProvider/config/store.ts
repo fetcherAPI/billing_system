@@ -1,11 +1,12 @@
-import $api from 'shared/api/api'
-import { configureStore } from '@reduxjs/toolkit'
-import { StateSchema } from './StateSchema'
-import { counterReducer } from 'entities/Counter/'
-import { useDispatch } from 'react-redux'
-import { LoginSliceReducer } from 'features/Login'
-import { RegisterSliceReducer } from 'features/Register'
-import { AdminSliceReducer } from 'entities/Admin/model/slice/AdminSlice.ts'
+import $api from 'shared/api/api';
+import { configureStore } from '@reduxjs/toolkit';
+import { StateSchema } from './StateSchema';
+import { counterReducer } from 'entities/Counter/';
+import { useDispatch } from 'react-redux';
+import { LoginSliceReducer } from 'features/Login';
+import { RegisterSliceReducer } from 'features/Register';
+import { AdminSliceReducer } from 'entities/Admin/model/slice/AdminSlice.ts';
+import { CompanyUsersReducer } from 'features/GetCompanyUsers';
 
 export function createReduxStore(initialState?: StateSchema) {
     return configureStore({
@@ -13,6 +14,7 @@ export function createReduxStore(initialState?: StateSchema) {
             counter: counterReducer,
             login: LoginSliceReducer,
             register: RegisterSliceReducer,
+            users: CompanyUsersReducer,
             admin: AdminSliceReducer,
         },
         preloadedState: initialState,
@@ -24,11 +26,11 @@ export function createReduxStore(initialState?: StateSchema) {
                     },
                 },
             }),
-    })
+    });
 }
 
-const store = createReduxStore()
+const store = createReduxStore();
 
 export type RootState = ReturnType<typeof store.getState>
 
-export const useAppDispatch = () => useDispatch<typeof store.dispatch>()
+export const useAppDispatch = () => useDispatch<typeof store.dispatch>();
