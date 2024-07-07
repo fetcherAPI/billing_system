@@ -1,10 +1,14 @@
-import { ICompanyCreate } from './Company.ts'
+import { ICompanyRegister } from './Company.ts';
+import { IUserRegister } from './User.ts';
 
 export interface IRegisterSliceSchema {
-    registerData: ICompanyCreate
-    createdCompanyId?: string
-    isLoading: boolean
-    error: string | undefined
+    companyData: ICompanyRegister;
+    userData: IUserRegister;
+    createdCompanyId?: string;
+    isLoading: boolean;
+    error: string | undefined;
 }
 
-export type keyOfRegisterSliceSchema = keyof ICompanyCreate
+export type keyOfRegisterSliceSchema = keyof ICompanyRegister;
+
+export type keyOfUserRegister = keyof IUserRegister;
