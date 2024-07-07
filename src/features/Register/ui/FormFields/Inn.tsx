@@ -6,16 +6,22 @@ import { INN_LENGTH } from 'shared/const';
 import { setRegisterProperty } from '../../model/slice/RegisterSlice.ts';
 import { useRequest } from 'shared/lib/hooks/useRequest';
 import { RegisterApi } from '../../api/RegisterApi.ts';
-import { keyOfRegisterSliceSchema } from '../../types/SliceSchema.ts';
+import { keyOfRegisterSliceSchema, keyOfUserRegister } from '../../types/SliceSchema.ts';
 
-interface INNProps {
+interface INNProps<T> {
     label: string;
-    inputName: keyOfRegisterSliceSchema;
-    fieldForSetResponse?: keyOfRegisterSliceSchema;
+    inputName: T;
+    fieldForSetResponse?: T;
+    type: 'User' | 'Company';
     setResponse?: () => void;
 }
 
-export const Inn = ({ label, inputName, fieldForSetResponse }: INNProps) => {
+export const Inn = ({
+                        label,
+                        inputName,
+                        fieldForSetResponse,
+                        type,
+                    }: INNProps<keyOfRegisterSliceSchema | keyOfUserRegister>) => {
     const [t] = useTranslation('registration');
     const dispatch = useAppDispatch();
     const { isLoading, error, request, response } = useRequest<{ INN: string }>();
@@ -24,16 +30,15 @@ export const Inn = ({ label, inputName, fieldForSetResponse }: INNProps) => {
         const value = event.target.value;
         if (value.length === INN_LENGTH) {
             await request({ INN: value }, RegisterApi.getPersonByInn);
-            dispatch(setRegisterProperty({ key: inputName, data: value }));
+            dispatch(setRegisterProperty({ key: inputName, data: value, type }));
         } else {
-            fieldForSetResponse && dispatch(setRegisterProperty({ key: fieldForSetResponse, data: '' }));
+            fieldForSetResponse && dispatch(setRegisterProperty({ key: fieldForSetResponse, data: '', type }));
         }
     };
 
     useEffect(() => {
         if (fieldForSetResponse && response) {
-            console.log(response);
-            dispatch(setRegisterProperty({ key: fieldForSetResponse, data: response }));
+            dispatch(setRegisterProperty({ key: fieldForSetResponse, data: response, type }));
         }
     }, [isLoading]);
 

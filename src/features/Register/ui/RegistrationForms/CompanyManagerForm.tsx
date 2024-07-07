@@ -5,13 +5,12 @@ import { useTranslation } from 'react-i18next';
 import { useAppDispatch } from 'app/providers/StoreProvider';
 import { classNames } from 'shared/lib/classNames/classNames';
 import { fieldsMaker } from 'shared/lib/fieldsMaker/fieldsMaker.ts';
-import { setRegisterProperty } from 'features/Register/model/slice/RegisterSlice';
-import { keyOfRegisterSliceSchema } from 'features/Register/types/SliceSchema';
-import { $createdCompanyId, $registerData } from '../../model/selectors';
-import { SelectLocality } from '../FormFields/SelectLocality.tsx';
-import { registerCompany } from '../../model/service/registerCompany.ts';
+import { keyOfUserRegister } from 'features/Register/types/SliceSchema';
+import { $registerUserData } from '../../model/selectors';
+import { registerUser } from '../../model/service/registerCompany.ts';
 import { Inn } from '../FormFields/Inn.tsx';
 import cls from './style.module.scss';
+import { setRegisterProperty } from '../../model/slice/RegisterSlice.ts';
 
 interface IProps {
     className?: string;
@@ -28,8 +27,8 @@ export const CompanyManagerForm = forwardRef<CompanyManagerFormRef, IProps>(
         const [form] = Form.useForm();
         const dispatch = useAppDispatch();
 
-        const formFields = useSelector($registerData);
-        const createdCompanyId = useSelector($createdCompanyId);
+        const formFields = useSelector($registerUserData);
+        // const createdCompanyId = useSelector($createdCompanyId);
 
         useImperativeHandle(ref, () => ({
             submit() {
@@ -38,19 +37,17 @@ export const CompanyManagerForm = forwardRef<CompanyManagerFormRef, IProps>(
         }));
 
         const handleFinish = () => {
-            createdCompanyId
-                ? handleNext()
-                : dispatch(registerCompany({ param: formFields })).then(
-                      (res) => res.meta.requestStatus === 'fulfilled' && handleNext()
-                  );
+            dispatch(registerUser({ param: formFields })).then(
+                (res) => res.meta.requestStatus === 'fulfilled' && handleNext(),
+            );
         };
 
         useEffect(() => {
-            form.setFieldValue('title', formFields.title);
+            form.setFieldValue('title', formFields.username);
         }, [formFields]);
 
-        const handleChangeInput = (e: ChangeEvent<HTMLInputElement>, key: keyOfRegisterSliceSchema) => {
-            dispatch(setRegisterProperty({ key, data: e.target.value }));
+        const handleChangeInput = (e: ChangeEvent<HTMLInputElement>, key: keyOfUserRegister) => {
+            dispatch(setRegisterProperty({ key, data: e.target.value, type: 'User' }));
         };
 
         return (
@@ -64,60 +61,47 @@ export const CompanyManagerForm = forwardRef<CompanyManagerFormRef, IProps>(
             >
                 <Row gutter={200} className={cls.row}>
                     <Col style={{ width: '50%' }}>
-                        <Inn label={'companyInn'} inputName={'inn'} fieldForSetResponse={'title'} />
-                        <Inn
-                            label={t('companyPin')}
-                            inputName={'managerInn'}
-                            fieldForSetResponse={'managerName'}
-                        />
+                        <Inn label={'ПИН руководителя'} inputName={'userInn'} fieldForSetResponse={'fullName'}
+                             type={'User'} />
+
 
                         <Form.Item
-                            name={'managerPosition'}
+                            name={'position'}
                             label={t('position')}
                             rules={[{ required: true, message: t('loginPassRuleText') }]}
                         >
                             <Input
                                 placeholder="input placeholder"
-                                onChange={(e) => handleChangeInput(e, 'managerPosition')}
+                                onChange={(e) => handleChangeInput(e, 'position')}
                             />
                         </Form.Item>
                         <Form.Item
-                            name={'website'}
-                            label={t('site')}
+                            name={'cellPhone'}
+                            label={t('Сотовый телефон')}
                             rules={[{ required: true, message: t('loginPassRuleText') }]}
                         >
                             <Input
                                 placeholder="input placeholder"
-                                onChange={(e) => handleChangeInput(e, 'website')}
+                                onChange={(e) => handleChangeInput(e, 'cellPhone')}
                             />
                         </Form.Item>
                         <Form.Item
-                            name={'workPhone'}
-                            label={t('workPhone')}
+                            name={'username'}
+                            label={t('Имя пользователя (логин)')}
                             rules={[{ required: true, message: t('loginPassRuleText') }]}
                         >
                             <Input
                                 placeholder="input placeholder"
-                                onChange={(e) => handleChangeInput(e, 'workPhone')}
-                            />
-                        </Form.Item>
-                        <Form.Item
-                            name={'legalAddress'}
-                            label={t('legalAddress')}
-                            rules={[{ required: true, message: t('loginPassRuleText') }]}
-                        >
-                            <Input
-                                placeholder="input placeholder"
-                                onChange={(e) => handleChangeInput(e, 'legalAddress')}
+                                onChange={(e) => handleChangeInput(e, 'username')}
                             />
                         </Form.Item>
                     </Col>
 
                     <Col style={{ width: '50%' }}>
                         <Form.Item
-                            name={'title'}
-                            label={t('companyName')}
-                            initialValue={formFields.title}
+                            name={'fullName'}
+                            label={t('ФИО руководителя')}
+                            initialValue={formFields.fullName}
                             rules={[
                                 {
                                     required: true,
@@ -128,8 +112,8 @@ export const CompanyManagerForm = forwardRef<CompanyManagerFormRef, IProps>(
                             <Input placeholder="input placeholder" disabled={true} />
                         </Form.Item>
                         <Form.Item
-                            name={'managerName'}
-                            label={t('headFullname')}
+                            name={''}
+                            label={t('Рабочий телефон')}
                             rules={[
                                 {
                                     required: true,
@@ -137,11 +121,12 @@ export const CompanyManagerForm = forwardRef<CompanyManagerFormRef, IProps>(
                                 },
                             ]}
                         >
-                            <Input placeholder="input placeholder" />
+                            <Input placeholder="input placeholder"
+                                   onChange={(e) => handleChangeInput(e, 'workPhone')} />
                         </Form.Item>
                         <Form.Item
-                            name={'ateId'}
-                            label={t('locality')}
+                            name={'email'}
+                            label={t('Электронный адрес')}
                             rules={[
                                 {
                                     required: true,
@@ -149,16 +134,17 @@ export const CompanyManagerForm = forwardRef<CompanyManagerFormRef, IProps>(
                                 },
                             ]}
                         >
-                            <SelectLocality />
+                            <Input placeholder="input placeholder"
+                                   onChange={(e) => handleChangeInput(e, 'email')} />
                         </Form.Item>
                         <Form.Item
-                            name={'factAddress'}
-                            label={t('actualAddress')}
+                            name={'password'}
+                            label={t('Пароль')}
                             rules={[{ required: true, message: t('loginPassRuleText') }]}
                         >
                             <Input
                                 placeholder="input placeholder"
-                                onChange={(e) => handleChangeInput(e, 'factAddress')}
+                                onChange={(e) => handleChangeInput(e, 'password')}
                             />
                         </Form.Item>
                     </Col>
@@ -170,5 +156,5 @@ export const CompanyManagerForm = forwardRef<CompanyManagerFormRef, IProps>(
                 </Form.Item>
             </Form>
         );
-    }
+    },
 );

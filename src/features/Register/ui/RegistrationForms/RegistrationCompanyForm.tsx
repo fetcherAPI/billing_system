@@ -41,8 +41,8 @@ export const RegistrationCompanyForm = forwardRef<RegistrationCompanyFormRef, IP
             createdCompanyId
                 ? handleNext()
                 : dispatch(registerCompany({ param: formFields })).then(
-                      (res) => res.meta.requestStatus === 'fulfilled' && handleNext()
-                  );
+                    (res) => res.meta.requestStatus === 'fulfilled' && handleNext(),
+                );
         };
 
         useEffect(() => {
@@ -50,7 +50,7 @@ export const RegistrationCompanyForm = forwardRef<RegistrationCompanyFormRef, IP
         }, [formFields]);
 
         const handleChangeInput = (e: ChangeEvent<HTMLInputElement>, key: keyOfRegisterSliceSchema) => {
-            dispatch(setRegisterProperty({ key, data: e.target.value }));
+            dispatch(setRegisterProperty({ key, data: e.target.value, type: 'Company' }));
         };
 
         return (
@@ -64,11 +64,12 @@ export const RegistrationCompanyForm = forwardRef<RegistrationCompanyFormRef, IP
             >
                 <Row gutter={200} className={cls.row}>
                     <Col style={{ width: '50%' }}>
-                        <Inn label={'companyInn'} inputName={'inn'} fieldForSetResponse={'title'} />
+                        <Inn label={'companyInn'} inputName={'inn'} fieldForSetResponse={'title'} type={'Company'} />
                         <Inn
                             label={t('companyPin')}
                             inputName={'managerInn'}
                             fieldForSetResponse={'managerName'}
+                            type={'Company'}
                         />
 
                         <Form.Item
@@ -170,5 +171,5 @@ export const RegistrationCompanyForm = forwardRef<RegistrationCompanyFormRef, IP
                 </Form.Item>
             </Form>
         );
-    }
+    },
 );
