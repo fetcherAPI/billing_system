@@ -1,16 +1,32 @@
 import { CompanyDetails, CompanyDetailsControl } from 'widgets/CompanyDetails';
 import { useParams } from 'react-router-dom';
+import { Col, Row } from 'antd';
+import { CompanyUsersList } from 'widgets/CompanyUsers';
+import { useDispatchToStore } from '../../../shared/lib/hooks/useDisaptchToStore';
+import { getCompanyUsers } from '../../../features/CompanyUsers/model/service/getCompanyUsers.ts';
+import { useEffect } from 'react';
 
 const CompanyDetailsPage = () => {
     const { id } = useParams();
-
+    const handleGetUsers = useDispatchToStore<{ id: number }>(getCompanyUsers);
+    useEffect(() => {
+        if (id) {
+            handleGetUsers({ id: +id });
+        }
+    }, []);
     if (!id) return <h1>Company id is not provided</h1>;
 
     return (
-        <div style={{ display: 'flex', height: '100%', columnGap: '20px' }}>
-            <CompanyDetailsControl />
-            <CompanyDetails />
-        </div>
+        <Row gutter={16}>
+            <Col span={17}>
+                <CompanyDetailsControl />
+                <br />
+                <CompanyDetails />
+            </Col>
+            <Col span={7}>
+                <CompanyUsersList />
+            </Col>
+        </Row>
     );
 };
 

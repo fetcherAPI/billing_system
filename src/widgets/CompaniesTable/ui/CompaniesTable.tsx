@@ -11,6 +11,7 @@ import {
     useHandleGetCompanyDetails,
 } from 'entities/Admin';
 import cls from './CompaniesTable.module.scss';
+import { getRouteCompanyDetail } from 'shared/config/routeConfig/routeConfig.tsx';
 
 const columns: TableProps<ICompany>['columns'] = [
     {
@@ -60,14 +61,15 @@ export const CompaniesTable = () => {
                 columns={columns}
                 dataSource={companies}
                 pagination={false}
+                scroll={{ x: 'calc(80vh + 50%)', y: '70vh' }}
                 onRow={(record) => {
                     return {
-                        onClick: () => handleGet(record.id),
+                        onClick: () => handleGet(record.id, `../${getRouteCompanyDetail(record.id)}`),
                     };
                 }}
             />
             <Divider />
-            <BluredBackGround width={15} height={10} className={cls.blur}>
+            <BluredBackGround className={cls.blur}>
                 <Pagination onChange={handleGetCompaniesList} total={companiesTotalCount} />
             </BluredBackGround>
         </div>

@@ -6,7 +6,7 @@ import { useDispatch } from 'react-redux';
 import { LoginSliceReducer } from 'features/Login';
 import { RegisterSliceReducer } from 'features/Register';
 import { AdminSliceReducer } from 'entities/Admin/model/slice/AdminSlice.ts';
-import { CompanyUsersReducer } from 'features/GetCompanyUsers';
+import { CompanyUsersReducer } from 'features/CompanyUsers';
 
 export function createReduxStore(initialState?: StateSchema) {
     return configureStore({
@@ -31,6 +31,6 @@ export function createReduxStore(initialState?: StateSchema) {
 
 const store = createReduxStore();
 
-export type RootState = ReturnType<typeof store.getState>
+export type RootState = ReturnType<typeof store.getState>;
 
 export const useAppDispatch = () => useDispatch<typeof store.dispatch>();

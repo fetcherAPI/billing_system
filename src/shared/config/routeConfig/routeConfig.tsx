@@ -27,7 +27,7 @@ export type AppRoutesProps = RouteProps & {
     preQualification?: boolean;
 };
 
-export const getRouteCompanyDetail = (param: string) => `${ChildRoutes.COMPANIES}/${param}`;
+export const getRouteCompanyDetail = (param: string | number) => `${ChildRoutes.COMPANIES}/${param}`;
 export const RoutePath: Record<AppRoutes, string> = {
     [AppRoutes.MAIN]: '/',
     [AppRoutes.ADMIN]: 'admin',

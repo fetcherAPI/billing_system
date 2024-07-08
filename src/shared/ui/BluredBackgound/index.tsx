@@ -7,9 +7,9 @@ import { classNames } from '../../lib/classNames/classNames.ts';
  */
 interface Props {
     /** The width of the component */
-    width: number;
+    width?: number;
     /** The height of the component */
-    height: number;
+    height?: number;
     /** The unit for the width (optional), default is '%' */
     unitWidth?: '%' | 'vw';
     /** The unit for the height (optional), default is '%' */

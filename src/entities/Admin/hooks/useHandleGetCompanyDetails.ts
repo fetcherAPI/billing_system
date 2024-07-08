@@ -1,17 +1,20 @@
 import { useAppDispatch } from 'app/providers/StoreProvider';
 import { getCompanyDetails } from '../model/service/getCompanies.ts';
 import { useNavigate } from 'react-router-dom';
-import { getRouteCompanyDetail } from 'shared/config/routeConfig/routeConfig.tsx';
+import { useSelector } from 'react-redux';
+import { $isLoading } from '../model/selector';
 
 export const useHandleGetCompanyDetails = () => {
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
-    const handleGet = async (id: number) => {
+    const isLoading = useSelector($isLoading);
+    const handleGet = async (id: number, navigatePath?: string) => {
         await dispatch(getCompanyDetails({ id: id }));
-        navigate(`../${getRouteCompanyDetail(`${id}`)}`);
+        navigatePath && navigate(navigatePath);
     };
 
     return {
         handleGet,
+        isLoading,
     };
 };

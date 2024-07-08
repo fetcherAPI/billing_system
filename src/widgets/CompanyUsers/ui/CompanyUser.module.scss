@@ -1,0 +1,18 @@
+
+.item {
+  background: white;
+  margin: 20px;
+  padding: 2%;
+  border-radius: var(--border-radius);
+
+  tr {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+.blur {
+  max-height: 80vh;
+  overflow-y: scroll;
+  scrollbar-width: none;
+}

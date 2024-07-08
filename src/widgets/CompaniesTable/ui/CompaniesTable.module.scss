@@ -1,4 +1,11 @@
 .CompaniesTable {
+  max-height: calc(100vh - 10vh);
+  height: 88vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  //background-color: white;
+
   table {
     //background-color: red;
   }

@@ -1,5 +1,6 @@
 .AdminNavBar {
   ul {
-    height: 100vh;
+    min-height: calc(100vh - 7vh);
+    max-height: max-content;
   }
 }

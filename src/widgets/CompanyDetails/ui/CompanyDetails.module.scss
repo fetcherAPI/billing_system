@@ -15,6 +15,8 @@
 }
 
 .controlBtnWrapper {
-  margin: 20px auto 0;
+  margin: 20px;
+  display: flex;
+  column-gap: 20px;
   width: 90%;
 }

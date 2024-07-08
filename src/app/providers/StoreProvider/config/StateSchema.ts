@@ -2,7 +2,7 @@ import { AxiosInstance } from 'axios';
 import { CounterSchema } from 'entities/Counter';
 import { ILoginSliceSchema } from 'features/Login/types/SliceSchema';
 import { IRegisterSliceSchema } from 'features/Register';
-import { ICompanyUsersSliceSchema } from 'features/GetCompanyUsers';
+import { ICompanyUsersSliceSchema } from 'features/CompanyUsers';
 import { IAdminSliceSchema } from 'entities/Admin';
 
 export interface StateSchema {
