@@ -11,11 +11,7 @@ export const CompanyDetailsControl = () => {
     return (
         <BluredBackGround className={cls.blur}>
             <div className={cls.controlBtnWrapper}>
-                <ActivateCompany />
-                <br />
-                <ActivateCompany />
-                <br />
-                <ActivateCompany />
+                <ActivateCompany id={id} />
             </div>
         </BluredBackGround>
     );

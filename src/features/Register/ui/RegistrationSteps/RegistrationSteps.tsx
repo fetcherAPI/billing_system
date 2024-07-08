@@ -7,11 +7,11 @@ import {
 } from '../RegistrationForms/RegistrationCompanyForm.tsx';
 import cls from './RegistrationSteps.module.scss';
 import { BackButton } from 'shared/ui';
-import { CompanyManagerForm, CompanyManagerFormRef } from '../RegistrationForms/CompanyManagerForm.tsx';
+import { UserRegisterForm, UserRegisterFormRef } from '../RegistrationForms/UserRegisterForm.tsx';
 
 export const RegistrationSteps = ({ className }: IBaseProps) => {
     const [current, setCurrent] = useState(0);
-    const formRef = useRef<RegistrationCompanyFormRef | CompanyManagerFormRef>(null);
+    const formRef = useRef<RegistrationCompanyFormRef | UserRegisterFormRef>(null);
 
     const next = () => {
         if (formRef.current) {
@@ -26,16 +26,11 @@ export const RegistrationSteps = ({ className }: IBaseProps) => {
     const steps = [
         {
             title: 'First',
-            content: (
-                <RegistrationCompanyForm
-                    ref={formRef}
-                    handleNext={() => setCurrent(current + 1)}
-                />
-            ),
+            content: <RegistrationCompanyForm ref={formRef} handleNext={() => setCurrent(current + 1)} />,
         },
         {
             title: 'Second',
-            content: <CompanyManagerForm ref={formRef} handleNext={() => setCurrent(current + 1)} />,
+            content: <UserRegisterForm ref={formRef} handleNext={() => setCurrent(current + 1)} />,
         },
         {
             title: 'Last',
@@ -58,10 +53,7 @@ export const RegistrationSteps = ({ className }: IBaseProps) => {
                             </Button>
                         )}
                         {current === steps.length - 1 && (
-                            <Button
-                                type="primary"
-                                onClick={() => message.success('Processing complete!')}
-                            >
+                            <Button type="primary" onClick={() => message.success('Processing complete!')}>
                                 Done
                             </Button>
                         )}

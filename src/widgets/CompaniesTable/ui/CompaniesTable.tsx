@@ -59,6 +59,7 @@ export const CompaniesTable = () => {
         <div className={cls.CompaniesTable}>
             <Table
                 columns={columns}
+                rowKey={(record) => record.id}
                 dataSource={companies}
                 pagination={false}
                 scroll={{ x: 'calc(80vh + 50%)', y: '70vh' }}

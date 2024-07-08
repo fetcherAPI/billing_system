@@ -5,6 +5,7 @@ import { IResponseList } from 'shared/types';
 import { ICompany, ICompanyDetails } from '../../type';
 import { IAdminSliceSchema } from '../../type/AdminSliceSchema.ts';
 import { getCompanies, getCompanyDetails } from '../service/getCompanies.ts';
+import { activateCompany } from '../service/activateCompany.ts';
 
 const initialState: IAdminSliceSchema = {
     company: {
@@ -40,6 +41,17 @@ const AdminSlice = createSlice({
                 state.company.isLoading = false;
             })
             .addCase(getCompanyDetails.rejected, (state, action) => {
+                state.company.isLoading = false;
+                state.company.error = errorHandler(action.payload as AxiosError);
+            })
+            .addCase(activateCompany.pending, (state) => {
+                state.company.isLoading = true;
+            })
+            .addCase(activateCompany.fulfilled, (state, action) => {
+                state.company.companyDetails = action.payload;
+                state.company.isLoading = false;
+            })
+            .addCase(activateCompany.rejected, (state, action) => {
                 state.company.isLoading = false;
                 state.company.error = errorHandler(action.payload as AxiosError);
             });

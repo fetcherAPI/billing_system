@@ -17,4 +17,8 @@ export class AdminApi {
     static async getCompanyDetails(id: number): Promise<AxiosResponse<ICompanyDetails>> {
         return api.get(`api/admin/company/${id}`);
     }
+
+    static async activateCompany(id: string): Promise<AxiosResponse<ICompanyDetails>> {
+        return api.put(`/api/admin/company/activate/${id}`);
+    }
 }
