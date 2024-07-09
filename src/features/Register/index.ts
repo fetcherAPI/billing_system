@@ -1,5 +1,8 @@
 import { IRegisterSliceSchema } from './types/SliceSchema';
 
+export { RegisterUserModal } from './ui/RegisterUserModal/RegisterUserModal.tsx';
+
+export { UserRegisterForm } from './ui/RegistrationForms/UserRegisterForm.tsx';
 export { RegisterSliceReducer } from './model/slice/RegisterSlice';
 export { RegistrationSteps } from './ui/RegistrationSteps/RegistrationSteps';
 

@@ -3,14 +3,12 @@ import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { errorHandler } from 'shared/lib';
 import { IRegisterSliceSchema, keyOfRegisterSliceSchema, keyOfUserRegister } from '../../types/SliceSchema';
 import { registerCompany, registerUser } from '../service/registerCompany.ts';
-import { ICompanyRegister } from '../../types/Company.ts';
-import { IUserRegister } from 'features/Register/types/User.ts';
-
+import { ICompanyRegister, IUserRegister } from 'shared/types';
 
 interface IRegisterPayload<T> {
-    key: T,
+    key: T;
     data: any;
-    type: 'User' | 'Company'
+    type: 'User' | 'Company';
 }
 
 const initialState: IRegisterSliceSchema = {
@@ -34,7 +32,10 @@ export const RegisterSlice = createSlice({
          * @param {string} action.payload.key - The key of the property to update.
          * @param {any} action.payload.data - The data to set for the specified key.
          */
-        setRegisterProperty(state: IRegisterSliceSchema, action: PayloadAction<IRegisterPayload<keyOfRegisterSliceSchema | keyOfUserRegister>>) {
+        setRegisterProperty(
+            state: IRegisterSliceSchema,
+            action: PayloadAction<IRegisterPayload<keyOfRegisterSliceSchema | keyOfUserRegister>>
+        ) {
             switch (action.payload.type) {
                 case 'User':
                     state.userData = {
@@ -51,7 +52,6 @@ export const RegisterSlice = createSlice({
                 default:
                     throw new Error('Unknown action type');
             }
-
         },
     },
 

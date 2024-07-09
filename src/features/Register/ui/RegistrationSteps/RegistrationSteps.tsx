@@ -1,17 +1,18 @@
 import { useState, useRef } from 'react';
 import { Button, message, Steps } from 'antd';
 import { IBaseProps } from 'shared/types';
-import {
-    RegistrationCompanyForm,
-    RegistrationCompanyFormRef,
-} from '../RegistrationForms/RegistrationCompanyForm.tsx';
+import { RegistrationCompanyForm } from '../RegistrationForms/RegistrationCompanyForm.tsx';
 import cls from './RegistrationSteps.module.scss';
 import { BackButton } from 'shared/ui';
-import { UserRegisterForm, UserRegisterFormRef } from '../RegistrationForms/UserRegisterForm.tsx';
+import { UserRegisterForm } from '../RegistrationForms/UserRegisterForm.tsx';
+
+export interface FormRef {
+    submit: () => void;
+}
 
 export const RegistrationSteps = ({ className }: IBaseProps) => {
     const [current, setCurrent] = useState(0);
-    const formRef = useRef<RegistrationCompanyFormRef | UserRegisterFormRef>(null);
+    const formRef = useRef<FormRef>(null);
 
     const next = () => {
         if (formRef.current) {
@@ -30,7 +31,13 @@ export const RegistrationSteps = ({ className }: IBaseProps) => {
         },
         {
             title: 'Second',
-            content: <UserRegisterForm ref={formRef} handleNext={() => setCurrent(current + 1)} />,
+            content: (
+                <UserRegisterForm
+                    ref={formRef}
+                    handleNext={() => setCurrent(current + 1)}
+                    userRole={'manager'}
+                />
+            ),
         },
         {
             title: 'Last',
