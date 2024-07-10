@@ -58,7 +58,7 @@ export const RegistrationCompanyForm = forwardRef<FormRef, IProps>(({ className,
             onFinish={handleFinish}
             className={classNames(cls.from, {}, [className])}
         >
-            <Row gutter={200} className={cls.row}>
+            <Row gutter={20} className={cls.row}>
                 <Col style={{ width: '50%' }}>
                     <Inn
                         label={'companyInn'}

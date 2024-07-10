@@ -5,6 +5,7 @@ import { useTranslation } from 'react-i18next';
 import { useAppDispatch } from 'app/providers/StoreProvider';
 import { classNames } from 'shared/lib/classNames/classNames';
 import { fieldsMaker } from 'shared/lib/fieldsMaker/fieldsMaker.ts';
+import { UserRoles } from 'shared/types/baseTypes.ts';
 import { keyOfUserRegister } from 'features/Register/types/SliceSchema';
 import { $registerUserData } from '../../model/selectors';
 import { registerUser } from '../../model/service/registerCompany.ts';
@@ -16,7 +17,7 @@ import { FormRef } from '../RegistrationSteps/RegistrationSteps.tsx';
 interface IProps {
     className?: string;
     handleNext?: () => void;
-    userRole: 'manager' | 'merchant';
+    userRole: UserRoles;
     companyId?: string;
 }
 
@@ -54,15 +55,6 @@ export const UserRegisterForm = forwardRef<FormRef, IProps>(
             }
         }, []);
 
-        //fdsafdsafjdksa
-
-        //fdsaklfjdklsajf
-
-        ///fdsafdsafdsa
-        //fdsafdsafdsafdsa
-
-        ///hfdksjahfkjdsahfdsa
-
         return (
             <Form
                 initialValues={formFields}
@@ -72,8 +64,8 @@ export const UserRegisterForm = forwardRef<FormRef, IProps>(
                 onFinish={handleFinish}
                 className={classNames(cls.from, {}, [className])}
             >
-                <Row gutter={200} className={cls.row}>
-                    <Col style={{ width: '50%' }}>
+                <Row className={cls.row} gutter={20}>
+                    <Col span={12}>
                         <Inn
                             label={isUserRoleManager ? 'ПИН руководителя' : 'ПИН сотрудника'}
                             inputName={'userInn'}

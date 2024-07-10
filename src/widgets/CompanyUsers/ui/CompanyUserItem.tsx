@@ -1,8 +1,7 @@
 import { IUser } from 'shared/types';
 import { Badge, Descriptions, Row } from 'antd';
 import cls from './CompanyUser.module.scss';
-import { ActivateUser } from 'features/CompanyUsers';
-import { DeactivateUser } from '../../../features/CompanyUsers/ui/ActivateUser.tsx';
+import { ActivateUser, DeactivateUser } from 'features/CompanyUsers';
 
 export const CompanyUserItem = (props: IUser) => {
     const { id, userInn, fullName, position, cellPhone, email, username, status } = props;

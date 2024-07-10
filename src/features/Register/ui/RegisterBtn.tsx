@@ -30,6 +30,7 @@ export const RegisterBtn = () => {
                 {t('registration')}
             </Button1>
             <ConfirmModal
+                autoClosable={true}
                 handleClose={() => setIsOpen(false)}
                 onConfirm={handleNavigate}
                 onCancel={handleCancel}

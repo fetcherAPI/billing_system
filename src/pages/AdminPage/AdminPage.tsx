@@ -1,11 +1,11 @@
-import { AdminNavBar } from 'widgets/AdminNavBar';
+import { Navbar } from 'widgets/Navbar';
 import { Outlet } from 'react-router-dom';
 import cls from './AdminPage.module.scss';
 
 const AdminPage = () => {
     return (
         <div className={cls.AdminPage}>
-            <AdminNavBar />
+            <Navbar />
             <div className={cls.content}>
                 <Outlet />
             </div>

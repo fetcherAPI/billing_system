@@ -1,15 +1,17 @@
-import { AxiosError } from 'axios'
+import { AxiosError } from 'axios';
 
 export interface IBaseSliceSchema {
-    isLoading: boolean
-    error: string | undefined | AxiosError
+    isLoading: boolean;
+    error: string | undefined | AxiosError;
 }
 
 export interface IBaseProps {
-    className?: string
+    className?: string;
 }
 
 export interface IPaginationQueryParams {
-    first: number
-    row: number
+    first: number;
+    row: number;
 }
+
+export type UserRoles = 'manager' | 'merchant' | 'admin';

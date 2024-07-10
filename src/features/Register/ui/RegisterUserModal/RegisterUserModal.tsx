@@ -37,7 +37,12 @@ export const RegisterUserModal = () => {
                 title="Пользовательское соглашение"
                 isOpen={isOpen}
             >
-                <UserRegisterForm ref={formRef} userRole={'merchant'} companyId={companyId} />
+                <UserRegisterForm
+                    ref={formRef}
+                    userRole={'merchant'}
+                    companyId={companyId}
+                    handleNext={handleCancel}
+                />
             </ConfirmModal>
         </>
     );

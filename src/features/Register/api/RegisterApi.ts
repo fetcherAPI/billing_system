@@ -2,6 +2,7 @@ import { AxiosResponse } from 'axios';
 import api from 'shared/api/api';
 import { ICompany, ICompanyRegister, IResponseList, IUser, IUserRegister } from 'shared/types';
 import { IAte } from '../types/Ate.ts';
+import { UserRoles } from '../../../shared/types/baseTypes.ts';
 
 export class RegisterApi {
     static async getPersonByInn({ INN }: { INN: string }): Promise<AxiosResponse> {
@@ -16,10 +17,7 @@ export class RegisterApi {
         return api.post<ICompany>(`/api/company/create`, params);
     }
 
-    static async registerUser(
-        params: IUserRegister,
-        userRole: 'manager' | 'merchant'
-    ): Promise<AxiosResponse<IUser>> {
+    static async registerUser(params: IUserRegister, userRole: UserRoles): Promise<AxiosResponse<IUser>> {
         const url = userRole === 'merchant' ? '/api/user/create' : '/api/company/user/create';
         return api.post<IUser>(url, params);
     }
