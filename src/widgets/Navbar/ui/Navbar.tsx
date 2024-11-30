@@ -14,22 +14,22 @@ const menuItemsMap: Map<UserRoles | undefined, Array<any>> = new Map([
         'manager',
         [
             {
-                key: 'gov-org',
+                key: '/manager',
                 icon: BankOutlined,
                 label: `Мои услуги`,
-                path: ChildRoutePath.service,
+                path: `/${AppRoutes.MANAGER}`,
             },
             {
-                key: 'service',
+                key: '/manager/service',
                 icon: DollarOutlined,
                 label: `Платежи`,
                 path: ChildRoutePath.service,
             },
             {
-                key: 'service',
+                key: '/manager/bills',
                 icon: AreaChartOutlined,
                 label: `Счета`,
-                path: `/${AppRoutes.MANAGER}`,
+                path: ChildRoutePath.bills,
             },
         ],
     ],

@@ -5,7 +5,12 @@ import { RegistrationPageLazy } from 'pages/RegistrationPage';
 import { AdminPageAsync, CompaniesAsync, ServicesAsync } from 'pages/AdminPage';
 import { CompanyDetailsAsync } from 'pages/CompanyDetialsPage';
 import { ServiceDetailsAsync } from 'pages/AdminPage/Services/ServiceDetails.async';
-import { ManagerPageAsync, ManagerServiceDetailPageAsync, ManagerServicesAsync } from 'pages/ManagerPage';
+import {
+    ManagerBillsPageAsync,
+    ManagerPageAsync,
+    ManagerServiceDetailPageAsync,
+    ManagerServicesAsync,
+} from 'pages/ManagerPage';
 
 export enum AppRoutes {
     MAIN = 'main',
@@ -22,6 +27,7 @@ export enum ChildRoutes {
     COMPANY_DETAILS = 'companyDetails',
     SERVICE = 'service',
     SERVICE_DETAILS = 'serviceDetails',
+    BILLS = 'bills',
 }
 
 export type AppRoutesProps = RouteProps & {
@@ -50,6 +56,7 @@ export const ChildRoutePath: Record<ChildRoutes, string> = {
     [ChildRoutes.SERVICE]: ChildRoutes.SERVICE,
     [ChildRoutes.COMPANY_DETAILS]: getRouteCompanyDetail(':id'),
     [ChildRoutes.SERVICE_DETAILS]: getRouteServiceDetail(':id'),
+    [ChildRoutes.BILLS]: 'bills',
 
     // последний
 };
@@ -98,6 +105,10 @@ export const routeConfig: Record<AppRoutes, AppRoutesProps> = {
             [ChildRoutes.SERVICE_DETAILS]: {
                 path: ChildRoutePath.serviceDetails,
                 element: <ManagerServiceDetailPageAsync />,
+            },
+            [ChildRoutes.BILLS]: {
+                path: ChildRoutePath.bills,
+                element: <ManagerBillsPageAsync />,
             },
         },
     },
