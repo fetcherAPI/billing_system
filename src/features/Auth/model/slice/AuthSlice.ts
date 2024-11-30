@@ -12,8 +12,8 @@ const initialState: ILoginSliceSchema = {
     isAuth: false,
 };
 
-const LoginSlice = createSlice({
-    name: 'LoginSlice',
+const AuthSlice = createSlice({
+    name: 'authSlice',
     initialState,
     reducers: {},
     extraReducers: (builder) => {
@@ -24,6 +24,7 @@ const LoginSlice = createSlice({
             .addCase(login.fulfilled, (state, action) => {
                 state.userData = action.payload;
                 state.isLoading = false;
+                state.isAuth = true;
                 onSuccessLogin(action.payload.token);
             })
             .addCase(login.rejected, (state, action) => {
@@ -38,6 +39,7 @@ const LoginSlice = createSlice({
             .addCase(refreshToken.fulfilled, (state, action) => {
                 state.userData = action.payload;
                 state.isLoading = false;
+                state.isAuth = true;
                 onSuccessLogin(action.payload.token);
             })
             .addCase(refreshToken.rejected, (state, action) => {
@@ -49,4 +51,4 @@ const LoginSlice = createSlice({
     },
 });
 
-export const LoginSliceReducer = LoginSlice.reducer;
+export const LoginSliceReducer = AuthSlice.reducer;

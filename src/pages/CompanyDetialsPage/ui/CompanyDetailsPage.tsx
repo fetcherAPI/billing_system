@@ -1,10 +1,11 @@
 import { CompanyDetails, CompanyDetailsControl } from 'widgets/CompanyDetails';
 import { useParams } from 'react-router-dom';
-import { Col, Row } from 'antd';
+import { Col, Divider, Row } from 'antd';
 import { CompanyUsersList } from 'widgets/CompanyUsers';
-import { useDispatchToStore } from '../../../shared/lib/hooks/useDisaptchToStore';
-import { getCompanyUsers } from '../../../features/CompanyUsers/model/service/getCompanyUsers.ts';
+import { useDispatchToStore } from 'shared/lib/hooks/useDisaptchToStore';
+import { getCompanyUsers } from 'features/CompanyUsers/model/service/getCompanyUsers.ts';
 import { useEffect } from 'react';
+import { BackButton } from 'shared/ui/index.ts';
 
 const CompanyDetailsPage = () => {
     const { id } = useParams();
@@ -22,6 +23,8 @@ const CompanyDetailsPage = () => {
                 <CompanyDetailsControl />
                 <br />
                 <CompanyDetails />
+                <Divider />
+                <BackButton />
             </Col>
             <Col span={7}>
                 <CompanyUsersList />

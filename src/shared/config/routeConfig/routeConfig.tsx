@@ -2,13 +2,16 @@ import { Outlet, RouteProps } from 'react-router-dom';
 import { MainPage } from 'pages/MainPage/ui/MainPage';
 import { LoginPage } from 'pages/LoginPage/ui/LoginPage';
 import { RegistrationPageLazy } from 'pages/RegistrationPage';
-import { AdminPageAsync, CompaniesAsync } from 'pages/AdminPage';
+import { AdminPageAsync, CompaniesAsync, ServicesAsync } from 'pages/AdminPage';
 import { CompanyDetailsAsync } from 'pages/CompanyDetialsPage';
+import { ServiceDetailsAsync } from 'pages/AdminPage/Services/ServiceDetails.async';
+import { ManagerPageAsync, ManagerServiceDetailPageAsync, ManagerServicesAsync } from 'pages/ManagerPage';
 
 export enum AppRoutes {
     MAIN = 'main',
     ADMIN = 'admin',
     PUBLIC = 'public',
+    MANAGER = 'manager',
 }
 
 export enum ChildRoutes {
@@ -17,7 +20,8 @@ export enum ChildRoutes {
     COMPANY = 'company',
     COMPANIES = 'companies',
     COMPANY_DETAILS = 'companyDetails',
-    PAYMENTS = 'payments',
+    SERVICE = 'service',
+    SERVICE_DETAILS = 'serviceDetails',
 }
 
 export type AppRoutesProps = RouteProps & {
@@ -28,10 +32,13 @@ export type AppRoutesProps = RouteProps & {
 };
 
 export const getRouteCompanyDetail = (param: string | number) => `${ChildRoutes.COMPANIES}/${param}`;
+export const getRouteServiceDetail = (param: string | number) => `${ChildRoutes.SERVICE}/${param}`;
+
 export const RoutePath: Record<AppRoutes, string> = {
     [AppRoutes.MAIN]: '/',
     [AppRoutes.ADMIN]: 'admin',
     [AppRoutes.PUBLIC]: 'public',
+    [AppRoutes.MANAGER]: 'manager',
     // последний
 };
 
@@ -40,8 +47,9 @@ export const ChildRoutePath: Record<ChildRoutes, string> = {
     [ChildRoutes.LOGIN]: 'login',
     [ChildRoutes.COMPANY]: 'company',
     [ChildRoutes.COMPANIES]: ChildRoutes.COMPANIES,
-    [ChildRoutes.PAYMENTS]: ChildRoutes.PAYMENTS,
+    [ChildRoutes.SERVICE]: ChildRoutes.SERVICE,
     [ChildRoutes.COMPANY_DETAILS]: getRouteCompanyDetail(':id'),
+    [ChildRoutes.SERVICE_DETAILS]: getRouteServiceDetail(':id'),
 
     // последний
 };
@@ -66,9 +74,30 @@ export const routeConfig: Record<AppRoutes, AppRoutesProps> = {
                 path: ChildRoutePath.companyDetails,
                 element: <CompanyDetailsAsync />,
             },
-            [ChildRoutes.PAYMENTS]: {
-                path: ChildRoutePath.payments,
-                element: <h1>payments </h1>,
+            [ChildRoutes.SERVICE]: {
+                path: ChildRoutePath.service,
+                element: <ServicesAsync />,
+            },
+            [ChildRoutes.SERVICE_DETAILS]: {
+                path: ChildRoutePath.serviceDetails,
+                element: <ServiceDetailsAsync />,
+            },
+        },
+    },
+
+    [AppRoutes.MANAGER]: {
+        path: RoutePath.manager,
+        element: <ManagerPageAsync />,
+        // roles: ['admin'],
+        // authOnly: true,
+        child: {
+            [ChildRoutes.SERVICE]: {
+                path: ChildRoutePath.service,
+                element: <ManagerServicesAsync />,
+            },
+            [ChildRoutes.SERVICE_DETAILS]: {
+                path: ChildRoutePath.serviceDetails,
+                element: <ManagerServiceDetailPageAsync />,
             },
         },
     },

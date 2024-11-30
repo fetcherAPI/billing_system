@@ -1,11 +1,11 @@
-import axios from "axios";
-import {useState} from "react";
-import {errorHandler} from "../../errorHandler/errorHandler";
+import axios from 'axios';
+import { useState } from 'react';
+import { errorHandler } from '../../errorHandler/errorHandler';
 
 export const useRequest = <T = undefined, P = undefined>() => {
-    const [response, setResponse] = useState<P>();
+    const [response, setResponse] = useState<P | string>();
 
-    const [error, setError] = useState<string>("");
+    const [error, setError] = useState<string>('');
 
     const [status, setStatus] = useState<number>();
 
@@ -17,25 +17,25 @@ export const useRequest = <T = undefined, P = undefined>() => {
             const res = await requestService(params);
 
             if (!res.data) {
-                setResponse(res);
+                setResponse('no data');
             } else {
                 setResponse(res.data);
             }
             setIsLoading(false);
             setStatus(res.status);
-            setError("");
+            setError('');
             return res;
         } catch (err) {
             if (axios.isAxiosError(err)) {
                 setError(errorHandler(err));
                 setStatus(err.response?.status);
             } else {
-                setError("An unexpected error occurred.");
+                setError('An unexpected error occurred.');
             }
             setIsLoading(false);
         } finally {
             setIsLoading(false);
         }
     };
-    return {response, error, isLoading, request, status};
+    return { response, error, isLoading, request, status };
 };

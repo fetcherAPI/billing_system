@@ -1,8 +1,8 @@
-import { AxiosResponse } from 'axios';
 import api from 'shared/api/api';
+import { AxiosResponse } from 'axios';
 import { ICompany, ICompanyRegister, IResponseList, IUser, IUserRegister } from 'shared/types';
 import { IAte } from '../types/Ate.ts';
-import { UserRoles } from '../../../shared/types/baseTypes.ts';
+import { UserRoles } from 'shared/types/baseTypes.ts';
 
 export class RegisterApi {
     static async getPersonByInn({ INN }: { INN: string }): Promise<AxiosResponse> {

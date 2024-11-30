@@ -1,6 +1,6 @@
 import { Menu, Drawer, Button, MenuProps } from "antd";
 import { MenuOutlined } from "@ant-design/icons";
-import { LoginBtn } from "features/Login";
+import { LoginBtn } from "features/Auth";
 import { RegisterBtn } from "features/Register";
 import { Link } from "react-router-dom";
 import { LangSwitcher } from "shared/ui/LangSwitcher";

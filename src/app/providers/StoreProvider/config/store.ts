@@ -3,7 +3,7 @@ import { configureStore } from '@reduxjs/toolkit';
 import { StateSchema } from './StateSchema';
 import { counterReducer } from 'entities/Counter/';
 import { useDispatch } from 'react-redux';
-import { LoginSliceReducer } from 'features/Login';
+import { LoginSliceReducer } from 'features/Auth';
 import { RegisterSliceReducer } from 'features/Register';
 import { AdminSliceReducer } from 'entities/Admin/model/slice/AdminSlice.ts';
 import { CompanyUsersReducer } from 'features/CompanyUsers';

@@ -19,7 +19,7 @@ export const SelectLocality = () => {
 
     const fetchChildren = async (parentId: number) => {
         const response = await api.get<IResponseList<IAte>>(
-            `http://10.200.24.107:8080/dictionary/ate/children?id=${parentId}&first=0&rows=100`,
+            `http://10.200.24.107:8080/dictionary/ate/children?id=${parentId}&first=0&rows=100`
         );
         return response.data.content.map((item: any) => ({
             id: item.id,
@@ -40,8 +40,6 @@ export const SelectLocality = () => {
         dispatch(setRegisterProperty({ key: 'ateId', data: newValue, type: 'Company' }));
         setValue(newValue);
     };
-
-    console.log(treeData);
 
     return (
         <TreeSelect

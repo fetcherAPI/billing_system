@@ -5,7 +5,7 @@ type FieldsMakerResult<T> = Array<{
 
 export const fieldsMaker = <T extends object>(
     obj: T,
-    needFields?: Array<keyof T | string>,
+    needFields?: Array<keyof T | string>
 ): FieldsMakerResult<T> => {
     const fields: FieldsMakerResult<T> = [];
     try {
@@ -31,4 +31,3 @@ export const fieldsMaker = <T extends object>(
         return fields;
     }
 };
-

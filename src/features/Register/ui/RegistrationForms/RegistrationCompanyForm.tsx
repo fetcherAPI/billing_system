@@ -43,7 +43,7 @@ export const RegistrationCompanyForm = forwardRef<FormRef, IProps>(({ className,
 
     useEffect(() => {
         form.setFieldValue('title', formFields.title);
-    }, [formFields]);
+    }, [form, formFields]);
 
     const handleChangeInput = (e: ChangeEvent<HTMLInputElement>, key: keyOfRegisterSliceSchema) => {
         dispatch(setRegisterProperty({ key, data: e.target.value, type: 'Company' }));
@@ -127,7 +127,7 @@ export const RegistrationCompanyForm = forwardRef<FormRef, IProps>(({ className,
                             },
                         ]}
                     >
-                        <Input placeholder="input placeholder" disabled={true} />
+                        <Input placeholder="input placeholder" disabled={false} />
                     </Form.Item>
                     <Form.Item
                         name={'managerName'}

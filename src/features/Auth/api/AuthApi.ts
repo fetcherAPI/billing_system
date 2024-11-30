@@ -2,7 +2,7 @@ import { AxiosResponse } from 'axios';
 import api from 'shared/api/api';
 import { ILogin, ILoginResponse } from '../types/LoginType';
 
-export class LoginApi {
+export class AuthApi {
     static async getIsAuth(): Promise<AxiosResponse> {
         return api.get(`/api/auth/authenticate`);
     }

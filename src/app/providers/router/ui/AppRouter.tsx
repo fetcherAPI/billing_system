@@ -3,7 +3,7 @@ import { Navigate, Route, Routes, useLocation } from 'react-router-dom';
 import { AppRoutesProps, routeConfig } from 'shared/config/routeConfig/routeConfig';
 import { PageLoader } from 'shared/ui/PageLoader/PageLoader';
 import { useSelector } from 'react-redux';
-import { $isAuth, $userRole } from 'features/Login/model/selectors';
+import { $isAuth, $userRole } from 'features/Auth/model/selectors';
 
 const AppRouter = () => {
     const renderWithWrapper = useCallback((route: AppRoutesProps) => {

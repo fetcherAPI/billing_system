@@ -1,4 +1,4 @@
-import { UserRoles } from '../../../shared/types/baseTypes.ts';
+import { UserRoles } from 'shared/types/baseTypes.ts';
 
 export interface ILogin {
     username: string;

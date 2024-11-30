@@ -1,9 +1,7 @@
-import { AppRoutes, ChildRoutes } from "./routeConfig";
+import { AppRoutes, ChildRoutes } from './routeConfig';
 
 export const getRouteRegistration = (param?: string) => {
-  return `${AppRoutes.PUBLIC}/${ChildRoutes.REGISTRATION}/${
-    param ? param : ""
-  }`;
+    return `${AppRoutes.PUBLIC}/${ChildRoutes.REGISTRATION}/${param ? param : ''}`;
 };
 
 export const getRegisterType = (param: string) => param;

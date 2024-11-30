@@ -1,7 +1,5 @@
 import { CompaniesTable } from 'widgets/CompaniesTable';
 
-const Companies = () => {
-    return <CompaniesTable />;
-};
+const Companies = () => <CompaniesTable />;
 
 export default Companies;

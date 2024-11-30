@@ -1,3 +1,3 @@
-export { LoginSliceReducer } from "./model/slice/LoginSlice";
+export { LoginSliceReducer } from "./model/slice/AuthSlice.ts";
 
 export { LoginBtn } from "./ui/LoginBtn";

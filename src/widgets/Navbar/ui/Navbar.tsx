@@ -1,29 +1,35 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { Menu } from 'antd';
 import Sider from 'antd/lib/layout/Sider';
-import { AreaChartOutlined, BankOutlined } from '@ant-design/icons';
-import { ChildRoutePath } from 'shared/config/routeConfig/routeConfig.tsx';
-import { useNavigate } from 'react-router-dom';
-import { UserRoles } from '../../../shared/types/baseTypes.ts';
+import { AreaChartOutlined, BankOutlined, DollarOutlined } from '@ant-design/icons';
+import { AppRoutes, ChildRoutePath } from 'shared/config/routeConfig/routeConfig.tsx';
+import { NavLink, useLocation } from 'react-router-dom';
+import { UserRoles } from 'shared/types/baseTypes.ts';
 import { useSelector } from 'react-redux';
-import { $userRole } from '../../../features/Login/model/selectors';
+import { $userRole } from 'features/Auth/model/selectors';
 import cls from './Navbar.module.scss';
 
-const menuItemsMap: Map<UserRoles, Array<any>> = new Map([
+const menuItemsMap: Map<UserRoles | undefined, Array<any>> = new Map([
     [
         'manager',
         [
             {
                 key: 'gov-org',
                 icon: BankOutlined,
-                label: `Гос орган`,
-                path: ChildRoutePath.companies,
+                label: `Мои услуги`,
+                path: ChildRoutePath.service,
             },
             {
-                key: 'payments',
-                icon: AreaChartOutlined,
+                key: 'service',
+                icon: DollarOutlined,
                 label: `Платежи`,
-                path: ChildRoutePath.payments,
+                path: ChildRoutePath.service,
+            },
+            {
+                key: 'service',
+                icon: AreaChartOutlined,
+                label: `Счета`,
+                path: `/${AppRoutes.MANAGER}`,
             },
         ],
     ],
@@ -40,7 +46,7 @@ const menuItemsMap: Map<UserRoles, Array<any>> = new Map([
                 key: 'payments',
                 icon: AreaChartOutlined,
                 label: `Платежи`,
-                path: ChildRoutePath.payments,
+                path: ChildRoutePath.service,
             },
         ],
     ],
@@ -48,44 +54,44 @@ const menuItemsMap: Map<UserRoles, Array<any>> = new Map([
         'admin',
         [
             {
-                key: 'gov-org',
+                key: '/admin/companies',
                 icon: BankOutlined,
                 label: `Гос орган`,
                 path: ChildRoutePath.companies,
             },
             {
-                key: 'payments',
+                key: '/admin/service',
                 icon: AreaChartOutlined,
-                label: `Платежи`,
-                path: ChildRoutePath.payments,
+                label: `Услуги`,
+                path: ChildRoutePath.service,
             },
         ],
     ],
 ]);
 
 export const Navbar = () => {
-    const navigate = useNavigate();
+    const location = useLocation();
     const userRole = useSelector($userRole);
 
-    if (!userRole) return null;
+    const its = useMemo(() => {
+        return menuItemsMap.get(userRole)?.map((item) => ({
+            key: item.key,
+            icon: React.createElement(item.icon),
+            label: <NavLink to={item.path}>{item.label}</NavLink>,
+            path: item.path,
+        }));
+    }, [userRole]);
 
-    const its = menuItemsMap.get(userRole)?.map((item) => ({
-        key: item.key,
-        icon: React.createElement(item.icon),
-        label: item.label,
-        path: item.path,
-    }));
+    if (!userRole) return null;
 
     return (
         <Sider className={cls.AdminNavBar}>
             <Menu
                 theme="dark"
                 mode="inline"
+                selectedKeys={[location.pathname]}
                 defaultSelectedKeys={['4']}
                 items={its}
-                //eslint-disable-next-line @typescript-eslint/ban-ts-comment
-                //@ts-expect-error
-                onSelect={(value) => navigate(value.item?.props?.path)}
             />
         </Sider>
     );

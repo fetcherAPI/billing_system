@@ -1,4 +1,4 @@
-import { LoginForm } from "features/Login/ui/LoginForm";
+import { LoginForm } from "features/Auth/ui/LoginForm";
 import "./LoginPage.css";
 
 export const LoginPage = () => {

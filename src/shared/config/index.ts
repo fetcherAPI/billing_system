@@ -1,3 +1,3 @@
-export * as routes from "./routeConfig/routes";
+export * as routes from './routeConfig/routes';
 
-export { AppRoutes } from "./routeConfig/routeConfig";
+export { AppRoutes } from './routeConfig/routeConfig';

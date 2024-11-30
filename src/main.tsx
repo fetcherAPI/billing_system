@@ -12,6 +12,7 @@ import relativeTime from 'dayjs/plugin/relativeTime';
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 dayjs.extend(relativeTime);
+
 root.render(
     <BrowserRouter>
         <StoreProvider>

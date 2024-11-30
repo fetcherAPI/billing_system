@@ -17,13 +17,15 @@ interface INNProps<T> {
 }
 
 export const Inn = ({
-                        label,
-                        inputName,
-                        fieldForSetResponse,
-                        type,
-                    }: INNProps<keyOfRegisterSliceSchema | keyOfUserRegister>) => {
+    label,
+    inputName,
+    fieldForSetResponse,
+    type,
+}: INNProps<keyOfRegisterSliceSchema | keyOfUserRegister>) => {
     const [t] = useTranslation('registration');
+
     const dispatch = useAppDispatch();
+
     const { isLoading, error, request, response } = useRequest<{ INN: string }>();
 
     const handleChangeInn = async (event: ChangeEvent<HTMLInputElement>) => {
@@ -32,13 +34,14 @@ export const Inn = ({
             await request({ INN: value }, RegisterApi.getPersonByInn);
             dispatch(setRegisterProperty({ key: inputName, data: value, type }));
         } else {
-            fieldForSetResponse && dispatch(setRegisterProperty({ key: fieldForSetResponse, data: '', type }));
+            fieldForSetResponse &&
+                dispatch(setRegisterProperty({ key: fieldForSetResponse, data: '', type }));
         }
     };
 
     useEffect(() => {
         if (fieldForSetResponse && response) {
-            dispatch(setRegisterProperty({ key: fieldForSetResponse, data: response, type }));
+            dispatch(setRegisterProperty({ key: fieldForSetResponse, data: JSON.stringify(response), type }));
         }
     }, [isLoading]);
 
@@ -64,8 +67,6 @@ export const Inn = ({
                 placeholder="input placeholder"
                 onChange={handleChangeInn}
             />
-
-            <p>{}</p>
         </Form.Item>
     );
 };

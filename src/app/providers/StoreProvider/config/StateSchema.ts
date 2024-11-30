@@ -1,6 +1,6 @@
 import { AxiosInstance } from 'axios';
 import { CounterSchema } from 'entities/Counter';
-import { ILoginSliceSchema } from 'features/Login/types/SliceSchema';
+import { ILoginSliceSchema } from 'features/Auth/types/SliceSchema';
 import { IRegisterSliceSchema } from 'features/Register';
 import { ICompanyUsersSliceSchema } from 'features/CompanyUsers';
 import { IAdminSliceSchema } from 'entities/Admin';

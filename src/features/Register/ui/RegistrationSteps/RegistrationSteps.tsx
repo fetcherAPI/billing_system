@@ -11,7 +11,7 @@ export interface FormRef {
 }
 
 export const RegistrationSteps = ({ className }: IBaseProps) => {
-    const [current, setCurrent] = useState(1);
+    const [current, setCurrent] = useState(0);
     const formRef = useRef<FormRef>(null);
 
     const next = () => {

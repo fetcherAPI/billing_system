@@ -1,9 +1,9 @@
-import { TOKEN, REFRESH_TOKEN } from "../const/localstorage";
+import { TOKEN, REFRESH_TOKEN } from '../const/localstorage';
 
 export function tokenAvailability() {
-  return localStorage.getItem(TOKEN);
+    return localStorage.getItem(TOKEN);
 }
 
 export function refreshTokenAvailability() {
-  return localStorage.getItem(REFRESH_TOKEN);
+    return localStorage.getItem(REFRESH_TOKEN);
 }
