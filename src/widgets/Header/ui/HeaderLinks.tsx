@@ -12,7 +12,7 @@ export const HeaderLinks = () => {
 
     const userRole = useSelector($userRole);
 
-    if (hideForRoles.includes(userRole)) return null;
+    if (hideForRoles.includes(userRole || '')) return null;
 
     return (
         <Row justify={'space-between'} className={cls.links}>
