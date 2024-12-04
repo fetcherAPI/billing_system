@@ -7,6 +7,7 @@ import { LoginSliceReducer } from 'features/Auth';
 import { RegisterSliceReducer } from 'features/Register';
 import { AdminSliceReducer } from 'entities/Admin/model/slice/AdminSlice.ts';
 import { CompanyUsersReducer } from 'features/CompanyUsers';
+import { ServiceSliceReducer } from 'entities/Service/model/slice/ServiceSlice';
 
 export function createReduxStore(initialState?: StateSchema) {
     return configureStore({
@@ -16,6 +17,7 @@ export function createReduxStore(initialState?: StateSchema) {
             register: RegisterSliceReducer,
             users: CompanyUsersReducer,
             admin: AdminSliceReducer,
+            service: ServiceSliceReducer,
         },
         preloadedState: initialState,
         middleware: (getDefaultMiddleware) =>

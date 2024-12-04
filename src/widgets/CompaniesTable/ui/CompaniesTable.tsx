@@ -50,7 +50,7 @@ export const CompaniesTable = () => {
 
     const handleGetCompaniesList = useCallback(
         (page: number, size: number) => {
-            dispatch(getCompanies({ first: page, row: size }));
+            dispatch(getCompanies({ first: page, rows: size }));
         },
         [dispatch]
     );

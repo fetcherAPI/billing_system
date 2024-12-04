@@ -24,7 +24,7 @@ const Services = () => {
             </Button>
             <Divider />
             <Modal title="" open={isModalOpen} onOk={handleOk} onCancel={handleCancel} footer={null}>
-                <CreateServiceForm isInModal />
+                <CreateServiceForm isInModal callbackAfterSuccesCreate={handleOk} />
             </Modal>
 
             <ServicesTable />

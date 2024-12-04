@@ -4,6 +4,7 @@ import { ILoginSliceSchema } from 'features/Auth/types/SliceSchema';
 import { IRegisterSliceSchema } from 'features/Register';
 import { ICompanyUsersSliceSchema } from 'features/CompanyUsers';
 import { IAdminSliceSchema } from 'entities/Admin';
+import { ISerivceSliceSchema } from 'entities/Service/model/types/sliceSchema';
 
 export interface StateSchema {
     counter: CounterSchema;
@@ -11,6 +12,7 @@ export interface StateSchema {
     register: IRegisterSliceSchema;
     users: ICompanyUsersSliceSchema;
     admin: IAdminSliceSchema;
+    service: ISerivceSliceSchema;
 }
 
 export interface ThunkExtraArg {

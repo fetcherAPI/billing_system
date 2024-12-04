@@ -37,16 +37,22 @@ const menuItemsMap: Map<UserRoles | undefined, Array<any>> = new Map([
         'merchant',
         [
             {
-                key: 'gov-org',
+                key: '/manager',
                 icon: BankOutlined,
-                label: `merchant`,
-                path: ChildRoutePath.companies,
+                label: `Мои услуги`,
+                path: `/${AppRoutes.MANAGER}`,
             },
             {
-                key: 'payments',
-                icon: AreaChartOutlined,
+                key: '/manager/service',
+                icon: DollarOutlined,
                 label: `Платежи`,
                 path: ChildRoutePath.service,
+            },
+            {
+                key: '/manager/bills',
+                icon: AreaChartOutlined,
+                label: `Счета`,
+                path: ChildRoutePath.bills,
             },
         ],
     ],

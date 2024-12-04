@@ -1,10 +1,13 @@
 import { useSelector } from 'react-redux';
-import { Divider, Table, TableProps, Tag } from 'antd';
+import { Divider, Table, TableProps } from 'antd';
 import { BluredBackGround, Pagination } from 'shared/ui';
-import { $companiesTotalCount } from 'entities/Admin';
 import { getRouteServiceDetail } from 'shared/config/routeConfig/routeConfig.tsx';
-import { IService } from 'entities/Admin/type';
 import { useNavigate } from 'react-router-dom';
+import { IService } from 'entities/Service/model/types/service';
+import { $servicesList, $servicesTotalCount } from 'entities/Service/model/selectors';
+import { useCallback } from 'react';
+import { useAppDispatch } from 'app/providers/StoreProvider';
+import { getServices } from 'entities/Service/model/service/getServices';
 
 const columns: TableProps<IService>['columns'] = [
     {
@@ -14,29 +17,19 @@ const columns: TableProps<IService>['columns'] = [
         render: (_, _record, index) => <a>{++index}</a>,
     },
     {
-        title: 'Инн',
-        dataIndex: 'payer_inn',
-        key: 'payer_inn',
+        title: 'Название усулуги',
+        dataIndex: 'name',
+        key: 'name',
     },
     {
-        title: 'Наименование огрганизации',
-        dataIndex: 'payer_name',
-        key: 'payer_name',
+        title: 'Название родителя',
+        dataIndex: 'parentName',
+        key: 'parentName',
     },
     {
-        title: 'Форма/соб',
-        dataIndex: 'destination',
-        key: 'destination',
-    },
-    {
-        title: 'Статаус',
-        key: 'status',
-        dataIndex: 'tags',
-        render: (_, { status }) => (
-            <Tag color={'volcano'} key={status}>
-                {status}
-            </Tag>
-        ),
+        title: 'Название организации',
+        dataIndex: 'companyName',
+        key: 'companyName',
     },
 ];
 
@@ -89,18 +82,24 @@ export const mockServices = [
 ];
 
 export const ServicesTable = () => {
-    const companiesTotalCount = useSelector($companiesTotalCount);
+    const servicesList = useSelector($servicesList);
+    const servicesTotalCount = useSelector($servicesTotalCount);
     const navigate = useNavigate();
-    const handleGetCompaniesList = () => {
-        console.log('from table ');
-    };
+    const dispatch = useAppDispatch();
+
+    const handleGetCompaniesList = useCallback(
+        (page: number, size: number) => {
+            dispatch(getServices({ first: page, rows: size }));
+        },
+        [dispatch]
+    );
 
     return (
         <div>
             <Table
                 columns={columns}
                 rowKey={(record) => record.id}
-                dataSource={mockServices}
+                dataSource={servicesList}
                 pagination={false}
                 onRow={(record) => {
                     return {
@@ -110,7 +109,7 @@ export const ServicesTable = () => {
             />
             <Divider />
             <BluredBackGround>
-                <Pagination onChange={handleGetCompaniesList} total={companiesTotalCount} />
+                <Pagination onChange={handleGetCompaniesList} total={servicesTotalCount} />
             </BluredBackGround>
         </div>
     );

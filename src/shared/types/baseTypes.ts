@@ -11,7 +11,7 @@ export interface IBaseProps {
 
 export interface IPaginationQueryParams {
     first: number;
-    row: number;
+    rows: number;
 }
 
 export type UserRoles = 'manager' | 'merchant' | 'admin';

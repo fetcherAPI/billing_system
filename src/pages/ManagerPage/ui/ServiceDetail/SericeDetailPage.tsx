@@ -1,19 +1,35 @@
 import { Button, Card, Col, Row } from 'antd';
-import { CreateServiceForm } from 'features/CreateService/ui/CreateServiceForm';
+import { $service, $servicesList } from 'entities/Service/model/selectors';
+import { getServiceById } from 'entities/Service/model/service/getServiceById';
+import { CreateSplitterForm } from 'features/CreateService/ui/CreateSplitterForm';
+import { GeneratePaymentCode } from 'features/CreateService/ui/GeneratePaymentCodeForm';
+import { useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { mockServices } from 'widgets/ServicesTable/ServicesTable';
+import { useDispatchToStore } from 'shared/lib/hooks/useDisaptchToStore';
 
 const SericeDetailPage = () => {
     const { id } = useParams();
+    const service = useSelector($service);
+    const servicesList = useSelector($servicesList);
+    const handleGetService = useDispatchToStore<{ id: number }>(getServiceById);
+
+    useEffect(() => {
+        if (!servicesList.length && id) {
+            handleGetService({ id: +id });
+        }
+    }, []);
+
     if (!id) return null;
+
     return (
         <Card>
-            <Row gutter={240}>
+            <Row gutter={24}>
                 <Col span={12}>
-                    <CreateServiceForm defaultValue={mockServices.find((el) => el.id === +id)} />
+                    <CreateSplitterForm defaultValue={service || servicesList.find((el) => el.id === +id)} />
                 </Col>
-                <Col style={{ marginTop: 30 }}>
-                    <Button>Сгенерировать код оплаты</Button>
+                <Col span={12}>
+                    <GeneratePaymentCode chapterId={+id} />
                 </Col>
             </Row>
         </Card>

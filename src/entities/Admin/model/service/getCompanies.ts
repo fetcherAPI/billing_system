@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { AdminApi } from '../../api/AdminApi.ts';
-import { IPaginationQueryParams } from '../../../../shared/types/baseTypes.ts';
+import { IPaginationQueryParams } from 'shared/types/baseTypes.ts';
 
 export const getCompanies = createAsyncThunk(
     'getCompanies',

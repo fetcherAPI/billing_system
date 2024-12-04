@@ -17,6 +17,7 @@ export enum AppRoutes {
     ADMIN = 'admin',
     PUBLIC = 'public',
     MANAGER = 'manager',
+    MERCHANT = 'merchant',
 }
 
 export enum ChildRoutes {
@@ -45,6 +46,7 @@ export const RoutePath: Record<AppRoutes, string> = {
     [AppRoutes.ADMIN]: 'admin',
     [AppRoutes.PUBLIC]: 'public',
     [AppRoutes.MANAGER]: 'manager',
+    [AppRoutes.MERCHANT]: 'merchant',
     // последний
 };
 
@@ -94,6 +96,27 @@ export const routeConfig: Record<AppRoutes, AppRoutesProps> = {
 
     [AppRoutes.MANAGER]: {
         path: RoutePath.manager,
+        element: <ManagerPageAsync />,
+        // roles: ['admin'],
+        // authOnly: true,
+        child: {
+            [ChildRoutes.SERVICE]: {
+                path: ChildRoutePath.service,
+                element: <ManagerServicesAsync />,
+            },
+            [ChildRoutes.SERVICE_DETAILS]: {
+                path: ChildRoutePath.serviceDetails,
+                element: <ManagerServiceDetailPageAsync />,
+            },
+            [ChildRoutes.BILLS]: {
+                path: ChildRoutePath.bills,
+                element: <ManagerBillsPageAsync />,
+            },
+        },
+    },
+
+    [AppRoutes.MERCHANT]: {
+        path: RoutePath.merchant,
         element: <ManagerPageAsync />,
         // roles: ['admin'],
         // authOnly: true,

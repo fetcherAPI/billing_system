@@ -13,4 +13,5 @@ export interface ILoginResponse {
     username: string;
     expiryDate: Date;
     currentTime: Date;
+    companyId: number;
 }
