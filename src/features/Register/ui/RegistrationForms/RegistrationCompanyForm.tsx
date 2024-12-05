@@ -103,16 +103,6 @@ export const RegistrationCompanyForm = forwardRef<FormRef, IProps>(({ className,
                             onChange={(e) => handleChangeInput(e, 'workPhone')}
                         />
                     </Form.Item>
-                    <Form.Item
-                        name={'legalAddress'}
-                        label={t('legalAddress')}
-                        rules={[{ required: true, message: t('loginPassRuleText') }]}
-                    >
-                        <Input
-                            placeholder="input placeholder"
-                            onChange={(e) => handleChangeInput(e, 'legalAddress')}
-                        />
-                    </Form.Item>
                 </Col>
 
                 <Col style={{ width: '50%' }}>
@@ -161,6 +151,16 @@ export const RegistrationCompanyForm = forwardRef<FormRef, IProps>(({ className,
                         <Input
                             placeholder="input placeholder"
                             onChange={(e) => handleChangeInput(e, 'factAddress')}
+                        />
+                    </Form.Item>
+                    <Form.Item
+                        name={'legalAddress'}
+                        label={t('legalAddress')}
+                        rules={[{ required: true, message: t('loginPassRuleText') }]}
+                    >
+                        <Input
+                            placeholder="input placeholder"
+                            onChange={(e) => handleChangeInput(e, 'legalAddress')}
                         />
                     </Form.Item>
                 </Col>

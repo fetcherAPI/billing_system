@@ -26,11 +26,11 @@ export const RegistrationSteps = ({ className }: IBaseProps) => {
 
     const steps = [
         {
-            title: 'First',
+            title: 'Компания',
             content: <RegistrationCompanyForm ref={formRef} handleNext={() => setCurrent(current + 1)} />,
         },
         {
-            title: 'Second',
+            title: 'Директор',
             content: (
                 <UserRegisterForm
                     ref={formRef}
@@ -40,8 +40,8 @@ export const RegistrationSteps = ({ className }: IBaseProps) => {
             ),
         },
         {
-            title: 'Last',
-            content: 'Last-content',
+            title: 'Завершить',
+            content: '',
         },
     ];
 
@@ -51,22 +51,22 @@ export const RegistrationSteps = ({ className }: IBaseProps) => {
         <div className={className}>
             <Steps current={current} items={items} />
             <div className={cls.content}>{steps[current].content}</div>
-            <div style={{ marginTop: 24 }}>
+            <div>
                 <BackButton>
                     <>
                         {current < steps.length - 1 && (
                             <Button type="primary" onClick={next}>
-                                Next
+                                Далее
                             </Button>
                         )}
                         {current === steps.length - 1 && (
                             <Button type="primary" onClick={() => message.success('Processing complete!')}>
-                                Done
+                                Завершить
                             </Button>
                         )}
                         {current > 0 && (
                             <Button style={{ margin: '0 8px' }} onClick={prev}>
-                                Previous
+                                Пред
                             </Button>
                         )}
                     </>

@@ -4,7 +4,8 @@ import { useNavigate } from 'react-router-dom';
 import { routes } from 'shared/config';
 import { RoutePath } from 'shared/config/routeConfig/routeConfig';
 import { ConfirmModal } from 'shared/ui';
-import { Button1, ThemeButton } from 'shared/ui/Button1';
+import { AuthOnly } from 'shared/ui/AuthOnly/AuthOnly';
+import { Button1 } from 'shared/ui/Button1';
 
 export const RegisterBtn = () => {
     const { t } = useTranslation('header');
@@ -25,10 +26,8 @@ export const RegisterBtn = () => {
     };
 
     return (
-        <>
-            <Button1 onClick={handleOpen} theme={ThemeButton.CLEAR}>
-                {t('registration')}
-            </Button1>
+        <AuthOnly hide={true}>
+            <Button1 onClick={handleOpen}>{t('registration')}</Button1>
             <ConfirmModal
                 autoClosable={true}
                 handleClose={() => setIsOpen(false)}
@@ -39,6 +38,6 @@ export const RegisterBtn = () => {
             >
                 <h1>ИНФО</h1>
             </ConfirmModal>
-        </>
+        </AuthOnly>
     );
 };

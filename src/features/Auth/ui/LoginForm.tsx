@@ -1,4 +1,4 @@
-import { Form, Input, Button } from 'antd';
+import { Button, Form, Input } from 'antd';
 import { useTranslation } from 'react-i18next';
 import { ILogin } from '../types/LoginType';
 import { login } from '../model/service/LoginService';

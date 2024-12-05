@@ -1,7 +1,8 @@
 {
-  "username": "Username",
-  "password": "Password",
-  "login": "Log in",
-  "loginUsernameRuleText": "Username is required",
-  "loginPassRuleText": "Password is required"
+    "username": "Username",
+    "password": "Password",
+    "login": "Log in",
+    "loginUsernameRuleText": "Username is required",
+    "loginPassRuleText": "Password is required",
+    "lang": "Lang"
 }

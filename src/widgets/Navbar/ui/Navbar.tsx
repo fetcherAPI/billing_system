@@ -2,7 +2,7 @@ import React, { useMemo } from 'react';
 import { Menu } from 'antd';
 import Sider from 'antd/lib/layout/Sider';
 import { AreaChartOutlined, BankOutlined, DollarOutlined } from '@ant-design/icons';
-import { AppRoutes, ChildRoutePath } from 'shared/config/routeConfig/routeConfig.tsx';
+import { ChildRoutePath } from 'shared/config/routeConfig/routeConfig.tsx';
 import { NavLink, useLocation } from 'react-router-dom';
 import { UserRoles } from 'shared/types/baseTypes.ts';
 import { useSelector } from 'react-redux';
@@ -14,16 +14,16 @@ const menuItemsMap: Map<UserRoles | undefined, Array<any>> = new Map([
         'manager',
         [
             {
-                key: '/manager',
+                key: '/manager/service',
                 icon: BankOutlined,
                 label: `Мои услуги`,
-                path: `/${AppRoutes.MANAGER}`,
+                path: ChildRoutePath.service,
             },
             {
-                key: '/manager/service',
+                key: '/manager/paymentCodes',
                 icon: DollarOutlined,
                 label: `Платежи`,
-                path: ChildRoutePath.service,
+                path: ChildRoutePath.paymentCodes,
             },
             {
                 key: '/manager/bills',
@@ -40,13 +40,13 @@ const menuItemsMap: Map<UserRoles | undefined, Array<any>> = new Map([
                 key: '/manager',
                 icon: BankOutlined,
                 label: `Мои услуги`,
-                path: `/${AppRoutes.MANAGER}`,
+                path: ChildRoutePath.service,
             },
             {
-                key: '/manager/service',
+                key: '/manager/paymentCodes',
                 icon: DollarOutlined,
                 label: `Платежи`,
-                path: ChildRoutePath.service,
+                path: ChildRoutePath.paymentCodes,
             },
             {
                 key: '/manager/bills',
@@ -82,7 +82,9 @@ export const Navbar = () => {
     const its = useMemo(() => {
         return menuItemsMap.get(userRole)?.map((item) => ({
             key: item.key,
-            icon: React.createElement(item.icon),
+            icon: React.createElement(item.icon, {
+                style: { fontSize: 25 },
+            }),
             label: <NavLink to={item.path}>{item.label}</NavLink>,
             path: item.path,
         }));
@@ -93,7 +95,7 @@ export const Navbar = () => {
     return (
         <Sider className={cls.AdminNavBar}>
             <Menu
-                theme="dark"
+                style={{ backgroundColor: '#f4f5f7', borderRadius: 5 }}
                 mode="inline"
                 selectedKeys={[location.pathname]}
                 defaultSelectedKeys={['4']}

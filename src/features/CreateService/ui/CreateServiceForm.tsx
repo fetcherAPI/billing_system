@@ -1,4 +1,4 @@
-import { Input, Button, Form, message } from 'antd';
+import { Input, Button, Form, message, Radio } from 'antd';
 import { useAppDispatch } from 'app/providers/StoreProvider';
 import { createService } from 'entities/Service';
 import { IService } from 'entities/Service/model/types/service';
@@ -7,6 +7,7 @@ import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { useNotif } from 'shared/lib';
 import { BackButton } from 'shared/ui';
+import { SelectServiceParent } from './SelectServiceParant';
 
 interface IProps {
     isInModal?: boolean;
@@ -16,6 +17,8 @@ interface IProps {
 
 interface ICreateService {
     name: string;
+    parentId: number;
+    isService: boolean;
 }
 
 export const CreateServiceForm = ({ defaultValue, callbackAfterSuccesCreate }: IProps) => {
@@ -29,11 +32,13 @@ export const CreateServiceForm = ({ defaultValue, callbackAfterSuccesCreate }: I
     };
 
     const onFinish = (values: ICreateService) => {
+        const { parentId, isService, name } = values;
         dispatch(
             createService({
-                name: values.name,
+                name,
                 companyId: userCompanyId,
-                isService: true,
+                parentId,
+                isService,
             })
         )
             .unwrap()
@@ -72,7 +77,17 @@ export const CreateServiceForm = ({ defaultValue, callbackAfterSuccesCreate }: I
                 >
                     <Input />
                 </Form.Item>
-
+                <SelectServiceParent />
+                <Form.Item name="isService" rules={[{ required: true }]}>
+                    <Radio.Group>
+                        <Radio key={'service'} value={true}>
+                            Услуга
+                        </Radio>
+                        <Radio key={'folder'} value={false}>
+                            Папка
+                        </Radio>
+                    </Radio.Group>
+                </Form.Item>
                 <BackButton>
                     <Form.Item>
                         <Button htmlType="submit" type="primary">

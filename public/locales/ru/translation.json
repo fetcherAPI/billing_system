@@ -1,7 +1,8 @@
 {
-  "username": "Имя пользователя",
-  "password": "Пароль",
-  "login": "Войти",
-  "loginUsernameRuleText": "Имя пользователя обязательно для заполнение",
-  "loginPassRuleText": "Пароль обязательно для заполнение"
+    "username": "Имя пользователя",
+    "password": "Пароль",
+    "login": "Войти",
+    "loginUsernameRuleText": "Имя пользователя обязательно для заполнение",
+    "loginPassRuleText": "Пароль обязательно для заполнение",
+    "lang": "Язык"
 }

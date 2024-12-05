@@ -7,7 +7,7 @@ import { FormRef } from 'features/Register/ui/RegistrationSteps/RegistrationStep
 import { useParams } from 'react-router-dom';
 
 export const RegisterUserModal = () => {
-    const [t] = useTranslation('registration');
+    const [t] = useTranslation('header');
     const [isOpen, setIsOpen] = useState(false);
     const formRef = useRef<FormRef>(null);
     const { id: companyId } = useParams();

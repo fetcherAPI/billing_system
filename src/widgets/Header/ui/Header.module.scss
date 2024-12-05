@@ -4,9 +4,23 @@
 
 .links {
     width: 40%;
+    a {
+        color: #7D829B;
+    }
 }
 
 .logo {
     color: white;
     font-size: clamp(16px, 4vw, 22px);
+    font-weight: 800;
+    font-style: normal;
 }
+
+
+.logo .billing {
+    color: #ffffff;
+  }
+  
+  .logo .kj {
+    color: #4049bb;
+  }

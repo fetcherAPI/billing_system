@@ -11,6 +11,7 @@ import {
     ManagerServiceDetailPageAsync,
     ManagerServicesAsync,
 } from 'pages/ManagerPage';
+import { PaymnetCodesPageLazy } from 'pages/PaymentCodesPage/ui/PaymentCodesPage.async';
 
 export enum AppRoutes {
     MAIN = 'main',
@@ -29,6 +30,7 @@ export enum ChildRoutes {
     SERVICE = 'service',
     SERVICE_DETAILS = 'serviceDetails',
     BILLS = 'bills',
+    PAYMENT_CODES = 'paymentCodes',
 }
 
 export type AppRoutesProps = RouteProps & {
@@ -59,6 +61,7 @@ export const ChildRoutePath: Record<ChildRoutes, string> = {
     [ChildRoutes.COMPANY_DETAILS]: getRouteCompanyDetail(':id'),
     [ChildRoutes.SERVICE_DETAILS]: getRouteServiceDetail(':id'),
     [ChildRoutes.BILLS]: 'bills',
+    [ChildRoutes.PAYMENT_CODES]: 'paymentCodes',
 
     // последний
 };
@@ -112,6 +115,10 @@ export const routeConfig: Record<AppRoutes, AppRoutesProps> = {
                 path: ChildRoutePath.bills,
                 element: <ManagerBillsPageAsync />,
             },
+            [ChildRoutes.PAYMENT_CODES]: {
+                path: ChildRoutePath.paymentCodes,
+                element: <PaymnetCodesPageLazy />,
+            },
         },
     },
 
@@ -132,6 +139,10 @@ export const routeConfig: Record<AppRoutes, AppRoutesProps> = {
             [ChildRoutes.BILLS]: {
                 path: ChildRoutePath.bills,
                 element: <ManagerBillsPageAsync />,
+            },
+            [ChildRoutes.PAYMENT_CODES]: {
+                path: ChildRoutePath.paymentCodes,
+                element: <PaymnetCodesPageLazy />,
             },
         },
     },

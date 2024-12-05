@@ -24,10 +24,13 @@ export const Header = () => {
     }, []);
 
     return (
-        <HeaderAntd>
+        <HeaderAntd style={{ backgroundColor: '#26325c' }}>
             <Row align={'middle'} justify={'space-between'}>
-                <Link to={'/'}>
-                    <h1 className={cls.logo}>Билинг КЖ</h1>
+                <Link to={'#'}>
+                    <h1 className={cls.logo}>
+                        <span className={cls.billing}>билинг</span>
+                        <span className={cls.kj}>{' кж'} </span>
+                    </h1>
                 </Link>
                 {!isMobile ? (
                     <>

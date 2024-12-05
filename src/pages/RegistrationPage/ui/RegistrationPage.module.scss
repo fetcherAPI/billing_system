@@ -1,6 +1,6 @@
 .wrapper {
     width: 70%;
-    margin: 0 auto;
+    margin: 20px auto;
 }
 
 
@@ -18,18 +18,26 @@
 
 
 .type {
-    background-color: antiquewhite;
+    background-color: #f1f2f4;
     width: 25%;
-    height: 20%;
+    height: 25%;
     display: flex;
+    color: #333263;
     align-items: center;
+    flex-direction: column;
     justify-content: center;
     border-radius: 10px;
     font-size: 1.3vw;
-    transition: all 1s;
+    transition: all 0.3s;
     &:hover {
-        scale: 1.1;
+        // scale: 1.05;
         box-shadow: var(--box-shadow);
+        background-color: white;
+        span {
+            svg {
+                color:#454cee;
+            }
+        }
     }
 }
 
