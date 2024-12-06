@@ -8,13 +8,16 @@ import { Loader } from 'shared/ui/Loader/Loader';
 import './App.css';
 import { useAppDispatch } from './providers/StoreProvider';
 import { refreshToken } from 'features/Auth/model/service/refreshToken';
+import { tokenAvailability } from 'shared/lib/helpers/tokenAvailability';
 
 export const App = () => {
     const { theme } = useTheme();
     const dispatch = useAppDispatch();
 
     useEffect(() => {
-        dispatch(refreshToken());
+        if (tokenAvailability()) {
+            dispatch(refreshToken());
+        }
     }, []);
 
     return (

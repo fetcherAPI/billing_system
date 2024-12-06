@@ -5,9 +5,12 @@ import { ISerivceSliceSchema } from '../types/sliceSchema.ts';
 import { createService } from '../service/createService.ts';
 import { getServices } from '../service/getServices.ts';
 import { getServiceById } from '../service/getServiceById.ts';
+import { getSplittersByChapterId } from '../service/getSplittersByChapterId.ts';
+import { createSplitter } from '../service/createSplitter.ts';
 
 const initialState: ISerivceSliceSchema = {
     serivcesList: [],
+    splitters: [],
     servicesTotalCount: 0,
 };
 
@@ -56,6 +59,34 @@ const ServiceSlice = createSlice({
                 state.error = undefined;
             })
             .addCase(getServiceById.rejected, (state, action) => {
+                state.isLoading = false;
+                state.error = errorHandler(action.payload as AxiosError);
+            })
+            // getSplittersByChapterId
+            .addCase(getSplittersByChapterId.pending, (state) => {
+                state.isLoading = true;
+                state.error = undefined;
+            })
+            .addCase(getSplittersByChapterId.fulfilled, (state, action) => {
+                state.splitters = action.payload;
+                state.isLoading = false;
+                state.error = undefined;
+            })
+            .addCase(getSplittersByChapterId.rejected, (state, action) => {
+                state.isLoading = false;
+                state.error = errorHandler(action.payload as AxiosError);
+            })
+            // createSplitter
+            .addCase(createSplitter.pending, (state) => {
+                state.isLoading = true;
+                state.error = undefined;
+            })
+            .addCase(createSplitter.fulfilled, (state, action) => {
+                state.splitters = [action.payload, ...state.splitters];
+                state.isLoading = false;
+                state.error = undefined;
+            })
+            .addCase(createSplitter.rejected, (state, action) => {
                 state.isLoading = false;
                 state.error = errorHandler(action.payload as AxiosError);
             });

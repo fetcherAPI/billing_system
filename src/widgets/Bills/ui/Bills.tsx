@@ -24,7 +24,7 @@ export const Bills = ({ title }: IProps) => {
             title: '№',
             dataIndex: 'number',
             key: 'number',
-            render: (_, _record, index) => <a>{++index}</a>,
+            render: (_, _record, index) => <p>{++index}</p>,
         },
         {
             title: title,

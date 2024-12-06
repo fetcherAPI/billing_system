@@ -11,7 +11,7 @@ export const LogoutBtn = () => {
     };
 
     return (
-        <AuthOnly hide={false}>
+        <AuthOnly>
             <Button1 onClick={handleLogOut}>Выйти</Button1>
         </AuthOnly>
     );

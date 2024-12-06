@@ -46,6 +46,8 @@ const AuthSlice = createSlice({
                 state.isLoading = false;
                 state.isAuth = false;
                 state.error = errorHandler(action.payload as AxiosError);
+                const url = window.location.origin;
+                window.location.replace(`${url}`);
                 onFailedLogin();
             });
     },

@@ -6,8 +6,8 @@ type Props = {
     children: ReactNode;
 };
 
-export const AuthOnly = ({ children }: Props) => {
+export const HideForAuth = ({ children }: Props) => {
     const isAuth = useSelector($isAuth);
-    if (!isAuth) return null;
+    if (isAuth) return null;
     return <>{children}</>;
 };
