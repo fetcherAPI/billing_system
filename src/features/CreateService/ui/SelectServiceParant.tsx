@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import type { GetProp, TreeSelectProps } from 'antd';
 import { Form, TreeSelect } from 'antd';
-// import { useAppDispatch } from 'app/providers/StoreProvider';
 import { ServiceApi } from 'entities/Service/api';
 import { IService } from 'entities/Service/model/types/service';
 
@@ -10,8 +9,6 @@ type DefaultOptionType = GetProp<TreeSelectProps, 'treeData'>[number];
 export const SelectServiceParent = () => {
     const [value, setValue] = useState<string>();
     const [treeData, setTreeData] = useState<Omit<DefaultOptionType, 'label'>[]>([]);
-
-    // const dispatch = useAppDispatch();
 
     const fetchChildren = async (parentId?: string) => {
         const response = await ServiceApi.getSerivcesTree({ rows: 40, first: 0 }, parentId);

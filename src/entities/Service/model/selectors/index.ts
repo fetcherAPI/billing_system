@@ -14,9 +14,8 @@ const selectTreeNodes = (state: StateSchema) => state.service.nodes;
 export const $selectNodesByParentId = (parentId: string | null) =>
     createSelector([selectTreeNodes], (nodes) => {
         if (parentId) {
-            console.log(Object.values(nodes));
-            return Object.values(nodes).filter((node) => node.id === +parentId)[0].children;
+            return nodes[parentId];
         } else {
-            return Object.values(nodes).filter((node) => node.parentId === null);
+            return nodes['firstLevel'];
         }
     });

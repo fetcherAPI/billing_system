@@ -8,6 +8,7 @@ import { getServiceById } from '../service/getServiceById.ts';
 import { getSplittersByChapterId } from '../service/getSplittersByChapterId.ts';
 import { createSplitter } from '../service/createSplitter.ts';
 import { getServicesByParentId } from '../service/getServicesByParentId.ts';
+import { IService } from '../types/service.ts';
 
 const initialState: ISerivceSliceSchema = {
     serivcesList: [],
@@ -28,6 +29,9 @@ const ServiceSlice = createSlice({
             })
             .addCase(createService.fulfilled, (state, action) => {
                 state.serivcesList = [...state.serivcesList, action.payload];
+                if (!action.payload.parentId) {
+                    state.nodes = { firstLevel: [...state.nodes['firstLevel'], action.payload] };
+                }
                 state.isLoading = false;
                 state.error = undefined;
                 state.servicesTotalCount = ++state.servicesTotalCount;
@@ -98,21 +102,18 @@ const ServiceSlice = createSlice({
                 state.error = undefined;
             })
             .addCase(getServicesByParentId.fulfilled, (state, action) => {
-                const { parentId, children } = action.payload;
-                children.data.content.forEach((child) => {
-                    state.nodes[child.id] = {
-                        ...child,
-                        children: state.nodes[child.id]?.children || [],
-                    };
-                });
+                const { parentId, children, total } = action.payload;
 
-                if (parentId !== null && parentId !== undefined) {
-                    const parent = state.nodes[parentId];
-                    if (parent) {
-                        parent.children = children.data.content.map((child) => state.nodes[child.id]);
-                    }
+                if (parentId) {
+                    const newNode: Record<string, IService[]> = {
+                        [parentId]: children,
+                    };
+                    state.nodes = { ...state.nodes, ...newNode };
+                } else {
+                    state.nodes = { ...state.nodes, firstLevel: children };
                 }
-                state.servicesTotalCount = action.payload.children.data.totalElements;
+
+                state.servicesTotalCount = total;
                 state.isLoading = false;
                 state.error = undefined;
             })

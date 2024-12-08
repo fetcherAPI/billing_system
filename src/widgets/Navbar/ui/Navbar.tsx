@@ -92,12 +92,16 @@ export const Navbar = () => {
 
     if (!userRole) return null;
 
+    const currentPath = location.pathname;
+
+    const selectedKeys = its?.filter((item) => currentPath.startsWith(item.key)).map((item) => item.key);
+
     return (
         <Sider className={cls.AdminNavBar}>
             <Menu
                 style={{ backgroundColor: '#f4f5f7', borderRadius: 5 }}
                 mode="inline"
-                selectedKeys={[location.pathname]}
+                selectedKeys={selectedKeys}
                 defaultSelectedKeys={['4']}
                 items={its}
             />
