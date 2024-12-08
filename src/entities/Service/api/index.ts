@@ -33,9 +33,12 @@ export class ServiceApi {
         return api.get(`api/chapter/${id}`);
     }
 
-    static async getSerivcesTree(parentId?: number): Promise<AxiosResponse<IResponseList<IService>>> {
+    static async getSerivcesTree(
+        { first, rows }: IPaginationQueryParams,
+        parentId?: string | null
+    ): Promise<AxiosResponse<IResponseList<IService>>> {
         const url = parentId
-            ? `/api/chapter/child?id=${parentId}&first=0&rows=40`
+            ? `/api/chapter/child?id=${parentId}&first=${first}&rows=${rows}`
             : '/api/chapter/child?first=0&rows=10';
         return api.get(url);
     }

@@ -5,7 +5,7 @@ import { useSearchParams } from 'react-router-dom';
 
 type MyPaginationProps = {
     total: number;
-    onChange: (page: number, pageSize: number) => void;
+    onChange: (page: number, pageSize: number, parentId?: number | undefined) => void;
     defendFromParentValue?: any;
     pageSizes?: Array<number>;
 };

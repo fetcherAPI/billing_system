@@ -13,8 +13,8 @@ export const SelectServiceParent = () => {
 
     // const dispatch = useAppDispatch();
 
-    const fetchChildren = async (parentId?: number) => {
-        const response = await ServiceApi.getSerivcesTree(parentId);
+    const fetchChildren = async (parentId?: string) => {
+        const response = await ServiceApi.getSerivcesTree({ rows: 40, first: 0 }, parentId);
         return response.data.content.map((item: IService) => ({
             id: item.id,
             pId: item.parentId,

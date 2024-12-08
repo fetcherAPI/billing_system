@@ -7,11 +7,13 @@ import { getServices } from '../service/getServices.ts';
 import { getServiceById } from '../service/getServiceById.ts';
 import { getSplittersByChapterId } from '../service/getSplittersByChapterId.ts';
 import { createSplitter } from '../service/createSplitter.ts';
+import { getServicesByParentId } from '../service/getServicesByParentId.ts';
 
 const initialState: ISerivceSliceSchema = {
     serivcesList: [],
     splitters: [],
     servicesTotalCount: 0,
+    nodes: {},
 };
 
 const ServiceSlice = createSlice({
@@ -87,6 +89,34 @@ const ServiceSlice = createSlice({
                 state.error = undefined;
             })
             .addCase(createSplitter.rejected, (state, action) => {
+                state.isLoading = false;
+                state.error = errorHandler(action.payload as AxiosError);
+            })
+            //getServicesByParentId
+            .addCase(getServicesByParentId.pending, (state) => {
+                state.isLoading = true;
+                state.error = undefined;
+            })
+            .addCase(getServicesByParentId.fulfilled, (state, action) => {
+                const { parentId, children } = action.payload;
+                children.data.content.forEach((child) => {
+                    state.nodes[child.id] = {
+                        ...child,
+                        children: state.nodes[child.id]?.children || [],
+                    };
+                });
+
+                if (parentId !== null && parentId !== undefined) {
+                    const parent = state.nodes[parentId];
+                    if (parent) {
+                        parent.children = children.data.content.map((child) => state.nodes[child.id]);
+                    }
+                }
+                state.servicesTotalCount = action.payload.children.data.totalElements;
+                state.isLoading = false;
+                state.error = undefined;
+            })
+            .addCase(getServicesByParentId.rejected, (state, action) => {
                 state.isLoading = false;
                 state.error = errorHandler(action.payload as AxiosError);
             });

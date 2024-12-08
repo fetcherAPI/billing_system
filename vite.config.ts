@@ -9,7 +9,7 @@ dotenv.config();
 
 // https://vitejs.dev/config/
 export default defineConfig({
-    base: '',
+    base: '/',
 
     preview: {
         port: 3010,
@@ -19,7 +19,6 @@ export default defineConfig({
         port: 3010,
         strictPort: false,
         host: true,
-        origin: 'http://0.0.0.0:3008',
         hmr: true,
     },
     plugins: [

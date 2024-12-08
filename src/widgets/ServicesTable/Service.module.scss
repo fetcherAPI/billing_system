@@ -1,0 +1,51 @@
+.serviceCard {
+    background-color: #f4f5f7;
+    padding: 1%;
+    border-radius: 20px;
+    transition: all 1s;
+    width: 20%;
+    height: 200px;
+    display: grid;
+  grid-template-areas:
+    "text text"
+    ". image";
+  grid-template-columns: 1fr auto;
+  grid-template-rows: auto 1fr;
+  position: relative;
+    &:hover {
+        background-color: white;
+        box-shadow: var(--box-shadow);
+    }
+
+    img {
+        width: 75px;
+        height: 75px;
+        object-fit: cover;
+    }
+}
+
+
+.serviceCard p:first-child {
+    grid-area: text;
+    align-self: start;
+    justify-self: start;
+    margin: 0;
+  }
+
+  .serviceCard img {
+    grid-area: image;
+    align-self: end;
+    justify-self: end;
+  }
+
+.servicesWrapper {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.serviceName {
+    width: 90%;
+    white-space: normal;
+    overflow-x: hidden;
+}
