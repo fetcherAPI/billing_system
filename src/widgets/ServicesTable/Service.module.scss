@@ -2,7 +2,7 @@
     background-color: #f4f5f7;
     padding: 1%;
     border-radius: 20px;
-    transition: all 1s;
+    transition: all 0.7s;
     width: 20%;
     height: 200px;
     display: grid;
@@ -15,8 +15,13 @@
     &:hover {
         background-color: white;
         box-shadow: var(--box-shadow);
+        
+        img {
+            transition: all 0.7s;
+            scale: 2;
+        }
     }
-
+overflow: hidden;
     img {
         width: 75px;
         height: 75px;

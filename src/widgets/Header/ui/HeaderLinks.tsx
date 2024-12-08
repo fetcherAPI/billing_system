@@ -15,7 +15,7 @@ export const HeaderLinks = () => {
     if (hideForRoles.includes(userRole || '')) return null;
 
     return (
-        <Row justify={'space-between'} className={cls.links}>
+        <Row justify={'center'} className={cls.links} style={{ columnGap: 30 }}>
             <Link to="#">{t('service')}</Link>
             <Link to="#">{t('client')}</Link>
             <Link to="#">{t('about')}</Link>
