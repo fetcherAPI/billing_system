@@ -5,6 +5,7 @@ import { IRegisterSliceSchema } from 'features/Register';
 import { ICompanyUsersSliceSchema } from 'features/CompanyUsers';
 import { IAdminSliceSchema } from 'entities/Admin';
 import { ISerivceSliceSchema } from 'entities/Service/model/types/sliceSchema';
+import { IPaymentCodesSliceSchema } from 'entities/PaymentCodes/model/types/sliceSchema';
 
 export interface StateSchema {
     counter: CounterSchema;
@@ -13,6 +14,7 @@ export interface StateSchema {
     users: ICompanyUsersSliceSchema;
     admin: IAdminSliceSchema;
     service: ISerivceSliceSchema;
+    paymentCode: IPaymentCodesSliceSchema;
 }
 
 export interface ThunkExtraArg {

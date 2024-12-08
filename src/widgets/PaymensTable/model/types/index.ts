@@ -1,4 +1,4 @@
-export interface IPaymentCode {
+export interface IPayment {
     id: number;
     date_created: string;
     destination: string;

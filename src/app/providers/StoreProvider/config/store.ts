@@ -8,6 +8,7 @@ import { RegisterSliceReducer } from 'features/Register';
 import { AdminSliceReducer } from 'entities/Admin/model/slice/AdminSlice.ts';
 import { CompanyUsersReducer } from 'features/CompanyUsers';
 import { ServiceSliceReducer } from 'entities/Service/model/slice/ServiceSlice';
+import { PaymentCodesSliceReducer } from 'entities/PaymentCodes/model/slice/PaymentCodesSlice';
 
 export function createReduxStore(initialState?: StateSchema) {
     return configureStore({
@@ -18,6 +19,7 @@ export function createReduxStore(initialState?: StateSchema) {
             users: CompanyUsersReducer,
             admin: AdminSliceReducer,
             service: ServiceSliceReducer,
+            paymentCode: PaymentCodesSliceReducer,
         },
         preloadedState: initialState,
         middleware: (getDefaultMiddleware) =>

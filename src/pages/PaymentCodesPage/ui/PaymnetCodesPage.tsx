@@ -1,5 +1,11 @@
+import { PaymentCodesTable } from 'entities/PaymentCodes';
+
 const PaymnetCodesPage = () => {
-    return <div>PaymnetCodesPage</div>;
+    return (
+        <>
+            <PaymentCodesTable />
+        </>
+    );
 };
 
 export default PaymnetCodesPage;

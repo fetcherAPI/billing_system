@@ -1,5 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { TOKEN } from '../lib/const/localstorage';
+import { IPayment } from 'entities/PaymentCodes/model/types';
 
 export const rtkApi = createApi({
     reducerPath: 'api',
@@ -13,8 +14,12 @@ export const rtkApi = createApi({
             return headers;
         },
     }),
-    endpoints: (builder) => {
-        console.log(builder);
-        return {};
-    },
+    endpoints: (builder) => ({
+        getPaymentCodes: builder.query<IPayment, unknown>({
+            query: () => ({
+                url: '/main/util/warrantyProvisionForm',
+                method: 'get',
+            }),
+        }),
+    }),
 });
