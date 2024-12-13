@@ -4,7 +4,6 @@ import { $service, $servicesList } from 'entities/Service/model/selectors';
 import { getServiceById } from 'entities/Service/model/service/getServiceById';
 import { getSplittersByChapterId } from 'entities/Service/model/service/getSplittersByChapterId';
 import { CreateSplitterForm } from 'features/CreateService/ui/CreateSplitterForm';
-import { GeneratePaymentCode } from 'features/CreateService/ui/GeneratePaymentCodeForm';
 import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
@@ -34,9 +33,7 @@ const SericeDetailPage = () => {
                 <Col span={12}>
                     <CreateSplitterForm defaultValue={service || servicesList.find((el) => el.id === +id)} />
                 </Col>
-                <Col span={12}>
-                    <GeneratePaymentCode chapterId={+id} />
-                </Col>
+                <Col span={12}></Col>
             </Row>
 
             <SplittersTable />

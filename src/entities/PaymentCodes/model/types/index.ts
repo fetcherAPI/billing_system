@@ -11,5 +11,6 @@ export interface IPayment {
     splitter: string;
     payId: number;
     status: number;
+    orderId: string;
     paymentCode: string;
 }

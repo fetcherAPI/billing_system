@@ -7,6 +7,7 @@ import { getPaymentCodes } from '../model/service/getPaymentCodes';
 import { Pagination } from 'shared/ui';
 import { IPayment } from '../model/types';
 import dayjs from 'dayjs';
+import { CheckPayment } from './CheckPayment';
 
 const columns: TableProps<IPayment>['columns'] = [
     {
@@ -50,6 +51,11 @@ const columns: TableProps<IPayment>['columns'] = [
                 {status}
             </Tag>
         ),
+    },
+    {
+        title: 'Проверить',
+        key: 'chekc',
+        render: (_, { orderId, status }) => <CheckPayment orderId={orderId} disabled={status !== null} />,
     },
 ];
 

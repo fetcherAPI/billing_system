@@ -3,13 +3,19 @@ import type { GetProp, TreeSelectProps } from 'antd';
 import { Form, TreeSelect } from 'antd';
 import { ServiceApi } from 'entities/Service/api';
 import { IService } from 'entities/Service/model/types/service';
+import { useAppDispatch } from 'app/providers/StoreProvider';
+import { getSplittersByChapterId } from 'entities/Service/model/service/getSplittersByChapterId';
 
 type DefaultOptionType = GetProp<TreeSelectProps, 'treeData'>[number];
 
-export const SelectServiceParent = () => {
+interface IProps {
+    required?: boolean;
+}
+
+export const SelectServiceParent = ({ required }: IProps) => {
     const [value, setValue] = useState<string>();
     const [treeData, setTreeData] = useState<Omit<DefaultOptionType, 'label'>[]>([]);
-
+    const dispatch = useAppDispatch();
     const fetchChildren = async (parentId?: string) => {
         const response = await ServiceApi.getSerivcesTree({ rows: 40, first: 0 }, parentId);
         return response.data.content.map((item: IService) => ({
@@ -29,6 +35,7 @@ export const SelectServiceParent = () => {
 
     const onChange = (newValue: string) => {
         setValue(newValue);
+        dispatch(getSplittersByChapterId({ id: +newValue }));
     };
 
     useEffect(() => {
@@ -45,6 +52,7 @@ export const SelectServiceParent = () => {
         <Form.Item
             name="parentId"
             label="Название услуги"
+            rules={[{ required }]}
             // rules={[{ required: true }, { min: 3, message: 'Обязательно для заполнение' }]}
         >
             <TreeSelect

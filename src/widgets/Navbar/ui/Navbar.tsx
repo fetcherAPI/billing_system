@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react';
 import { Menu } from 'antd';
 import Sider from 'antd/lib/layout/Sider';
-import { AreaChartOutlined, BankOutlined, DollarOutlined } from '@ant-design/icons';
+import { AreaChartOutlined, BankOutlined, DollarOutlined, FormOutlined } from '@ant-design/icons';
 import { ChildRoutePath } from 'shared/config/routeConfig/routeConfig.tsx';
 import { NavLink, useLocation } from 'react-router-dom';
 import { UserRoles } from 'shared/types/baseTypes.ts';
@@ -31,6 +31,12 @@ const menuItemsMap: Map<UserRoles | undefined, Array<any>> = new Map([
                 label: `Счета`,
                 path: ChildRoutePath.bills,
             },
+            {
+                key: '/merchant/generateCode',
+                icon: FormOutlined,
+                label: `Сгенерировать код`,
+                path: ChildRoutePath.generateCode,
+            },
         ],
     ],
     [
@@ -53,6 +59,13 @@ const menuItemsMap: Map<UserRoles | undefined, Array<any>> = new Map([
                 icon: AreaChartOutlined,
                 label: `Счета`,
                 path: ChildRoutePath.bills,
+            },
+
+            {
+                key: '/merchant/generateCode',
+                icon: FormOutlined,
+                label: `Сгенерировать код`,
+                path: ChildRoutePath.generateCode,
             },
         ],
     ],

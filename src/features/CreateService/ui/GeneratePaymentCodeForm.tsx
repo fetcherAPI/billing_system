@@ -3,15 +3,17 @@ import TextArea from 'antd/es/input/TextArea';
 import { useAppDispatch } from 'app/providers/StoreProvider';
 import { generatePaymentCode } from 'entities/Service/model/service/generatePaymentCode';
 import { useNotif } from 'shared/lib';
+import { SelectServiceParent } from './SelectServiceParant';
 
 interface IGeneratePaymentCode {
     payerInn: string;
     payerName: string;
     destination: string;
     amount: number;
+    parentId: number;
 }
 
-export const GeneratePaymentCode = ({ chapterId }: { chapterId: number }) => {
+export const GeneratePaymentCodeForm = () => {
     const [form] = Form.useForm();
     const notif = useNotif();
     const dispatch = useAppDispatch();
@@ -20,14 +22,14 @@ export const GeneratePaymentCode = ({ chapterId }: { chapterId: number }) => {
         message.error('Submit failed!');
     };
 
-    const onFinish = ({ payerInn, payerName, destination, amount }: IGeneratePaymentCode) => {
+    const onFinish = ({ payerInn, payerName, destination, amount, parentId }: IGeneratePaymentCode) => {
         dispatch(
             generatePaymentCode({
                 payerInn,
                 payerName,
                 destination,
                 amount: +amount,
-                chapterId,
+                chapterId: parentId,
             })
         )
             .unwrap()
@@ -53,6 +55,7 @@ export const GeneratePaymentCode = ({ chapterId }: { chapterId: number }) => {
                 onFinishFailed={onFinishFailed}
                 variant="filled"
             >
+                <SelectServiceParent required={true} />
                 <Form.Item
                     name="payerInn"
                     label="Инн"

@@ -1,8 +1,9 @@
 .AdminPage {
   display: flex;
+  justify-content: space-between;
 }
 
 .content {
-  width: 100%;
+  width: 85%;
   padding: 20px;
 }

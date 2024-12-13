@@ -12,6 +12,7 @@ import {
     ManagerServicesAsync,
 } from 'pages/ManagerPage';
 import { PaymnetCodesPageLazy } from 'pages/PaymentCodesPage/ui/PaymentCodesPage.async';
+import { GeneratePaymentCodeAsync } from 'pages/GeneratePaymentCode';
 
 export enum AppRoutes {
     MAIN = 'main',
@@ -31,6 +32,7 @@ export enum ChildRoutes {
     SERVICE_DETAILS = 'serviceDetails',
     BILLS = 'bills',
     PAYMENT_CODES = 'paymentCodes',
+    GENERATE_CODE = 'generateCode',
 }
 
 export type AppRoutesProps = RouteProps & {
@@ -62,6 +64,7 @@ export const ChildRoutePath: Record<ChildRoutes, string> = {
     [ChildRoutes.SERVICE_DETAILS]: getRouteServiceDetail(':id'),
     [ChildRoutes.BILLS]: 'bills',
     [ChildRoutes.PAYMENT_CODES]: 'paymentCodes',
+    [ChildRoutes.GENERATE_CODE]: 'generateCode',
 
     // последний
 };
@@ -119,6 +122,10 @@ export const routeConfig: Record<AppRoutes, AppRoutesProps> = {
                 path: ChildRoutePath.paymentCodes,
                 element: <PaymnetCodesPageLazy />,
             },
+            [ChildRoutes.GENERATE_CODE]: {
+                path: ChildRoutePath.generateCode,
+                element: <GeneratePaymentCodeAsync />,
+            },
         },
     },
 
@@ -143,6 +150,10 @@ export const routeConfig: Record<AppRoutes, AppRoutesProps> = {
             [ChildRoutes.PAYMENT_CODES]: {
                 path: ChildRoutePath.paymentCodes,
                 element: <PaymnetCodesPageLazy />,
+            },
+            [ChildRoutes.GENERATE_CODE]: {
+                path: ChildRoutePath.generateCode,
+                element: <GeneratePaymentCodeAsync />,
             },
         },
     },

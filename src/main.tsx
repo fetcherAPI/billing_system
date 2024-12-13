@@ -36,9 +36,9 @@ root.render(
                         components: {
                             Menu: {
                                 // colorItemBgHover: 'red',
-                                colorItemBgSelected: '#...',
-                                colorItemTextSelected: '#454cee',
-                                colorItemText: '#646d8b',
+                                itemSelectedBg: '#...',
+                                itemSelectedColor: '#454cee',
+                                itemColor: '#646d8b',
                             },
                         },
                     }}
