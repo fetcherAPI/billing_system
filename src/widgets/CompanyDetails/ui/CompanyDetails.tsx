@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { Descriptions, Skeleton as SkeletonAnt } from 'antd';
-import { BluredBackGround } from 'shared/ui';
+import { BackButton, BluredBackGround } from 'shared/ui';
 import { $companyDetails, useHandleGetCompanyDetails } from 'entities/Admin';
 import cls from './CompanyDetails.module.scss';
 
@@ -20,21 +20,30 @@ export const CompanyDetails = () => {
     if (!id) return null;
 
     return (
-        <BluredBackGround className={cls.blur}>
-            {isLoading ? (
-                <Skeleton />
-            ) : (
-                <Descriptions title="Информация об организации" className={cls.detailsWrapper}>
-                    <Descriptions.Item label="Форма собственности">{inn}</Descriptions.Item>
-                    <Descriptions.Item label="ИНН Организации">{inn}</Descriptions.Item>
-                    <Descriptions.Item label="Наименование орг">{title}</Descriptions.Item>
-                    <Descriptions.Item label="Дата рег">{dateCreated}</Descriptions.Item>
-                    <Descriptions.Item label="Юр адрес">{legalAddress}</Descriptions.Item>
-                    <Descriptions.Item label="Факт адрес">{factAddress}</Descriptions.Item>
-                    <Descriptions.Item label="Рабочий тел">{workPhone}</Descriptions.Item>
+        <>
+            {' '}
+            <BluredBackGround className={cls.blur}>
+                {isLoading ? (
+                    <Skeleton />
+                ) : (
+                    <Descriptions title="Информация об организации" className={cls.detailsWrapper}>
+                        <Descriptions.Item label="Форма собственности">{inn}</Descriptions.Item>
+                        <Descriptions.Item label="ИНН Организации">{inn}</Descriptions.Item>
+                        <Descriptions.Item label="Наименование орг">{title}</Descriptions.Item>
+                        <Descriptions.Item label="Дата рег">{dateCreated}</Descriptions.Item>
+                        <Descriptions.Item label="Юр адрес">{legalAddress}</Descriptions.Item>
+                        <Descriptions.Item label="Факт адрес">{factAddress}</Descriptions.Item>
+                        <Descriptions.Item label="Рабочий тел">{workPhone}</Descriptions.Item>
+                    </Descriptions>
+                )}
+
+                <Descriptions className={cls.detailsWrapper}>
+                    <Descriptions.Item label="">
+                        <BackButton />
+                    </Descriptions.Item>
                 </Descriptions>
-            )}
-        </BluredBackGround>
+            </BluredBackGround>
+        </>
     );
 };
 

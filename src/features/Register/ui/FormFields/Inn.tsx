@@ -33,15 +33,12 @@ export const Inn = ({
         if (value.length === INN_LENGTH) {
             await request({ INN: value }, RegisterApi.getPersonByInn);
             dispatch(setRegisterProperty({ key: inputName, data: value, type }));
-        } else {
-            fieldForSetResponse &&
-                dispatch(setRegisterProperty({ key: fieldForSetResponse, data: '', type }));
         }
     };
 
     useEffect(() => {
         if (fieldForSetResponse && response) {
-            dispatch(setRegisterProperty({ key: fieldForSetResponse, data: JSON.stringify(response), type }));
+            dispatch(setRegisterProperty({ key: fieldForSetResponse, data: response, type }));
         }
     }, [isLoading]);
 
@@ -54,10 +51,10 @@ export const Inn = ({
                     required: true,
                     message: t('required'),
                 },
-                {
-                    max: 14,
-                    message: t('max length 14'),
-                },
+                // {
+                //     max: 14,
+                //     message: t('max length 14'),
+                // },
             ]}
         >
             <Input

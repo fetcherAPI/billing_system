@@ -38,7 +38,6 @@ $api.interceptors.response.use(
         return response;
     },
     async (error) => {
-        console.log('error', error);
         if (!error.config.url.includes('refresh_token')) {
             message.error(errorHandler(error));
         }
@@ -50,7 +49,7 @@ $api.interceptors.response.use(
             originalRequest.headers['Authorization'] = `Bearer ${newAccessToken}`; // Обновляем токен в текущем запросе
             return $api(originalRequest); // Повторяем запрос с новым токеном
         }
-        return Promise.reject(error); // Передаем ошибку дальше, если условия не совпадают
+        // return Promise.reject(error); // Передаем ошибку дальше, если условия не совпадают
     }
 );
 

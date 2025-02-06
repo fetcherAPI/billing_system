@@ -88,7 +88,7 @@ const ServiceSlice = createSlice({
                 state.error = undefined;
             })
             .addCase(createSplitter.fulfilled, (state, action) => {
-                state.splitters = [action.payload, ...state.splitters];
+                state.splitters = [action.payload.data, ...state.splitters];
                 state.isLoading = false;
                 state.error = undefined;
             })

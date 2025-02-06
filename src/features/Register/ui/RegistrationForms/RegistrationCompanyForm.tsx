@@ -83,11 +83,7 @@ export const RegistrationCompanyForm = forwardRef<FormRef, IProps>(({ className,
                             onChange={(e) => handleChangeInput(e, 'managerPosition')}
                         />
                     </Form.Item>
-                    <Form.Item
-                        name={'website'}
-                        label={t('site')}
-                        rules={[{ required: true, message: t('loginPassRuleText') }]}
-                    >
+                    <Form.Item name={'website'} label={t('site')}>
                         <Input
                             placeholder="input placeholder"
                             onChange={(e) => handleChangeInput(e, 'website')}

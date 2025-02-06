@@ -1,6 +1,6 @@
-import { useCallback } from 'react';
+import { useCallback, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { Divider, Table, TableProps, Tag } from 'antd';
+import { Divider, Table, TableProps, Tag, Input } from 'antd';
 import { useAppDispatch } from 'app/providers/StoreProvider';
 import { ICompany } from 'entities/Admin/type';
 import { BluredBackGround, Pagination } from 'shared/ui';
@@ -12,28 +12,32 @@ import {
 } from 'entities/Admin';
 import cls from './CompaniesTable.module.scss';
 import { getRouteCompanyDetail } from 'shared/config/routeConfig/routeConfig.tsx';
+// import Search from 'antd/es/transfer/search';
 
 const columns: TableProps<ICompany>['columns'] = [
     {
         title: '№',
         dataIndex: 'number',
         key: 'number',
+        width: 35,
         render: (_, _record, index) => <p>{++index}</p>,
     },
     {
         title: 'Инн',
         dataIndex: 'inn',
+        width: 140,
         key: 'inn',
     },
     {
-        title: 'Форма/соб',
-        dataIndex: 'companyName',
-        key: 'companyName',
+        title: 'Госорган',
+        dataIndex: 'title',
+        key: 'title',
     },
     {
         title: 'Статаус',
         key: 'status',
         dataIndex: 'tags',
+        width: 90,
         render: (_, { status }) => (
             <Tag color={'volcano'} key={status}>
                 {status}
@@ -46,6 +50,19 @@ export const CompaniesTable = () => {
     const dispatch = useAppDispatch();
     const companies = useSelector($companiesList);
     const companiesTotalCount = useSelector($companiesTotalCount);
+
+    const [searchValue, setSearchValue] = useState('');
+
+    const [searchedCompanies, setSearchedCompanies] = useState<Array<ICompany>>([]);
+
+    const handleSearch = (value: string) => {
+        console.log('value', value);
+        setSearchValue(value);
+        setSearchedCompanies(
+            companies.filter((company) => company.title.toLowerCase().includes(value.toLowerCase()))
+        );
+    };
+
     const { handleGet } = useHandleGetCompanyDetails();
 
     const handleGetCompaniesList = useCallback(
@@ -57,12 +74,13 @@ export const CompaniesTable = () => {
 
     return (
         <div className={cls.CompaniesTable}>
+            <Input.Search onSearch={handleSearch} placeholder="Поиск по названию" />
+
             <Table
                 columns={columns}
                 rowKey={(record) => record.id}
-                dataSource={companies}
+                dataSource={searchValue ? searchedCompanies : companies}
                 pagination={false}
-                scroll={{ x: 'calc(80vh + 50%)', y: '70vh' }}
                 onRow={(record) => {
                     return {
                         onClick: () => handleGet(record.id, `../${getRouteCompanyDetail(record.id)}`),

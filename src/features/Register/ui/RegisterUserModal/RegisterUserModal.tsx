@@ -34,7 +34,7 @@ export const RegisterUserModal = () => {
                 handleClose={() => setIsOpen(false)}
                 onConfirm={handleConfirm}
                 onCancel={handleCancel}
-                title="Пользовательское соглашение"
+                title="Регистрация"
                 isOpen={isOpen}
             >
                 <UserRegisterForm

@@ -9,6 +9,7 @@ import filePng from 'shared/assets/folder.png';
 import cardPng from 'shared/assets/card.png';
 import { getServicesByParentId } from 'entities/Service/model/service/getServicesByParentId';
 import { EmptyData } from 'shared/ui/EmtyData/EmptyData';
+import { BackButton } from 'shared/ui';
 
 const Tree = ({ isService, name, id }: { isService: boolean; name: string; id: number }) => {
     const navigate = useNavigate();
@@ -46,12 +47,18 @@ export const ServicesTable = () => {
     }, [parentId]);
 
     return (
-        <div className={cls.servicesWrapper}>
-            {nodes?.length ? (
-                nodes?.map((el) => <Tree key={el.id} isService={el.isService} name={el.name} id={el.id} />)
-            ) : (
-                <EmptyData />
-            )}
-        </div>
+        <>
+            <div className={cls.servicesWrapper}>
+                {nodes?.length ? (
+                    nodes?.map((el) => (
+                        <Tree key={el.id} isService={el.isService} name={el.name} id={el.id} />
+                    ))
+                ) : (
+                    <EmptyData />
+                )}
+            </div>
+            <br />
+            <BackButton />
+        </>
     );
 };

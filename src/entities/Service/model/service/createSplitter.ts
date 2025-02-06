@@ -7,7 +7,7 @@ export const createSplitter = createAsyncThunk(
     async (param: ISplitterCreateDto, { rejectWithValue }) => {
         try {
             const response = await ServiceApi.createSplitter(param);
-            return response.data;
+            return response;
         } catch (error) {
             return rejectWithValue(error);
         }

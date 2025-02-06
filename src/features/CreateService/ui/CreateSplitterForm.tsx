@@ -25,7 +25,7 @@ export const CreateSplitterForm = ({ defaultValue, callbackAfterSuccesCreate }: 
     const dispatch = useAppDispatch();
 
     const onFinishFailed = () => {
-        message.error('Submit failed!');
+        message.error('Ошибка');
     };
 
     const onFinish = ({ account, paymentCode, amount }: ICreateSplitter) => {
@@ -45,8 +45,8 @@ export const CreateSplitterForm = ({ defaultValue, callbackAfterSuccesCreate }: 
                     notif.open({ status: 'success' });
                     callbackAfterSuccesCreate && callbackAfterSuccesCreate();
                 })
-                .catch((error) => {
-                    notif.open({ status: 'error', description: error });
+                .catch(() => {
+                    notif.open({ status: 'error' });
                 });
         }
     };

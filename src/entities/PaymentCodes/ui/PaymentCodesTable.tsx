@@ -4,7 +4,7 @@ import { $paymentCodesList, $paymentCodesTotalCount } from '../model/selectors';
 import { useCallback } from 'react';
 import { useAppDispatch } from 'app/providers/StoreProvider';
 import { getPaymentCodes } from '../model/service/getPaymentCodes';
-import { Pagination } from 'shared/ui';
+import { BackButton, Pagination } from 'shared/ui';
 import { IPayment } from '../model/types';
 import dayjs from 'dayjs';
 import { CheckPayment } from './CheckPayment';
@@ -76,7 +76,9 @@ export const PaymentCodesTable = () => {
         <>
             <Table columns={columns} dataSource={codes} pagination={false} rowKey={(record) => record.id} />
             <Divider />
-            <Pagination onChange={handleGetPaymentCodes} total={totalCount} />
+            <BackButton>
+                <Pagination onChange={handleGetPaymentCodes} total={totalCount} />
+            </BackButton>
         </>
     );
 };
