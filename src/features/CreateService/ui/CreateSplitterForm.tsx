@@ -100,7 +100,7 @@ export const CreateSplitterForm = ({ defaultValue, callbackAfterSuccesCreate }: 
                         <Form.Item
                             name="amount"
                             label="Сумма"
-                            rules={[{ required: true }, { min: 3, message: 'Обязательно для заполнение' }]}
+                            rules={[{ required: true }, { min: 1, message: 'Обязательно для заполнение' }]}
                         >
                             <Input disabled={false} />
                         </Form.Item>

@@ -1,7 +1,7 @@
 {
-  "service": "Услуги",
-  "client": "Клиентам",
-  "about": "О протале",
-  "login": "Войти",
-  "registration": "Регистрация"
+    "service": "Услуги",
+    "client": "Клиентам",
+    "about": "О портале",
+    "login": "Войти",
+    "registration": "Регистрация"
 }

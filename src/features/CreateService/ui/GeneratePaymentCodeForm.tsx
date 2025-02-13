@@ -4,6 +4,8 @@ import { useAppDispatch } from 'app/providers/StoreProvider';
 import { generatePaymentCode } from 'entities/Service/model/service/generatePaymentCode';
 import { useNotif } from 'shared/lib';
 import { SelectServiceParent } from './SelectServiceParant';
+import { useSelector } from 'react-redux';
+import { $splitters } from 'entities/Service/model/selectors';
 
 interface IGeneratePaymentCode {
     payerInn: string;
@@ -17,6 +19,8 @@ export const GeneratePaymentCodeForm = () => {
     const [form] = Form.useForm();
     const notif = useNotif();
     const dispatch = useAppDispatch();
+
+    const splitters = useSelector($splitters);
 
     const onFinishFailed = () => {
         message.error('Submit failed!');
@@ -41,7 +45,7 @@ export const GeneratePaymentCodeForm = () => {
                 });
             })
             .catch((error) => {
-                notif.open({ status: 'error', description: error });
+                notif.open({ status: 'error', description: `${error}` });
             });
     };
 
@@ -79,16 +83,8 @@ export const GeneratePaymentCodeForm = () => {
                     <TextArea rows={4} />
                 </Form.Item>
 
-                {/* <Form.Item
-                    name="amount"
-                    label="Сумма"
-                    rules={[{ required: true }, { min: 3, message: 'Обязательно для заполнение' }]}
-                >
-                    <Input disabled={false} />
-                </Form.Item> */}
-
                 <Form.Item>
-                    <Button htmlType="submit" type="primary">
+                    <Button htmlType="submit" type="primary" disabled={!splitters?.length}>
                         Сгенерировать код оплаты
                     </Button>
                 </Form.Item>

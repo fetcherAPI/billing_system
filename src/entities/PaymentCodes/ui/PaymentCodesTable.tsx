@@ -8,34 +8,40 @@ import { BackButton, Pagination } from 'shared/ui';
 import { IPayment } from '../model/types';
 import dayjs from 'dayjs';
 import { CheckPayment } from './CheckPayment';
+import { useSearch } from 'shared/lib';
 
 const columns: TableProps<IPayment>['columns'] = [
     {
         title: '№',
         dataIndex: 'number',
         key: 'number',
+        sorter: (a, b) => a.number - b.number,
         render: (_, _record, index) => <p>{++index}</p>,
     },
     {
         title: 'Инн',
         dataIndex: 'payerInn',
         key: 'payerInn',
+        sorter: (a, b) => a.payerInn.localeCompare(b.payerInn),
     },
     {
         title: 'Форма/соб',
         dataIndex: 'payerName',
         key: 'payerName',
+        sorter: (a, b) => a.payerName.localeCompare(b.payerName),
     },
     {
         title: 'Дата генерации',
         dataIndex: 'dateCreated',
-        render: (_, { dateCreated }) => dayjs(dateCreated).format('DD.MM.YYYY HH:mm'),
         key: 'dateCreated',
+        sorter: (a, b) => dayjs(a.dateCreated).valueOf() - dayjs(b.dateCreated).valueOf(),
+        render: (_, { dateCreated }) => dayjs(dateCreated).format('DD.MM.YYYY HH:mm'),
     },
     {
         title: 'Сумма',
         dataIndex: 'amount',
         key: 'amount',
+        sorter: (a, b) => a.amount - b.amount,
     },
     {
         title: 'Код платежа',
@@ -43,9 +49,10 @@ const columns: TableProps<IPayment>['columns'] = [
         key: 'paymentCode',
     },
     {
-        title: 'Статаус',
+        title: 'Статус',
         key: 'status',
-        dataIndex: 'tags',
+        dataIndex: 'status',
+
         render: (_, { status }) => (
             <Tag color={'volcano'} key={status}>
                 {status}
@@ -54,7 +61,7 @@ const columns: TableProps<IPayment>['columns'] = [
     },
     {
         title: 'Проверить',
-        key: 'chekc',
+        key: 'check',
         render: (_, { orderId, status }) => <CheckPayment orderId={orderId} disabled={status !== null} />,
     },
 ];
@@ -62,8 +69,14 @@ const columns: TableProps<IPayment>['columns'] = [
 export const PaymentCodesTable = () => {
     const codes = useSelector($paymentCodesList);
     const totalCount = useSelector($paymentCodesTotalCount);
-
     const dispatch = useAppDispatch();
+
+    const { SearchComponent, filteredData } = useSearch(codes, [
+        'payerInn',
+        'splitter',
+        'paymentCode',
+        'payerName',
+    ]);
 
     const handleGetPaymentCodes = useCallback(
         (page: number, size: number) => {
@@ -74,7 +87,14 @@ export const PaymentCodesTable = () => {
 
     return (
         <>
-            <Table columns={columns} dataSource={codes} pagination={false} rowKey={(record) => record.id} />
+            {SearchComponent}
+            <Divider />
+            <Table
+                columns={columns}
+                dataSource={filteredData.length ? filteredData : codes}
+                pagination={false}
+                rowKey={(record) => record.id}
+            />
             <Divider />
             <BackButton>
                 <Pagination onChange={handleGetPaymentCodes} total={totalCount} />

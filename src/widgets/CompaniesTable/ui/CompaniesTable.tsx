@@ -1,6 +1,6 @@
-import { useCallback, useState } from 'react';
+import { useCallback } from 'react';
 import { useSelector } from 'react-redux';
-import { Divider, Table, TableProps, Tag, Input } from 'antd';
+import { Divider, Table, TableProps, Tag } from 'antd';
 import { useAppDispatch } from 'app/providers/StoreProvider';
 import { ICompany } from 'entities/Admin/type';
 import { BluredBackGround, Pagination } from 'shared/ui';
@@ -12,7 +12,7 @@ import {
 } from 'entities/Admin';
 import cls from './CompaniesTable.module.scss';
 import { getRouteCompanyDetail } from 'shared/config/routeConfig/routeConfig.tsx';
-// import Search from 'antd/es/transfer/search';
+import { useSearch } from 'shared/lib';
 
 const columns: TableProps<ICompany>['columns'] = [
     {
@@ -51,17 +51,7 @@ export const CompaniesTable = () => {
     const companies = useSelector($companiesList);
     const companiesTotalCount = useSelector($companiesTotalCount);
 
-    const [searchValue, setSearchValue] = useState('');
-
-    const [searchedCompanies, setSearchedCompanies] = useState<Array<ICompany>>([]);
-
-    const handleSearch = (value: string) => {
-        console.log('value', value);
-        setSearchValue(value);
-        setSearchedCompanies(
-            companies.filter((company) => company.title.toLowerCase().includes(value.toLowerCase()))
-        );
-    };
+    const { SearchComponent, filteredData } = useSearch<ICompany>(companies, ['title', 'inn']);
 
     const { handleGet } = useHandleGetCompanyDetails();
 
@@ -74,12 +64,11 @@ export const CompaniesTable = () => {
 
     return (
         <div className={cls.CompaniesTable}>
-            <Input.Search onSearch={handleSearch} placeholder="Поиск по названию" />
-
+            {SearchComponent}
             <Table
                 columns={columns}
                 rowKey={(record) => record.id}
-                dataSource={searchValue ? searchedCompanies : companies}
+                dataSource={filteredData?.length ? filteredData : companies}
                 pagination={false}
                 onRow={(record) => {
                     return {
