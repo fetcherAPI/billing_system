@@ -28,7 +28,7 @@ export const UserRegisterForm = forwardRef<FormRef, IProps>(
         const dispatch = useAppDispatch();
         const formFields = useSelector($registerUserData);
 
-        const isUserRoleManager = userRole === 'manager';
+        // const isUserRoleManager = userRole === 'manager';
 
         useImperativeHandle(ref, () => ({
             submit() {
@@ -67,7 +67,7 @@ export const UserRegisterForm = forwardRef<FormRef, IProps>(
                 <Row className={cls.row} gutter={20}>
                     <Col span={12}>
                         <Inn
-                            label={isUserRoleManager ? 'ПИН руководителя' : 'ПИН сотрудника'}
+                            label={'ПИН сотрудника'}
                             inputName={'userInn'}
                             fieldForSetResponse={'fullName'}
                             type={'User'}
@@ -78,30 +78,21 @@ export const UserRegisterForm = forwardRef<FormRef, IProps>(
                             label={t('position')}
                             rules={[{ required: true, message: t('loginPassRuleText') }]}
                         >
-                            <Input
-                                placeholder="input placeholder"
-                                onChange={(e) => handleChangeInput(e, 'position')}
-                            />
+                            <Input onChange={(e) => handleChangeInput(e, 'position')} />
                         </Form.Item>
                         <Form.Item
                             name={'cellPhone'}
                             label={t('Сотовый телефон')}
                             rules={[{ required: true, message: t('loginPassRuleText') }]}
                         >
-                            <Input
-                                placeholder="input placeholder"
-                                onChange={(e) => handleChangeInput(e, 'cellPhone')}
-                            />
+                            <Input onChange={(e) => handleChangeInput(e, 'cellPhone')} />
                         </Form.Item>
                         <Form.Item
                             name={'username'}
                             label={t('Имя пользователя (логин)')}
                             rules={[{ required: true, message: t('loginPassRuleText') }]}
                         >
-                            <Input
-                                placeholder="input placeholder"
-                                onChange={(e) => handleChangeInput(e, 'username')}
-                            />
+                            <Input onChange={(e) => handleChangeInput(e, 'username')} />
                         </Form.Item>
                     </Col>
 
@@ -117,7 +108,7 @@ export const UserRegisterForm = forwardRef<FormRef, IProps>(
                                 },
                             ]}
                         >
-                            <Input placeholder="input placeholder" disabled={true} />
+                            <Input disabled={true} />
                         </Form.Item>
                         <Form.Item
                             name={''}
@@ -129,10 +120,7 @@ export const UserRegisterForm = forwardRef<FormRef, IProps>(
                                 },
                             ]}
                         >
-                            <Input
-                                placeholder="input placeholder"
-                                onChange={(e) => handleChangeInput(e, 'workPhone')}
-                            />
+                            <Input onChange={(e) => handleChangeInput(e, 'workPhone')} />
                         </Form.Item>
                         <Form.Item
                             name={'email'}
@@ -144,20 +132,14 @@ export const UserRegisterForm = forwardRef<FormRef, IProps>(
                                 },
                             ]}
                         >
-                            <Input
-                                placeholder="input placeholder"
-                                onChange={(e) => handleChangeInput(e, 'email')}
-                            />
+                            <Input onChange={(e) => handleChangeInput(e, 'email')} />
                         </Form.Item>
                         <Form.Item
                             name={'password'}
                             label={t('Пароль')}
                             rules={[{ required: true, message: t('loginPassRuleText') }]}
                         >
-                            <Input
-                                placeholder="input placeholder"
-                                onChange={(e) => handleChangeInput(e, 'password')}
-                            />
+                            <Input onChange={(e) => handleChangeInput(e, 'password')} />
                         </Form.Item>
                     </Col>
                 </Row>

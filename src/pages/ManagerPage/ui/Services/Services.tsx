@@ -1,4 +1,5 @@
 import { Button, Divider, Modal } from 'antd';
+import { IService } from 'entities/Service/model/types/service';
 import { CreateServiceForm } from 'features/CreateService/ui/CreateServiceForm';
 import { useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
@@ -41,3 +42,30 @@ const Services = () => {
 };
 
 export default Services;
+
+export const useServiceForm = (defaultValue: IService) => {
+    const [isModalOpen, setIsModalOpen] = useState(false);
+
+    const showModal = () => {
+        setIsModalOpen(true);
+    };
+
+    const handleOk = () => {
+        setIsModalOpen(false);
+    };
+
+    const handleCancel = () => {
+        setIsModalOpen(false);
+    };
+
+    const FormWithModal = (
+        <Modal title="" open={isModalOpen} onOk={handleOk} onCancel={handleCancel} footer={null}>
+            <CreateServiceForm isInModal callbackAfterSuccesCreate={handleOk} defaultValue={defaultValue} />
+        </Modal>
+    );
+
+    return {
+        showModal,
+        FormWithModal,
+    };
+};

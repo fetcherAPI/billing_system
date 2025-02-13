@@ -61,7 +61,6 @@ export const Inn = ({
                 status={error ? 'error' : ''}
                 aria-errormessage={error}
                 // disabled={isLoading}
-                placeholder="input placeholder"
                 onChange={handleChangeInn}
             />
         </Form.Item>

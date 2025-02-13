@@ -5,14 +5,20 @@ import { IPaginationQueryParams } from 'shared/types/baseTypes';
 
 interface IParams extends IPaginationQueryParams {
     parentId?: string | null;
+    updated?: boolean;
 }
 
 export const getServicesByParentId = createAsyncThunk(
     'getServicesByParentId',
-    async ({ first, rows, parentId }: IParams, { rejectWithValue, getState }) => {
+    async ({ first, rows, parentId, updated }: IParams, { rejectWithValue, getState }) => {
         try {
             const state = getState() as RootState;
             const nodes = state.service.nodes;
+
+            if (updated) {
+                const response = await ServiceApi.getSerivcesTree({ first, rows }, parentId);
+                return { parentId, children: response.data.content, total: response.data.totalElements };
+            }
             if (parentId && nodes[parentId]) {
                 return { parentId, children: nodes[parentId], total: state.service.servicesTotalCount };
             } else if (!parentId && nodes['firstLevel']) {

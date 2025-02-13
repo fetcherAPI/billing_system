@@ -1,5 +1,5 @@
 import { ISplitter } from './../model/types/splitter';
-import { ICreateServiceDto, IService } from './../model/types/service';
+import { ICreateServiceDto, IService, IUpdateService } from './../model/types/service';
 import { AxiosResponse } from 'axios';
 import api from 'shared/api/api';
 import { IResponseList } from 'shared/types';
@@ -17,6 +17,12 @@ export class ServiceApi {
 
     static async createService(param: ICreateServiceDto): Promise<AxiosResponse<IService>> {
         return api.post(`/api/chapter/create`, param);
+    }
+
+    static async updateService(param: IUpdateService): Promise<AxiosResponse<IService>> {
+        const { id, ...data } = param;
+
+        return api.put(`/api/chapter/${id}`, data);
     }
 
     static async createSplitter(param: ISplitterCreateDto): Promise<AxiosResponse<ISplitter>> {
@@ -39,7 +45,7 @@ export class ServiceApi {
     ): Promise<AxiosResponse<IResponseList<IService>>> {
         const url = parentId
             ? `/api/chapter/child?id=${parentId}&first=${first}&rows=${rows}`
-            : '/api/chapter/child?first=0&rows=10';
+            : '/api/chapter/child?first=0&rows=100';
         return api.get(url);
     }
 

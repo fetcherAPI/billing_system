@@ -9,13 +9,17 @@ import { getSplittersByChapterId } from 'entities/Service/model/service/getSplit
 type DefaultOptionType = GetProp<TreeSelectProps, 'treeData'>[number];
 
 interface IProps {
+    defaultValue?: string;
     required?: boolean;
 }
 
-export const SelectServiceParent = ({ required }: IProps) => {
-    const [value, setValue] = useState<string>();
+export const SelectServiceParent = ({ required, defaultValue }: IProps) => {
+    const [value, setValue] = useState<string>(defaultValue || '');
+
     const [treeData, setTreeData] = useState<Omit<DefaultOptionType, 'label'>[]>([]);
+
     const dispatch = useAppDispatch();
+
     const fetchChildren = async (parentId?: string) => {
         const response = await ServiceApi.getSerivcesTree({ rows: 40, first: 0 }, parentId);
         return response.data.content.map((item: IService) => ({
@@ -51,7 +55,7 @@ export const SelectServiceParent = ({ required }: IProps) => {
     return (
         <Form.Item
             name="parentId"
-            label="Название услуги"
+            label="Выбрать"
             rules={[{ required }]}
             // rules={[{ required: true }, { min: 3, message: 'Обязательно для заполнение' }]}
         >

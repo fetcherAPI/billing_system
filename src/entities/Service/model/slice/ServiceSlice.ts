@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import { errorHandler } from 'shared/lib';
 import { AxiosError } from 'axios';
 import { ISerivceSliceSchema } from '../types/sliceSchema.ts';
-import { createService } from '../service/createService.ts';
+import { createService, updateService } from '../service/createService.ts';
 import { getServices } from '../service/getServices.ts';
 import { getServiceById } from '../service/getServiceById.ts';
 import { getSplittersByChapterId } from '../service/getSplittersByChapterId.ts';
@@ -40,6 +40,20 @@ const ServiceSlice = createSlice({
                 state.isLoading = false;
                 state.error = errorHandler(action.payload as AxiosError);
             })
+            //updateService
+            .addCase(updateService.pending, (state) => {
+                state.isLoading = true;
+                state.error = undefined;
+            })
+            .addCase(updateService.fulfilled, (state) => {
+                state.isLoading = false;
+                state.error = undefined;
+            })
+            .addCase(updateService.rejected, (state, action) => {
+                state.isLoading = false;
+                state.error = errorHandler(action.payload as AxiosError);
+            })
+            ///
             .addCase(getServices.pending, (state) => {
                 state.isLoading = true;
                 state.error = undefined;

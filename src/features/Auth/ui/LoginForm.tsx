@@ -31,14 +31,14 @@ export const LoginForm = () => {
                     label={t('username')}
                     rules={[{ required: true, message: t('loginUsernameRuleText') }]}
                 >
-                    <Input placeholder="input placeholder" />
+                    <Input />
                 </Form.Item>
                 <Form.Item
                     name={'password'}
                     label={t('password')}
                     rules={[{ required: true, message: t('loginPassRuleText') }]}
                 >
-                    <Input.Password placeholder="input placeholder" />
+                    <Input.Password />
                 </Form.Item>
                 <Form.Item>
                     <Button type="primary" htmlType="submit">

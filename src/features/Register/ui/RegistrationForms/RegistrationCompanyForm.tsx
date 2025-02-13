@@ -78,26 +78,17 @@ export const RegistrationCompanyForm = forwardRef<FormRef, IProps>(({ className,
                         label={t('position')}
                         rules={[{ required: true, message: t('loginPassRuleText') }]}
                     >
-                        <Input
-                            placeholder="input placeholder"
-                            onChange={(e) => handleChangeInput(e, 'managerPosition')}
-                        />
+                        <Input onChange={(e) => handleChangeInput(e, 'managerPosition')} />
                     </Form.Item>
                     <Form.Item name={'website'} label={t('site')}>
-                        <Input
-                            placeholder="input placeholder"
-                            onChange={(e) => handleChangeInput(e, 'website')}
-                        />
+                        <Input onChange={(e) => handleChangeInput(e, 'website')} />
                     </Form.Item>
                     <Form.Item
                         name={'workPhone'}
                         label={t('workPhone')}
                         rules={[{ required: true, message: t('loginPassRuleText') }]}
                     >
-                        <Input
-                            placeholder="input placeholder"
-                            onChange={(e) => handleChangeInput(e, 'workPhone')}
-                        />
+                        <Input onChange={(e) => handleChangeInput(e, 'workPhone')} />
                     </Form.Item>
                 </Col>
 
@@ -113,7 +104,7 @@ export const RegistrationCompanyForm = forwardRef<FormRef, IProps>(({ className,
                             },
                         ]}
                     >
-                        <Input placeholder="input placeholder" disabled={false} />
+                        <Input disabled={false} />
                     </Form.Item>
                     <Form.Item
                         name={'managerName'}
@@ -125,7 +116,7 @@ export const RegistrationCompanyForm = forwardRef<FormRef, IProps>(({ className,
                             },
                         ]}
                     >
-                        <Input placeholder="input placeholder" />
+                        <Input />
                     </Form.Item>
                     <Form.Item
                         name={'ateId'}
@@ -144,20 +135,14 @@ export const RegistrationCompanyForm = forwardRef<FormRef, IProps>(({ className,
                         label={t('actualAddress')}
                         rules={[{ required: true, message: t('loginPassRuleText') }]}
                     >
-                        <Input
-                            placeholder="input placeholder"
-                            onChange={(e) => handleChangeInput(e, 'factAddress')}
-                        />
+                        <Input onChange={(e) => handleChangeInput(e, 'factAddress')} />
                     </Form.Item>
                     <Form.Item
                         name={'legalAddress'}
                         label={t('legalAddress')}
                         rules={[{ required: true, message: t('loginPassRuleText') }]}
                     >
-                        <Input
-                            placeholder="input placeholder"
-                            onChange={(e) => handleChangeInput(e, 'legalAddress')}
-                        />
+                        <Input onChange={(e) => handleChangeInput(e, 'legalAddress')} />
                     </Form.Item>
                 </Col>
             </Row>

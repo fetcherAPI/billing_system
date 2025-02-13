@@ -8,6 +8,8 @@ import { useSelector } from 'react-redux';
 import { useNotif } from 'shared/lib';
 import { BackButton } from 'shared/ui';
 import { SelectServiceParent } from './SelectServiceParant';
+import { updateService } from 'entities/Service/model/service/createService';
+import { getServicesByParentId } from 'entities/Service/model/service/getServicesByParentId';
 
 interface IProps {
     isInModal?: boolean;
@@ -33,22 +35,52 @@ export const CreateServiceForm = ({ defaultValue, callbackAfterSuccesCreate }: I
 
     const onFinish = (values: ICreateService) => {
         const { parentId, isService, name } = values;
-        dispatch(
-            createService({
-                name,
-                companyId: userCompanyId,
-                parentId,
-                isService,
-            })
-        )
-            .unwrap()
-            .then(() => {
-                notif.open({ status: 'success' });
-                callbackAfterSuccesCreate && callbackAfterSuccesCreate();
-            })
-            .catch((error) => {
-                notif.open({ status: 'error', description: error });
-            });
+
+        if (defaultValue?.id) {
+            dispatch(
+                updateService({
+                    name,
+                    id: defaultValue.id,
+                    parentId,
+                    isService,
+                })
+            )
+                .unwrap()
+                .then(() => {
+                    notif.open({ status: 'success' });
+                    callbackAfterSuccesCreate && callbackAfterSuccesCreate();
+                })
+                .catch((error) => {
+                    notif.open({ status: 'error', description: `${error}` });
+                })
+                .finally(() => {
+                    dispatch(
+                        getServicesByParentId({
+                            first: 0,
+                            rows: 100,
+                            parentId: parentId?.toString(),
+                            updated: true,
+                        })
+                    );
+                });
+        } else {
+            dispatch(
+                createService({
+                    name,
+                    companyId: userCompanyId,
+                    parentId,
+                    isService,
+                })
+            )
+                .unwrap()
+                .then(() => {
+                    notif.open({ status: 'success' });
+                    callbackAfterSuccesCreate && callbackAfterSuccesCreate();
+                })
+                .catch((error) => {
+                    notif.open({ status: 'error', description: `${error}` });
+                });
+        }
     };
 
     useEffect(() => {
@@ -77,7 +109,7 @@ export const CreateServiceForm = ({ defaultValue, callbackAfterSuccesCreate }: I
                 >
                     <Input />
                 </Form.Item>
-                <SelectServiceParent />
+                <SelectServiceParent defaultValue={defaultValue?.parentId?.toString()} />
                 <Form.Item name="isService" rules={[{ required: true }]}>
                     <Radio.Group>
                         <Radio key={'service'} value={true}>
@@ -91,7 +123,7 @@ export const CreateServiceForm = ({ defaultValue, callbackAfterSuccesCreate }: I
                 <BackButton>
                     <Form.Item>
                         <Button htmlType="submit" type="primary">
-                            Сохранить
+                            {defaultValue?.id ? 'Обновить' : 'Сохранить'}
                         </Button>
                     </Form.Item>
                 </BackButton>

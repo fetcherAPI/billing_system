@@ -2,9 +2,8 @@ import { useState, useRef } from 'react';
 import { Button, message, Steps } from 'antd';
 import { IBaseProps } from 'shared/types';
 import { RegistrationCompanyForm } from '../RegistrationForms/RegistrationCompanyForm.tsx';
-import cls from './RegistrationSteps.module.scss';
-import { BackButton } from 'shared/ui';
 import { UserRegisterForm } from '../RegistrationForms/UserRegisterForm.tsx';
+import cls from './RegistrationSteps.module.scss';
 
 export interface FormRef {
     submit: () => void;
@@ -52,25 +51,25 @@ export const RegistrationSteps = ({ className }: IBaseProps) => {
             <Steps current={current} items={items} />
             <div className={cls.content}>{steps[current].content}</div>
             <div>
-                <BackButton>
-                    <>
-                        {current < steps.length - 1 && (
-                            <Button type="primary" onClick={next}>
-                                Далее
-                            </Button>
-                        )}
-                        {current === steps.length - 1 && (
-                            <Button type="primary" onClick={() => message.success('Processing complete!')}>
-                                Завершить
-                            </Button>
-                        )}
-                        {current > 0 && (
-                            <Button style={{ margin: '0 8px' }} onClick={prev}>
-                                Пред
-                            </Button>
-                        )}
-                    </>
-                </BackButton>
+                {/* <BackButton> */}
+                <>
+                    {current < steps.length - 1 && (
+                        <Button type="primary" onClick={next}>
+                            Сохранить
+                        </Button>
+                    )}
+                    {current === steps.length - 1 && (
+                        <Button type="primary" onClick={() => message.success('Processing complete!')}>
+                            Завершить
+                        </Button>
+                    )}
+                    {current > 0 && (
+                        <Button style={{ margin: '0 8px' }} onClick={prev}>
+                            Предыдущая форма
+                        </Button>
+                    )}
+                </>
+                {/* </BackButton> */}
             </div>
         </div>
     );
