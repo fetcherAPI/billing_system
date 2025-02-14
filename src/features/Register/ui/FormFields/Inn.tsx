@@ -51,10 +51,14 @@ export const Inn = ({
                     required: true,
                     message: t('required'),
                 },
-                // {
-                //     max: 14,
-                //     message: t('max length 14'),
-                // },
+                {
+                    max: 14,
+                    message: t('max length 14'),
+                },
+                {
+                    min: 14,
+                    message: 'минимум 14 символов',
+                },
             ]}
         >
             <Input
