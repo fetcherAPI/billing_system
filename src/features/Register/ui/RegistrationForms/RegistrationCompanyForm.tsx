@@ -104,7 +104,7 @@ export const RegistrationCompanyForm = forwardRef<FormRef, IProps>(({ className,
                             },
                         ]}
                     >
-                        <Input disabled={false} />
+                        <Input disabled />
                     </Form.Item>
                     <Form.Item
                         name={'managerName'}
@@ -116,7 +116,7 @@ export const RegistrationCompanyForm = forwardRef<FormRef, IProps>(({ className,
                             },
                         ]}
                     >
-                        <Input />
+                        <Input disabled />
                     </Form.Item>
                     <Form.Item
                         name={'ateId'}

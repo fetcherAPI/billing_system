@@ -13,6 +13,7 @@ import {
 } from 'pages/ManagerPage';
 import { PaymnetCodesPageLazy } from 'pages/PaymentCodesPage/ui/PaymentCodesPage.async';
 import { GeneratePaymentCodeAsync } from 'pages/GeneratePaymentCode';
+import { UsersListLazy } from 'pages/UsersListPage';
 
 export enum AppRoutes {
     MAIN = 'main',
@@ -33,6 +34,7 @@ export enum ChildRoutes {
     BILLS = 'bills',
     PAYMENT_CODES = 'paymentCodes',
     GENERATE_CODE = 'generateCode',
+    USERS = 'users',
 }
 
 export type AppRoutesProps = RouteProps & {
@@ -65,6 +67,7 @@ export const ChildRoutePath: Record<ChildRoutes, string> = {
     [ChildRoutes.BILLS]: 'bills',
     [ChildRoutes.PAYMENT_CODES]: 'paymentCodes',
     [ChildRoutes.GENERATE_CODE]: 'generateCode',
+    [ChildRoutes.USERS]: 'users',
 
     // последний
 };
@@ -125,6 +128,10 @@ export const routeConfig: Record<AppRoutes, AppRoutesProps> = {
             [ChildRoutes.GENERATE_CODE]: {
                 path: ChildRoutePath.generateCode,
                 element: <GeneratePaymentCodeAsync />,
+            },
+            [ChildRoutes.USERS]: {
+                path: ChildRoutePath.users,
+                element: <UsersListLazy />,
             },
         },
     },

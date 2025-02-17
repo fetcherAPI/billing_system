@@ -37,6 +37,12 @@ const menuItemsMap: Map<UserRoles | undefined, Array<any>> = new Map([
                 label: `Сгенерировать код`,
                 path: ChildRoutePath.generateCode,
             },
+            {
+                key: '/merchant/users',
+                icon: FormOutlined,
+                label: `Сотрудники`,
+                path: ChildRoutePath.users,
+            },
         ],
     ],
     [

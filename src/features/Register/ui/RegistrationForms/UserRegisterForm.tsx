@@ -13,6 +13,7 @@ import { Inn } from '../FormFields/Inn.tsx';
 import { setRegisterProperty } from '../../model/slice/RegisterSlice.ts';
 import cls from './style.module.scss';
 import { FormRef } from '../RegistrationSteps/RegistrationSteps.tsx';
+import { getCompanyUsers } from 'features/CompanyUsers/model/service/getCompanyUsers.ts';
 
 interface IProps {
     className?: string;
@@ -37,9 +38,12 @@ export const UserRegisterForm = forwardRef<FormRef, IProps>(
         }));
 
         const handleFinish = () => {
-            dispatch(registerUser({ param: formFields, userRole })).then(
-                (res) => res.meta.requestStatus === 'fulfilled' && handleNext && handleNext()
-            );
+            dispatch(registerUser({ param: formFields, userRole }))
+                .unwrap()
+                .then(() => {
+                    dispatch(getCompanyUsers({ id: (companyId && +companyId) || 0 }));
+                    handleNext && handleNext();
+                });
         };
         const handleChangeInput = (e: ChangeEvent<HTMLInputElement>, key: keyOfUserRegister) => {
             dispatch(setRegisterProperty({ key, data: e.target.value, type: 'User' }));
