@@ -4,13 +4,16 @@ import { Button1, ThemeButton } from 'shared/ui/Button1';
 import { ConfirmModal } from 'shared/ui';
 import { UserRegisterForm } from 'features/Register';
 import { FormRef } from 'features/Register/ui/RegistrationSteps/RegistrationSteps.tsx';
-import { useParams } from 'react-router-dom';
 
-export const RegisterUserModal = () => {
+export interface IRegisterUserModalProps {
+    companyId: number;
+}
+
+export const RegisterUserModal = ({ companyId }: IRegisterUserModalProps) => {
     const [t] = useTranslation('header');
     const [isOpen, setIsOpen] = useState(false);
     const formRef = useRef<FormRef>(null);
-    const { id: companyId } = useParams();
+    // const { id: companyId } = useParams();
     const handleOpen = () => {
         setIsOpen((prev) => !prev);
     };

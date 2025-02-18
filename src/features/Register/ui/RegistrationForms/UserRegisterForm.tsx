@@ -19,7 +19,7 @@ interface IProps {
     className?: string;
     handleNext?: () => void;
     userRole: UserRoles;
-    companyId?: string;
+    companyId?: number;
 }
 
 export const UserRegisterForm = forwardRef<FormRef, IProps>(

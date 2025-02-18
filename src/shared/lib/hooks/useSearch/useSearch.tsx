@@ -15,7 +15,11 @@ export const useSearch = <T,>(initialData: T[], searchFields: (keyof T)[]) => {
             )
         );
     };
-    const SearchComponent = <Input.Search onSearch={handleSearch} placeholder="Поиск по ...." />;
+    const SearchComponent = (
+        <>
+            <Input.Search onSearch={handleSearch} placeholder="Поиск по ...." />
+        </>
+    );
 
     return {
         SearchComponent,
