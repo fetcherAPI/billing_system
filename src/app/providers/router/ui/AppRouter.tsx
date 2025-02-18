@@ -14,7 +14,7 @@ const AppRouter = () => {
                 path={route.path}
                 element={route.authOnly ? <RequireAuth roles={route.roles}>{element}</RequireAuth> : element}
             >
-                {route.child && Object.values(route.child).map((child) => renderWithWrapper(child))}
+                {route.child ? Object.values(route.child).map((child) => renderWithWrapper(child)) : null}
             </Route>
         );
     }, []);
@@ -29,7 +29,7 @@ interface RequireAuthProps {
 }
 
 export function RequireAuth({ children, roles }: RequireAuthProps) {
-    const auth = useSelector($isAuth);
+    const auth = useSelector($isAuth) || Boolean(localStorage.getItem('token'));
     const location = useLocation();
     const userRoles = useSelector($userRole);
 

@@ -82,7 +82,7 @@ export const routeConfig: Record<AppRoutes, AppRoutesProps> = {
         path: RoutePath.admin,
         element: <AdminPageAsync />,
         // roles: ['admin'],
-        // authOnly: true,
+        authOnly: true,
         child: {
             [ChildRoutes.COMPANIES]: {
                 path: ChildRoutePath.companies,
@@ -107,7 +107,7 @@ export const routeConfig: Record<AppRoutes, AppRoutesProps> = {
         path: RoutePath.manager,
         element: <ManagerPageAsync />,
         // roles: ['admin'],
-        // authOnly: true,
+        authOnly: true,
         child: {
             [ChildRoutes.SERVICE]: {
                 path: ChildRoutePath.service,
@@ -140,7 +140,7 @@ export const routeConfig: Record<AppRoutes, AppRoutesProps> = {
         path: RoutePath.merchant,
         element: <ManagerPageAsync />,
         // roles: ['admin'],
-        // authOnly: true,
+        authOnly: true,
         child: {
             [ChildRoutes.SERVICE]: {
                 path: ChildRoutePath.service,
