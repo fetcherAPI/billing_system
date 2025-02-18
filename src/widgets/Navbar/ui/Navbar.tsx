@@ -46,7 +46,7 @@ const menuItemsMap: Map<UserRoles | undefined, Array<any>> = new Map([
             {
                 key: '/manager/users',
                 icon: TeamOutlined,
-                label: `Сотрудники`,
+                label: `Пользователи`,
                 path: ChildRoutePath.users,
             },
         ],

@@ -1,38 +1,24 @@
-import axios from 'axios';
 import { useState } from 'react';
-import { errorHandler } from '../../errorHandler/errorHandler';
 
 export const useRequest = <T = undefined, P = undefined>() => {
-    const [response, setResponse] = useState<P | string>();
-
+    const [response, setResponse] = useState<P | null>(null);
     const [error, setError] = useState<string>('');
-
-    const [status, setStatus] = useState<number>();
-
+    const [status, setStatus] = useState<number | undefined>();
     const [isLoading, setIsLoading] = useState<boolean>(false);
 
-    const request = async (params: T, requestService: any) => {
+    const request = async (
+        params: T,
+        requestService: (params: T) => Promise<{ data: P; status: number }>
+    ) => {
         setIsLoading(true);
+        setError('');
         try {
             const res = await requestService(params);
-
-            if (!res.data) {
-                setResponse('no data');
-            } else {
-                setResponse(res.data);
-            }
-            setIsLoading(false);
-            setStatus(res.status);
-            setError('');
-            return res;
+            setResponse(res?.data ?? null);
+            setStatus(res?.status);
         } catch (err) {
-            if (axios.isAxiosError(err)) {
-                setError(errorHandler(err));
-                setStatus(err.response?.status);
-            } else {
-                setError('An unexpected error occurred.');
-            }
-            setIsLoading(false);
+            setError(`${err}`);
+            setResponse(null);
         } finally {
             setIsLoading(false);
         }

@@ -14,7 +14,7 @@ export const GetCompanyUsers = ({ id }: IProps) => {
 
     return (
         <Button1 theme={ThemeButton.PRIMARY} onClick={() => handleGetUsers({ id })}>
-            {isLoading ? 'load..' : 'Сотрудники'}
+            {isLoading ? 'load..' : 'пользователи'}
         </Button1>
     );
 };

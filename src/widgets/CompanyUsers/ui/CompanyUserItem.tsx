@@ -12,7 +12,7 @@ export const CompanyUserItem = (props: IUser) => {
             text={isUserActive ? 'активный' : 'заблокированный '}
         >
             <Row className={cls.item}>
-                <Descriptions title="Сотрудник">
+                <Descriptions title="Пользователь">
                     <Descriptions.Item label="ИНН пользователя">{userInn}</Descriptions.Item>
                     <Descriptions.Item label="ФИО">{fullName}</Descriptions.Item>
                     <Descriptions.Item label="Должность ">{position}</Descriptions.Item>

@@ -40,7 +40,10 @@ export const Inn = ({
         if (fieldForSetResponse && response) {
             dispatch(setRegisterProperty({ key: fieldForSetResponse, data: response, type }));
         }
-    }, [isLoading]);
+        if (fieldForSetResponse && error) {
+            dispatch(setRegisterProperty({ key: fieldForSetResponse, data: error, type }));
+        }
+    }, [isLoading, error]);
 
     return (
         <Form.Item

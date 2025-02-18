@@ -1,5 +1,4 @@
 import { useRef, useState } from 'react';
-import { useTranslation } from 'react-i18next';
 import { Button1, ThemeButton } from 'shared/ui/Button1';
 import { ConfirmModal } from 'shared/ui';
 import { UserRegisterForm } from 'features/Register';
@@ -10,10 +9,8 @@ export interface IRegisterUserModalProps {
 }
 
 export const RegisterUserModal = ({ companyId }: IRegisterUserModalProps) => {
-    const [t] = useTranslation('header');
     const [isOpen, setIsOpen] = useState(false);
     const formRef = useRef<FormRef>(null);
-    // const { id: companyId } = useParams();
     const handleOpen = () => {
         setIsOpen((prev) => !prev);
     };
@@ -31,7 +28,7 @@ export const RegisterUserModal = ({ companyId }: IRegisterUserModalProps) => {
     return (
         <>
             <Button1 onClick={handleOpen} theme={ThemeButton.SECONDARY}>
-                {t('registration')}
+                Добавить пользователя
             </Button1>
             <ConfirmModal
                 handleClose={() => setIsOpen(false)}

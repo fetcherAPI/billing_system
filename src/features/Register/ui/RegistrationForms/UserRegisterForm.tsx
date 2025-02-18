@@ -71,7 +71,7 @@ export const UserRegisterForm = forwardRef<FormRef, IProps>(
                 <Row className={cls.row} gutter={20}>
                     <Col span={12}>
                         <Inn
-                            label={'ПИН сотрудника'}
+                            label={'ПИН пользователя'}
                             inputName={'userInn'}
                             fieldForSetResponse={'fullName'}
                             type={'User'}
@@ -103,7 +103,7 @@ export const UserRegisterForm = forwardRef<FormRef, IProps>(
                     <Col style={{ width: '50%' }}>
                         <Form.Item
                             name={'fullName'}
-                            label={t('ФИО руководителя')}
+                            label={t('ФИО пользователя')}
                             initialValue={formFields.fullName}
                             rules={[
                                 {

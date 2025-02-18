@@ -17,6 +17,13 @@ export class RegisterApi {
         return api.post<ICompany>(`/api/company/create`, params);
     }
 
+    static async updateCompany(
+        params: ICompanyRegister,
+        companyId: number
+    ): Promise<AxiosResponse<ICompany>> {
+        return api.put<ICompany>(`/api/company/${companyId}`, params);
+    }
+
     static async registerUser(params: IUserRegister, userRole: UserRoles): Promise<AxiosResponse<IUser>> {
         const url = userRole === 'merchant' ? '/api/user/create' : '/api/company/user/create';
         return api.post<IUser>(url, params);

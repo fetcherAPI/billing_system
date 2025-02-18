@@ -18,13 +18,13 @@ const CompanyDetailsPage = () => {
 
     return (
         <Row gutter={16}>
-            <Col span={17}>
+            <Col span={16}>
                 <CompanyDetailsControl />
                 <br />
                 <CompanyDetails />
                 <Divider />
             </Col>
-            <Col span={7}>
+            <Col span={8}>
                 <CompanyUsersList />
             </Col>
         </Row>

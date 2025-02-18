@@ -12,7 +12,7 @@ export interface ICompanyDetails extends ICompany {
     website: string;
     workPhone: string;
     dateCreated: string;
-    ateId: string;
+    ateId: number;
     ateName: string;
     managerInn: string;
     managerName: string;

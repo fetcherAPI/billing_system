@@ -15,6 +15,18 @@ export const registerCompany = createAsyncThunk(
     }
 );
 
+export const updateCompany = createAsyncThunk(
+    'updateCompany',
+    async ({ param, companyId }: { param: ICompanyRegister; companyId: number }, { rejectWithValue }) => {
+        try {
+            const response = await RegisterApi.updateCompany(param, companyId);
+            return response.data;
+        } catch (error) {
+            return rejectWithValue(error);
+        }
+    }
+);
+
 export const registerUser = createAsyncThunk(
     'registerUser',
     async ({ param, userRole }: { param: IUserRegister; userRole: UserRoles }, { rejectWithValue }) => {
