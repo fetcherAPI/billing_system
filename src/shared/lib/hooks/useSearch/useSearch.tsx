@@ -9,11 +9,15 @@ export const useSearch = <T,>(initialData: T[], searchFields: (keyof T)[]) => {
         setSearchValue(value);
         const lowerValue = value.toLowerCase();
 
-        setFilteredData(
-            initialData.filter((item) =>
-                searchFields.some((field) => String(item[field]).toLowerCase().includes(lowerValue))
-            )
-        );
+        if (value.length) {
+            setFilteredData(
+                initialData.filter((item) =>
+                    searchFields.some((field) => String(item[field]).toLowerCase().includes(lowerValue))
+                )
+            );
+        } else {
+            setFilteredData([]);
+        }
     };
     const SearchComponent = (
         <>
