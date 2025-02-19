@@ -1,55 +1,22 @@
-import { useEffect, useRef, useState } from 'react';
+import { memo, useEffect, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { Card, Col, Descriptions, Row, Skeleton as SkeletonAnt } from 'antd';
 import { BackButton, ConfirmModal } from 'shared/ui';
 import { $companyDetails, useHandleGetCompanyDetails } from 'entities/Admin';
-import cls from './CompanyDetails.module.scss';
 import { Button1, ThemeButton } from 'shared/ui/Button1';
 import { RegistrationCompanyForm } from 'features/Register';
 import { FormRef } from 'features/Register/ui/RegistrationSteps/RegistrationSteps';
+import cls from './CompanyDetails.module.scss';
 
 export const CompanyDetails = () => {
-    const [isOpen, setIsOpen] = useState(false);
-
-    const formRef = useRef<FormRef>(null);
-
-    const next = () => {
-        if (formRef.current) {
-            formRef.current.submit();
-        }
-    };
-
-    const handleOpen = () => {
-        setIsOpen((prev) => !prev);
-    };
-
-    const handleCancel = () => {
-        setIsOpen(false);
-    };
-
-    const handleConfirm = () => {
-        next();
-    };
     const { id } = useParams();
     const { handleGet, isLoading } = useHandleGetCompanyDetails();
-    const {
-        inn,
-        dateCreated,
-        legalAddress,
-        factAddress,
-        workPhone,
-        ateId,
-        website,
-        managerName,
-        managerInn,
-        title,
-        managerPosition,
-    } = useSelector($companyDetails);
+    const companyDetails = useSelector($companyDetails);
 
     useEffect(() => {
-        if (!inn && id) {
-            handleGet(+id).then((r) => console.log(r));
+        if (!companyDetails.inn && id) {
+            handleGet(+id);
         }
     }, []);
 
@@ -57,66 +24,72 @@ export const CompanyDetails = () => {
 
     return (
         <>
-            <>
-                {isLoading ? (
-                    <Skeleton />
-                ) : (
-                    <Card>
-                        <ConfirmModal
-                            handleClose={() => setIsOpen(false)}
-                            onConfirm={handleConfirm}
-                            onCancel={handleCancel}
-                            title="Регистрация"
-                            isOpen={isOpen}
-                        >
-                            <RegistrationCompanyForm
-                                ref={formRef}
-                                companyId={+id}
-                                defaultValue={{
-                                    inn,
-                                    legalAddress,
-                                    title,
-                                    factAddress,
-                                    workPhone,
-                                    ateId,
-                                    website,
-                                    managerName,
-                                    managerInn,
-                                    managerPosition,
-                                    notes: '',
-                                }}
-                            />
-                        </ConfirmModal>
-                        <Row>
-                            <Col span={18}>
-                                <Descriptions
-                                    title="Информация об организации"
-                                    className={cls.detailsWrapper}
-                                >
-                                    <Descriptions.Item label="Форма собственности">{inn}</Descriptions.Item>
-                                    <Descriptions.Item label="ИНН Организации">{inn}</Descriptions.Item>
-                                    <Descriptions.Item label="Наименование орг">{title}</Descriptions.Item>
-                                    <Descriptions.Item label="Дата рег">{dateCreated}</Descriptions.Item>
-                                    <Descriptions.Item label="Юр адрес">{legalAddress}</Descriptions.Item>
-                                    <Descriptions.Item label="Факт адрес">{factAddress}</Descriptions.Item>
-                                    <Descriptions.Item label="Рабочий тел">{workPhone}</Descriptions.Item>
-                                    <Descriptions.Item label="">
-                                        <BackButton />
+            {isLoading ? (
+                <Skeleton />
+            ) : (
+                <Card>
+                    <Row>
+                        <Col span={18}>
+                            <Descriptions title="Информация об организации" className={cls.detailsWrapper}>
+                                {[
+                                    { label: 'Форма собственности', value: companyDetails.inn },
+                                    { label: 'ИНН Организации', value: companyDetails.inn },
+                                    { label: 'Наименование орг', value: companyDetails.title },
+                                    { label: 'Дата рег', value: companyDetails.dateCreated },
+                                    { label: 'Юр адрес', value: companyDetails.legalAddress },
+                                    { label: 'Факт адрес', value: companyDetails.factAddress },
+                                    { label: 'Рабочий тел', value: companyDetails.workPhone },
+                                ].map(({ label, value }) => (
+                                    <Descriptions.Item key={label} label={label}>
+                                        {value}
                                     </Descriptions.Item>
-                                </Descriptions>
-                            </Col>
-                            <Col>
-                                <Button1 theme={ThemeButton.PRIMARY} onClick={handleOpen}>
-                                    Редактировать
-                                </Button1>
-                            </Col>
-                        </Row>
-                    </Card>
-                )}
-            </>
+                                ))}
+                                <Descriptions.Item label="">
+                                    <BackButton />
+                                </Descriptions.Item>
+                            </Descriptions>
+                        </Col>
+                        <Col>
+                            <UpdateModal companyId={+id} />
+                        </Col>
+                    </Row>
+                </Card>
+            )}
         </>
     );
 };
+
+const UpdateModal = memo(({ companyId }: { companyId: number }) => {
+    const [isOpen, setIsOpen] = useState(false);
+    const formRef = useRef<FormRef>(null);
+    const companyDetails = useSelector($companyDetails);
+
+    const toggleModal = () => setIsOpen((prev) => !prev);
+    const handleConfirm = () => formRef.current?.submit();
+    return (
+        <>
+            <ConfirmModal
+                handleClose={toggleModal}
+                onConfirm={handleConfirm}
+                onCancel={toggleModal}
+                title="Регистрация"
+                isOpen={isOpen}
+            >
+                <RegistrationCompanyForm
+                    ref={formRef}
+                    companyId={companyId}
+                    handleNext={toggleModal}
+                    defaultValue={{ ...companyDetails, notes: '' }}
+                />
+            </ConfirmModal>
+            <Button1 theme={ThemeButton.PRIMARY} onClick={toggleModal}>
+                Редактировать
+            </Button1>
+        </>
+    );
+});
+
+UpdateModal.displayName = 'UpdateModal';
 
 const Skeleton = () => {
     return (

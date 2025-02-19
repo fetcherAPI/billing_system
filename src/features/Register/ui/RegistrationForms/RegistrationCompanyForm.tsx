@@ -14,6 +14,8 @@ import { Inn } from '../FormFields/Inn.tsx';
 import cls from './style.module.scss';
 import { FormRef } from '../RegistrationSteps/RegistrationSteps.tsx';
 import { ICompanyRegister } from 'shared/types/company.ts';
+import { useNotif } from 'shared/lib/index.ts';
+import { getCompanyDetails } from 'entities/Admin/index.ts';
 
 interface IProps {
     handleNext?: () => void;
@@ -27,6 +29,7 @@ export const RegistrationCompanyForm = forwardRef<FormRef, IProps>(
         const { t } = useTranslation('registration');
         const [form] = Form.useForm();
         const dispatch = useAppDispatch();
+        const notif = useNotif();
 
         const formFields = useSelector($registerData);
         const createdCompanyId = useSelector($createdCompanyId);
@@ -45,6 +48,13 @@ export const RegistrationCompanyForm = forwardRef<FormRef, IProps>(
                 ? handleNext()
                 : dispatch(action)
                       .unwrap()
+                      .then(() =>
+                          notif.open({
+                              status: 'success',
+                              description: `Успешно ${defaultValue?.inn ? 'обновлено' : 'создано'}`,
+                          })
+                      )
+                      .then(() => dispatch(getCompanyDetails({ id: companyId || 0 })))
                       .then(() => handleNext && handleNext());
         };
 
@@ -58,8 +68,6 @@ export const RegistrationCompanyForm = forwardRef<FormRef, IProps>(
             dispatch(setRegisterProperty({ key, data: e.target.value, type: 'Company' }));
         };
 
-        console.log('defaultValue', defaultValue);
-
         return (
             <Form
                 initialValues={defaultValue || formFields}
@@ -69,6 +77,8 @@ export const RegistrationCompanyForm = forwardRef<FormRef, IProps>(
                 onFinish={handleFinish}
                 className={classNames(cls.from, {}, [className])}
             >
+                {' '}
+                {notif.context}
                 <Row gutter={20} className={cls.row}>
                     <Col style={{ width: '50%' }}>
                         <Inn
