@@ -19,6 +19,10 @@ export class ServiceApi {
         return api.post(`/api/chapter/create`, param);
     }
 
+    static async deleteService(id: number) {
+        return api.delete(`/api/chapter/${id}`);
+    }
+
     static async updateService(param: IUpdateService): Promise<AxiosResponse<IService>> {
         const { id, ...data } = param;
 
@@ -51,6 +55,10 @@ export class ServiceApi {
 
     static async getSplittersByChapterId(chapterId: number): Promise<AxiosResponse<Array<ISplitter>>> {
         return api.get(`/api/chapter/splitter/listByChapter/${chapterId}`);
+    }
+
+    static async deleteSplitter(splitterId: number) {
+        return api.delete(`api/chapter/splitter/${splitterId}`);
     }
 }
 

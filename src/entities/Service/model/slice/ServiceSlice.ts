@@ -9,6 +9,7 @@ import { getSplittersByChapterId } from '../service/getSplittersByChapterId.ts';
 import { createSplitter } from '../service/createSplitter.ts';
 import { getServicesByParentId } from '../service/getServicesByParentId.ts';
 import { IService } from '../types/service.ts';
+import { deleteService } from '../service/deleteService.ts';
 
 const initialState: ISerivceSliceSchema = {
     serivcesList: [],
@@ -23,6 +24,22 @@ const ServiceSlice = createSlice({
     reducers: {},
     extraReducers: (builder) => {
         builder
+
+            //delete
+            .addCase(deleteService.pending, (state) => {
+                state.isLoading = true;
+                state.error = undefined;
+            })
+            .addCase(deleteService.fulfilled, (state) => {
+                state.isLoading = false;
+                state.error = undefined;
+                state.servicesTotalCount = --state.servicesTotalCount;
+            })
+            .addCase(deleteService.rejected, (state, action) => {
+                state.isLoading = false;
+                state.error = errorHandler(action.payload as AxiosError);
+            })
+            //create
             .addCase(createService.pending, (state) => {
                 state.isLoading = true;
                 state.error = undefined;

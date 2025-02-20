@@ -1,6 +1,5 @@
 import { memo, useEffect, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
 import { Card, Col, Descriptions, Row, Skeleton as SkeletonAnt } from 'antd';
 import { BackButton, ConfirmModal } from 'shared/ui';
 import { $companyDetails, useHandleGetCompanyDetails } from 'entities/Admin';
@@ -9,18 +8,19 @@ import { RegistrationCompanyForm } from 'features/Register';
 import { FormRef } from 'features/Register/ui/RegistrationSteps/RegistrationSteps';
 import cls from './CompanyDetails.module.scss';
 
-export const CompanyDetails = () => {
-    const { id } = useParams();
+interface ICompanyDetails {
+    companyId: number;
+}
+
+export const CompanyDetails = ({ companyId }: ICompanyDetails) => {
     const { handleGet, isLoading } = useHandleGetCompanyDetails();
     const companyDetails = useSelector($companyDetails);
 
     useEffect(() => {
-        if (!companyDetails.inn && id) {
-            handleGet(+id);
+        if (!companyDetails.inn) {
+            handleGet(companyId);
         }
     }, []);
-
-    if (!id) return null;
 
     return (
         <>
@@ -34,6 +34,7 @@ export const CompanyDetails = () => {
                                 {[
                                     { label: 'Форма собственности', value: companyDetails.inn },
                                     { label: 'ИНН Организации', value: companyDetails.inn },
+                                    { label: 'Место', value: companyDetails.ateName },
                                     { label: 'Наименование орг', value: companyDetails.title },
                                     { label: 'Дата рег', value: companyDetails.dateCreated },
                                     { label: 'Юр адрес', value: companyDetails.legalAddress },
@@ -50,7 +51,7 @@ export const CompanyDetails = () => {
                             </Descriptions>
                         </Col>
                         <Col>
-                            <UpdateModal companyId={+id} />
+                            <UpdateModal companyId={companyId} />
                         </Col>
                     </Row>
                 </Card>

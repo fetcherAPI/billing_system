@@ -50,10 +50,7 @@ export const CreateServiceForm = ({ defaultValue, callbackAfterSuccesCreate }: I
                     notif.open({ status: 'success' });
                     callbackAfterSuccesCreate && callbackAfterSuccesCreate();
                 })
-                .catch((error) => {
-                    notif.open({ status: 'error', description: `${error}` });
-                })
-                .finally(() => {
+                .then(() => {
                     dispatch(
                         getServicesByParentId({
                             first: 0,
@@ -62,6 +59,9 @@ export const CreateServiceForm = ({ defaultValue, callbackAfterSuccesCreate }: I
                             updated: true,
                         })
                     );
+                })
+                .catch((error) => {
+                    notif.open({ status: 'error', description: `${error}` });
                 });
         } else {
             dispatch(
@@ -73,6 +73,16 @@ export const CreateServiceForm = ({ defaultValue, callbackAfterSuccesCreate }: I
                 })
             )
                 .unwrap()
+                .then(() => {
+                    dispatch(
+                        getServicesByParentId({
+                            first: 0,
+                            rows: 100,
+                            parentId: parentId?.toString(),
+                            updated: true,
+                        })
+                    );
+                })
                 .then(() => {
                     notif.open({ status: 'success' });
                     callbackAfterSuccesCreate && callbackAfterSuccesCreate();

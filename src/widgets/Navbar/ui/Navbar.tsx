@@ -7,6 +7,7 @@ import {
     DollarOutlined,
     FormOutlined,
     TeamOutlined,
+    UserOutlined,
 } from '@ant-design/icons';
 import { ChildRoutePath } from 'shared/config/routeConfig/routeConfig.tsx';
 import { NavLink, useLocation } from 'react-router-dom';
@@ -48,6 +49,13 @@ const menuItemsMap: Map<UserRoles | undefined, Array<any>> = new Map([
                 icon: TeamOutlined,
                 label: `Пользователи`,
                 path: ChildRoutePath.users,
+            },
+
+            {
+                key: '/manager/myCompanyData',
+                icon: UserOutlined,
+                label: `Данные организации`,
+                path: ChildRoutePath.myCompanyData,
             },
         ],
     ],

@@ -14,6 +14,7 @@ const CompanyDetailsPage = () => {
             handleGetUsers({ id: +id });
         }
     }, []);
+
     if (!id) return <h1>Company id is not provided</h1>;
 
     return (
@@ -21,7 +22,7 @@ const CompanyDetailsPage = () => {
             <Col span={16}>
                 <CompanyDetailsControl />
                 <br />
-                <CompanyDetails />
+                <CompanyDetails companyId={+id} />
                 <Divider />
             </Col>
             <Col span={8}>
