@@ -95,7 +95,6 @@ export const CompanyUsersList = ({ list }: ICompanyUsersList) => {
                     columns={columns}
                     rowKey={(record) => record.id}
                     dataSource={filteredData?.length ? filteredData : users}
-                    pagination={false}
                 />
             </>
         );

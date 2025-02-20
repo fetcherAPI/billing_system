@@ -15,6 +15,7 @@ import cardPng from 'shared/assets/card.png';
 import filePng from 'shared/assets/folder.png';
 import cls from './Service.module.scss';
 import { deleteService } from 'entities/Service';
+import { useSearch } from 'shared/lib';
 
 interface ITreeProps {
     service: IService;
@@ -60,6 +61,8 @@ export const ServicesTable = () => {
 
     const nodes = useSelector((state: RootState) => $selectNodesByParentId(parentId)(state));
 
+    const { SearchComponent, filteredData } = useSearch<IService>(nodes, ['companyName', 'name']);
+
     const handleClick = (id: number) => {
         searchParams.set('parentId', String(id));
         setSearchParams(searchParams);
@@ -87,11 +90,15 @@ export const ServicesTable = () => {
         dispatch(getServicesByParentId({ first: 0, rows: 100, parentId: parentId }));
     }, [parentId]);
 
+    const renderList = filteredData?.length ? filteredData : nodes;
+
     return (
         <>
+            {SearchComponent}
+
             <div className={cls.servicesWrapper}>
                 {nodes?.length ? (
-                    nodes?.map((el) => (
+                    renderList?.map((el) => (
                         <Tree
                             key={el.id}
                             service={el}
