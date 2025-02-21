@@ -83,7 +83,8 @@ export const ServicesTable = () => {
                     parentId: parentId,
                     updated: true,
                 });
-            });
+            })
+            .catch((error) => console.error('Ошибка удаления:', error));
     };
 
     useEffect(() => {
