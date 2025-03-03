@@ -41,7 +41,7 @@ const columns: TableProps<IUser>['columns'] = [
         key: 'email',
     },
     {
-        title: 'Статаус',
+        title: 'Статус',
         key: 'status',
         dataIndex: 'tags',
         render: (_, { status }) => (
@@ -51,8 +51,8 @@ const columns: TableProps<IUser>['columns'] = [
         ),
     },
     {
-        title: 'Статаус',
-        key: 'status',
+        title: 'Действия',
+        key: 'action',
         dataIndex: 'tags',
         width: 90,
         render: (_, { id, status }) => (
