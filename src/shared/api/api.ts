@@ -5,7 +5,7 @@ import { message } from 'antd';
 import { errorHandler } from 'shared/lib';
 
 const $api = axios.create({
-    baseURL: 'http://10.200.24.107:8080',
+    baseURL: process.env.REACT_APP_API_URL,
 });
 
 $api.interceptors.request.use((config: any) => {
