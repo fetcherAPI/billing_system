@@ -1,15 +1,19 @@
 import { RegisterUserModal } from 'features/Register';
 import { useParams } from 'react-router-dom';
+import { companyIdLocalStore } from 'shared/lib';
 import { CompanyUsersList } from 'widgets/CompanyUsers';
 
-const UsersListPage = () => {
+const UsersListPage: React.FC = () => {
     const { id } = useParams();
-    if (!id) return 'Company id is not provided';
+    const companyId = companyIdLocalStore();
+
+    if (!id && !companyId) return <p>Company id is not provided UsersListPage</p>;
+
     return (
         <>
-            <RegisterUserModal companyId={+id} />
+            <RegisterUserModal companyId={Number(id) || Number(companyId)} />
             <br />
-            <CompanyUsersList companyId={+id} list={true} />
+            <CompanyUsersList companyId={Number(id) || Number(companyId)} list={true} />
         </>
     );
 };

@@ -1,20 +1,22 @@
 import { getServiceById } from 'entities/Service/model/service/getServiceById';
 import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import { companyIdLocalStore } from 'shared/lib';
 import { useDispatchToStore } from 'shared/lib/hooks/useDisaptchToStore';
 import { ServiceDetailWidget } from 'widgets/ServiceDetails';
 
 const ServiceDetails = () => {
-    const { id } = useParams();
     const handleGetUsers = useDispatchToStore<{ id: number }>(getServiceById);
+    const { id } = useParams();
+    const companyId = companyIdLocalStore();
 
     useEffect(() => {
         if (id) {
-            handleGetUsers({ id: +id });
+            handleGetUsers({ id: Number(id) || Number(companyId) });
         }
-    }, [id]);
+    }, [id, companyId]);
 
-    if (!id) return <h1>Company id is not provided</h1>;
+    if (!id && !companyId) return <p>Company id is not provided UsersListPage</p>;
 
     return <ServiceDetailWidget />;
 };

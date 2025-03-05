@@ -5,9 +5,9 @@ import { CompanyUsersList } from 'widgets/CompanyUsers';
 import { useDispatchToStore } from 'shared/lib/hooks/useDisaptchToStore';
 import { getCompanyUsers } from 'features/CompanyUsers/model/service/getCompanyUsers.ts';
 import { useEffect } from 'react';
+import { companyIdLocalStore } from 'shared/lib';
 
 const CompanyDetailsPage = () => {
-    const { id } = useParams();
     const handleGetUsers = useDispatchToStore<{ id: number }>(getCompanyUsers);
     useEffect(() => {
         if (id) {
@@ -15,18 +15,21 @@ const CompanyDetailsPage = () => {
         }
     }, []);
 
-    if (!id) return <h1>Company id is not provided</h1>;
+    const { id } = useParams();
+    const companyId = companyIdLocalStore();
+
+    if (!id && !companyId) return <p>Company id is not provided UsersListPage</p>;
 
     return (
         <Row gutter={16}>
             <Col span={16}>
                 <CompanyDetailsControl />
                 <br />
-                <CompanyDetails companyId={+id} />
+                <CompanyDetails companyId={Number(id) || Number(companyId)} />
                 <Divider />
             </Col>
             <Col span={8}>
-                <CompanyUsersList companyId={+id} />
+                <CompanyUsersList companyId={Number(id) || Number(companyId)} />
             </Col>
         </Row>
     );
