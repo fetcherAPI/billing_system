@@ -41,7 +41,7 @@ export const UserRegisterForm = forwardRef<FormRef, IProps>(
             dispatch(registerUser({ param: formFields, userRole }))
                 .unwrap()
                 .then(() => {
-                    dispatch(getCompanyUsers({ id: (companyId && +companyId) || 0 }));
+                    if (companyId) dispatch(getCompanyUsers({ id: companyId }));
                     handleNext && handleNext();
                 });
         };

@@ -6,6 +6,7 @@ import { RoutePath } from 'shared/config/routeConfig/routeConfig';
 import { ConfirmModal } from 'shared/ui';
 import { Button1 } from 'shared/ui/Button1';
 import { HideForAuth } from 'shared/ui/HideForAuth/HideForAuth';
+import UserAgreement from 'widgets/UserAgreement/UserAgreement';
 
 export const RegisterBtn = () => {
     const { t } = useTranslation('header');
@@ -33,10 +34,11 @@ export const RegisterBtn = () => {
                 handleClose={() => setIsOpen(false)}
                 onConfirm={handleNavigate}
                 onCancel={handleCancel}
-                title="Пользовательское соглашение"
+                title=""
+                width={900}
                 isOpen={isOpen}
             >
-                <h1>ИНФО</h1>
+                <UserAgreement />
             </ConfirmModal>
         </HideForAuth>
     );

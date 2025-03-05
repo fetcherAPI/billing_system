@@ -1,12 +1,11 @@
 import { useAppDispatch } from 'app/providers/StoreProvider';
 import { getCompanyDetails } from 'entities/Admin';
-import { $userCompanyId } from 'features/Auth/model/selectors';
 import { useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import { companyIdLocalStore } from 'shared/lib';
 import { CompanyDetails } from 'widgets/CompanyDetails';
 
 const MyCompanyData = () => {
-    const companyId = useSelector($userCompanyId);
+    const companyId = Number.parseInt(companyIdLocalStore() || '');
     const dispatch = useAppDispatch();
     useEffect(() => {
         if (companyId) {

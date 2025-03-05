@@ -26,7 +26,7 @@ const CompanyDetailsPage = () => {
                 <Divider />
             </Col>
             <Col span={8}>
-                <CompanyUsersList />
+                <CompanyUsersList companyId={+id} />
             </Col>
         </Row>
     );

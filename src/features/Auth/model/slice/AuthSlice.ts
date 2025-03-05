@@ -25,7 +25,7 @@ const AuthSlice = createSlice({
                 state.userData = action.payload;
                 state.isLoading = false;
                 state.isAuth = true;
-                onSuccessLogin(action.payload.token);
+                onSuccessLogin(action.payload.token, action.payload.companyId);
             })
             .addCase(login.rejected, (state, action) => {
                 state.isLoading = false;
@@ -40,7 +40,7 @@ const AuthSlice = createSlice({
                 state.userData = action.payload;
                 state.isLoading = false;
                 state.isAuth = true;
-                onSuccessLogin(action.payload.token);
+                onSuccessLogin(action.payload.token, action.payload.companyId);
             })
             .addCase(refreshToken.rejected, (state, action) => {
                 state.isLoading = false;

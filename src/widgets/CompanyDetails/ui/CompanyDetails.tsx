@@ -36,6 +36,7 @@ export const CompanyDetails = ({ companyId }: ICompanyDetails) => {
                                     { label: 'ИНН Организации', value: companyDetails.inn },
                                     { label: 'Место', value: companyDetails.ateName },
                                     { label: 'Наименование орг', value: companyDetails.title },
+                                    { label: 'Должность', value: companyDetails.managerPosition },
                                     { label: 'Дата рег', value: companyDetails.dateCreated },
                                     { label: 'Юр адрес', value: companyDetails.legalAddress },
                                     { label: 'Факт адрес', value: companyDetails.factAddress },

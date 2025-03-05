@@ -1,6 +1,6 @@
 import { useCallback } from 'react';
 import { useSelector } from 'react-redux';
-import { Divider, Table, TableProps, Tag } from 'antd';
+import { Table, TableProps, Tag } from 'antd';
 import { useAppDispatch } from 'app/providers/StoreProvider';
 import { ICompany } from 'entities/Admin/type';
 import { BluredBackGround, Pagination } from 'shared/ui';
@@ -38,13 +38,17 @@ const columns: TableProps<ICompany>['columns'] = [
         key: 'status',
         dataIndex: 'tags',
         width: 90,
-        render: (_, { status }) => (
-            <Tag color={'volcano'} key={status}>
-                {status}
-            </Tag>
-        ),
+        render: (_, { status }) => RenderStatus({ status }),
     },
 ];
+
+const RenderStatus = ({ status }: { status: string }) => {
+    return (
+        <Tag color={status === 'ACTIVE' ? 'green' : 'volcano'} key={status}>
+            {status === 'ACTIVE' ? 'активен' : 'блокирован'}
+        </Tag>
+    );
+};
 
 export const CompaniesTable = () => {
     const dispatch = useAppDispatch();
@@ -76,7 +80,7 @@ export const CompaniesTable = () => {
                     };
                 }}
             />
-            <Divider />
+
             <BluredBackGround className={cls.blur}>
                 <Pagination onChange={handleGetCompaniesList} total={companiesTotalCount} />
             </BluredBackGround>

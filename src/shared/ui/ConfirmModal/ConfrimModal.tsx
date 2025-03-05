@@ -9,10 +9,11 @@ interface IConfirmModalProps {
     handleClose: () => void;
     onCancel?: () => any;
     autoClosable?: boolean;
+    width?: string | number;
 }
 
 export const ConfirmModal = (props: IConfirmModalProps) => {
-    const { isOpen, title, children, onConfirm, handleClose, onCancel, autoClosable } = props;
+    const { isOpen, title, children, onConfirm, handleClose, onCancel, autoClosable, ...other } = props;
     const handleCancel = () => {
         onCancel && onCancel();
     };
@@ -32,6 +33,7 @@ export const ConfirmModal = (props: IConfirmModalProps) => {
                 onCancel={handleCancel}
                 cancelText={'Отказываюсь'}
                 okText={'Принимаю'}
+                {...other}
             >
                 {children}
             </Modal>

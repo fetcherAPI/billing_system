@@ -5,6 +5,7 @@ import { ActivateUser, DeactivateUser } from 'features/CompanyUsers';
 
 export const CompanyUserItem = (props: IUser) => {
     const { id, userInn, fullName, position, cellPhone, email, username, status } = props;
+    console.log('props', props);
     const isUserActive = status === 'ACTIVE';
     return (
         <Badge.Ribbon

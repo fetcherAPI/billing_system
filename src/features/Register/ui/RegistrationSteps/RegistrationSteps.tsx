@@ -1,9 +1,10 @@
 import { useState, useRef } from 'react';
-import { Button, message, Steps } from 'antd';
+import { Button, Card, Steps, Typography } from 'antd';
 import { IBaseProps } from 'shared/types';
 import { RegistrationCompanyForm } from '../RegistrationForms/RegistrationCompanyForm.tsx';
 import { UserRegisterForm } from '../RegistrationForms/UserRegisterForm.tsx';
 import cls from './RegistrationSteps.module.scss';
+import { useNavigate } from 'react-router-dom';
 
 export interface FormRef {
     submit: () => void;
@@ -12,7 +13,7 @@ export interface FormRef {
 export const RegistrationSteps = ({ className }: IBaseProps) => {
     const [current, setCurrent] = useState(0);
     const formRef = useRef<FormRef>(null);
-
+    const nav = useNavigate();
     const next = () => {
         if (formRef.current) {
             formRef.current.submit();
@@ -40,7 +41,18 @@ export const RegistrationSteps = ({ className }: IBaseProps) => {
         },
         {
             title: 'Завершить',
-            content: '',
+            content: (
+                <Card
+                    style={{
+                        display: 'flex',
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        height: 400,
+                    }}
+                >
+                    <Typography>Вы успешно прошли регистрацию!</Typography>
+                </Card>
+            ),
         },
     ];
 
@@ -53,13 +65,15 @@ export const RegistrationSteps = ({ className }: IBaseProps) => {
             <div>
                 {/* <BackButton> */}
                 <>
+                    {' '}
+                    <br />
                     {current < steps.length - 1 && (
                         <Button type="primary" onClick={next}>
                             Сохранить
                         </Button>
                     )}
                     {current === steps.length - 1 && (
-                        <Button type="primary" onClick={() => message.success('Processing complete!')}>
+                        <Button type="primary" onClick={() => nav('../login')}>
                             Завершить
                         </Button>
                     )}

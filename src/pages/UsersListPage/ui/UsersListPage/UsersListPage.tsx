@@ -1,15 +1,15 @@
-import { $userCompanyId } from 'features/Auth/model/selectors';
 import { RegisterUserModal } from 'features/Register';
-import { useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
 import { CompanyUsersList } from 'widgets/CompanyUsers';
 
 const UsersListPage = () => {
-    const companyId = useSelector($userCompanyId);
+    const { id } = useParams();
+    if (!id) return 'Company id is not provided';
     return (
         <>
-            <RegisterUserModal companyId={companyId || 0} />
+            <RegisterUserModal companyId={+id} />
             <br />
-            <CompanyUsersList list={true} />
+            <CompanyUsersList companyId={+id} list={true} />
         </>
     );
 };

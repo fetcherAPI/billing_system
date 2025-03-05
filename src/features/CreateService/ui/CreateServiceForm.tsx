@@ -2,10 +2,10 @@ import { Input, Button, Form, message, Radio } from 'antd';
 import { useAppDispatch } from 'app/providers/StoreProvider';
 import { createService } from 'entities/Service';
 import { IService } from 'entities/Service/model/types/service';
-import { $userCompanyId } from 'features/Auth/model/selectors';
+
 import { useEffect } from 'react';
-import { useSelector } from 'react-redux';
-import { useNotif } from 'shared/lib';
+
+import { companyIdLocalStore, useNotif } from 'shared/lib';
 import { BackButton } from 'shared/ui';
 import { SelectServiceParent } from './SelectServiceParant';
 import { updateService } from 'entities/Service/model/service/createService';
@@ -26,7 +26,7 @@ interface ICreateService {
 export const CreateServiceForm = ({ defaultValue, callbackAfterSuccesCreate }: IProps) => {
     const [form] = Form.useForm();
     const notif = useNotif();
-    const userCompanyId = useSelector($userCompanyId) || 2801;
+    const userCompanyId = Number.parseInt(companyIdLocalStore() || '');
     const dispatch = useAppDispatch();
 
     const onFinishFailed = () => {

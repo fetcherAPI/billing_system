@@ -8,13 +8,13 @@ import { useSearch } from 'shared/lib/index.ts';
 import { useEffect } from 'react';
 import { useAppDispatch } from 'app/providers/StoreProvider/index.ts';
 import { getCompanyUsers } from 'features/CompanyUsers/model/service/getCompanyUsers.ts';
-import { $userCompanyId } from 'features/Auth/model/selectors/index.ts';
 import { ActivateUser, DeactivateUser } from 'features/CompanyUsers/index.ts';
 import { ThemeButton } from 'shared/ui/Button1/index.ts';
 import cls from './CompanyUser.module.scss';
 
 interface ICompanyUsersList {
     list?: boolean;
+    companyId: number;
 }
 
 const columns: TableProps<IUser>['columns'] = [
@@ -67,10 +67,9 @@ const columns: TableProps<IUser>['columns'] = [
     },
 ];
 
-export const CompanyUsersList = ({ list }: ICompanyUsersList) => {
+export const CompanyUsersList = ({ list, companyId }: ICompanyUsersList) => {
     const users = useSelector($companyUsers);
     const dispatch = useAppDispatch();
-    const companyId = useSelector($userCompanyId);
 
     const { SearchComponent, filteredData } = useSearch<IUser>(users, [
         'companyName',
@@ -81,7 +80,7 @@ export const CompanyUsersList = ({ list }: ICompanyUsersList) => {
 
     useEffect(() => {
         if (!users.length) {
-            dispatch(getCompanyUsers({ id: companyId || 0 }));
+            dispatch(getCompanyUsers({ id: companyId }));
         }
     }, []);
 

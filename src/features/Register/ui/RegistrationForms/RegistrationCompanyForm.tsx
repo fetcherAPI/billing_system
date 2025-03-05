@@ -54,7 +54,9 @@ export const RegistrationCompanyForm = forwardRef<FormRef, IProps>(
                               description: `Успешно ${defaultValue?.inn ? 'обновлено' : 'создано'}`,
                           })
                       )
-                      .then(() => dispatch(getCompanyDetails({ id: companyId || 0 })))
+                      .then(() => {
+                          if (defaultValue?.inn) dispatch(getCompanyDetails({ id: companyId || 0 }));
+                      })
                       .then(() => handleNext && handleNext());
         };
 
@@ -77,7 +79,6 @@ export const RegistrationCompanyForm = forwardRef<FormRef, IProps>(
                 onFinish={handleFinish}
                 className={classNames(cls.from, {}, [className])}
             >
-                {' '}
                 {notif.context}
                 <Row gutter={20} className={cls.row}>
                     <Col style={{ width: '50%' }}>
