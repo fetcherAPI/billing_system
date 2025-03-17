@@ -16,7 +16,7 @@ export const useSearch = <T,>(initialData: T[], searchFields: (keyof T)[]) => {
                 )
             );
         } else {
-            setFilteredData(initialData);
+            setFilteredData([]);
         }
     };
     const SearchComponent = (

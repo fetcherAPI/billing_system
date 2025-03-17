@@ -10,6 +10,7 @@ export interface ICompanyRegister {
     managerName: string;
     managerInn: string;
     managerPosition: string;
+    ateName?: string;
 }
 
 export interface ICompany extends ICompanyRegister {

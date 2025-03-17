@@ -13,14 +13,14 @@ import { registerCompany, updateCompany } from '../../model/service/registerComp
 import { Inn } from '../FormFields/Inn.tsx';
 import cls from './style.module.scss';
 import { FormRef } from '../RegistrationSteps/RegistrationSteps.tsx';
-import { ICompanyRegister } from 'shared/types/company.ts';
+import { ICompany, ICompanyRegister } from 'shared/types/company.ts';
 import { useNotif } from 'shared/lib/index.ts';
 import { getCompanyDetails } from 'entities/Admin/index.ts';
 
 interface IProps {
     handleNext?: () => void;
     className?: string;
-    defaultValue?: ICompanyRegister;
+    defaultValue?: ICompany | ICompanyRegister;
     companyId?: number;
 }
 
@@ -38,12 +38,13 @@ export const RegistrationCompanyForm = forwardRef<FormRef, IProps>(
                 form.submit();
             },
         }));
+        console.log('formFields', defaultValue);
 
-        const action = defaultValue?.inn
-            ? updateCompany({ param: formFields, companyId: companyId || 0 })
-            : registerCompany({ param: formFields });
+        const handleFinish = (values) => {
+            const action = defaultValue?.inn
+                ? updateCompany({ param: values, companyId: companyId || 0 })
+                : registerCompany({ param: formFields });
 
-        const handleFinish = () => {
             createdCompanyId && handleNext
                 ? handleNext()
                 : dispatch(action)
@@ -142,6 +143,7 @@ export const RegistrationCompanyForm = forwardRef<FormRef, IProps>(
                         <Form.Item
                             name={'ateId'}
                             label={t('locality')}
+                            initialValue={defaultValue?.ateName}
                             rules={[
                                 {
                                     required: true,
@@ -149,7 +151,7 @@ export const RegistrationCompanyForm = forwardRef<FormRef, IProps>(
                                 },
                             ]}
                         >
-                            <SelectLocality />
+                            <SelectLocality initialValue={defaultValue?.ateName || ''} />
                         </Form.Item>
                         <Form.Item
                             name={'factAddress'}

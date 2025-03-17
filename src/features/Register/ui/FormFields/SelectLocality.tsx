@@ -9,8 +9,8 @@ import { setRegisterProperty } from '../../model/slice/RegisterSlice.ts';
 
 type DefaultOptionType = GetProp<TreeSelectProps, 'treeData'>[number];
 
-export const SelectLocality = () => {
-    const [value, setValue] = useState<string>();
+export const SelectLocality = ({ initialValue }: { initialValue: string }) => {
+    const [value, setValue] = useState<string>(initialValue);
     const [treeData, setTreeData] = useState<Omit<DefaultOptionType, 'label'>[]>([
         { id: 121, pId: 0, value: '121', title: 'Кыргызская Республика' },
     ]);
@@ -43,9 +43,10 @@ export const SelectLocality = () => {
 
     return (
         <TreeSelect
+            placeholder={initialValue}
             treeDataSimpleMode
             style={{ width: '100%' }}
-            value={value}
+            value={value || initialValue}
             dropdownStyle={{ maxHeight: 400, overflow: 'auto' }}
             onChange={onChange}
             loadData={onLoadData}

@@ -12,11 +12,11 @@ export default defineConfig({
     base: '/',
 
     preview: {
-        port: 3010,
+        port: 3015,
         strictPort: false,
     },
     server: {
-        port: 3010,
+        port: 3015,
         strictPort: false,
         host: true,
         hmr: true,

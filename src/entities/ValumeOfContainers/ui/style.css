@@ -1,0 +1,91 @@
+.wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  height: 300px;
+  width: 90%;
+}
+
+.sosud {
+  align-self: center;
+}
+
+.measureUnit {
+  align-self: flex-end;
+}
+
+#banner {
+  border-radius: 20px 20px 10px 10px;
+  width: 150px;
+  height: 150px;
+  background: #000;
+  overflow: hidden;
+  backface-visibility: hidden;
+  transform: translate3d(0, 0, 0);
+}
+
+#banner .fill {
+  animation-name: fillAction;
+  animation-iteration-count: 1;
+  animation-timing-function: cubic-bezier(0.2, 0.6, 0.8, 0.4);
+  animation-duration: 2s;
+  animation-fill-mode: forwards;
+}
+
+#banner #waveShape {
+  animation-name: waveAction;
+  animation-timing-function: linear;
+  animation-duration: 1s;
+  width: 300px;
+  height: 150px;
+  fill: #04acff;
+}
+
+@keyframes fillAction {
+  0% {
+    transform: translate(0, 150px);
+  }
+  100% {
+    transform: translate(0, -5px);
+  }
+}
+@keyframes waveAction {
+  0% {
+    transform: translate(-150px, 100);
+  }
+  100% {
+    transform: translate(0, 100);
+  }
+}
+.rotate-90-cw {
+  animation: rotate-90-cw 3s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+
+@keyframes rotate-90-cw {
+  0% {
+    transform: rotate(0);
+    transform-origin: 150% 100%;
+  }
+
+  50% {
+    transform: rotate(90deg);
+    transform-origin: 120% 50%;
+  }
+  100% {
+    transform: rotate(0);
+    transform-origin: 140% 50%;
+  }
+}
+
+.text {
+  position: relative;
+  top: -50px;
+  left: 80px;
+}
+
+.controlBtns {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  column-gap: 20px;
+}

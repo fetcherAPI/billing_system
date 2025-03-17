@@ -50,7 +50,7 @@ export const RegistrationSteps = ({ className }: IBaseProps) => {
                         height: 400,
                     }}
                 >
-                    <Typography>Вы успешно прошли регистрацию!</Typography>
+                    <Typography style={{ fontSize: '200%' }}>Вы успешно прошли регистрацию!</Typography>
                 </Card>
             ),
         },
@@ -67,6 +67,11 @@ export const RegistrationSteps = ({ className }: IBaseProps) => {
                 <>
                     {' '}
                     <br />
+                    {current > 0 && (
+                        <Button style={{ margin: '0 8px' }} onClick={prev}>
+                            Предыдущая форма
+                        </Button>
+                    )}
                     {current < steps.length - 1 && (
                         <Button type="primary" onClick={next}>
                             Сохранить
@@ -75,11 +80,6 @@ export const RegistrationSteps = ({ className }: IBaseProps) => {
                     {current === steps.length - 1 && (
                         <Button type="primary" onClick={() => nav('../login')}>
                             Завершить
-                        </Button>
-                    )}
-                    {current > 0 && (
-                        <Button style={{ margin: '0 8px' }} onClick={prev}>
-                            Предыдущая форма
                         </Button>
                     )}
                 </>
