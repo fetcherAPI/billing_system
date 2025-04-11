@@ -12,7 +12,7 @@ const MyCompanyData = () => {
             dispatch(getCompanyDetails({ id: companyId }));
         }
     }, []);
-    if (!companyId) return 'id not found';
+    if (!Number.isInteger(companyId)) return 'id not found';
 
     return <CompanyDetails companyId={companyId} />;
 };

@@ -24,4 +24,8 @@ export class UsersApi {
     static async updateUser(params: IUserRegister, userId: number): Promise<AxiosResponse<IUser>> {
         return api.put<IUser>(`/api/user/updateUser/${userId}`, params);
     }
+
+    static async deleteUser(id: number): Promise<AxiosResponse<IUser>> {
+        return api.delete<IUser>(`/api/user/${id}`);
+    }
 }

@@ -4,7 +4,7 @@ import { AxiosError } from 'axios';
 import { getCompanyUsers } from '../service/getCompanyUsers.ts';
 import { activateUser, deactivateUser } from '../service/activateUser.ts';
 import { IUsersSliceSchema } from '../type/UsersSliceSchema.ts';
-import { registerUser, updateUser } from '../service/userService.ts';
+import { deleteUser, registerUser, updateUser } from '../service/userService.ts';
 
 const initialState: IUsersSliceSchema = {
     isLoading: false,
@@ -55,7 +55,8 @@ const Users = createSlice({
                 state.isLoading = true;
                 state.error = undefined;
             })
-            .addCase(registerUser.fulfilled, (state) => {
+            .addCase(registerUser.fulfilled, (state, action) => {
+                state.users = [action.payload, ...state.users];
                 state.isLoading = false;
                 state.error = undefined;
             })
@@ -74,6 +75,20 @@ const Users = createSlice({
                 state.error = undefined;
             })
             .addCase(updateUser.rejected, (state, action) => {
+                state.isLoading = false;
+                state.error = errorHandler(action.payload as AxiosError);
+            })
+            ///delete user
+            .addCase(deleteUser.pending, (state) => {
+                state.isLoading = true;
+                state.error = undefined;
+            })
+            .addCase(deleteUser.fulfilled, (state, action) => {
+                state.users = [...state.users.filter((obj) => obj.id !== action.payload)];
+                state.isLoading = false;
+                state.error = undefined;
+            })
+            .addCase(deleteUser.rejected, (state, action) => {
                 state.isLoading = false;
                 state.error = errorHandler(action.payload as AxiosError);
             });

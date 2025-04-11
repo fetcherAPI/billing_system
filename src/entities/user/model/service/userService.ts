@@ -26,3 +26,15 @@ export const updateUser = createAsyncThunk(
         }
     }
 );
+
+export const deleteUser = createAsyncThunk(
+    'deleteUser',
+    async ({ id }: { id: number }, { rejectWithValue }) => {
+        try {
+            await UsersApi.deleteUser(id);
+            return id;
+        } catch (error) {
+            return rejectWithValue(error);
+        }
+    }
+);

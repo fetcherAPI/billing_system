@@ -9,5 +9,9 @@
     "eaddress": "Электронный адрес",
     "locality": "Населенный пункт",
     "actualAddress": "Фактический адрес",
-    "workPhone": "Рабочий телефон"
+    "workPhone": "Рабочий телефон",
+    "required": "Обязательное поле",
+    "min_rule_text": "Минимум {{length}} символа",
+    "url_rule_text": "Некорректный URL",
+    "email_rule_text": "Некорректный email"
 }

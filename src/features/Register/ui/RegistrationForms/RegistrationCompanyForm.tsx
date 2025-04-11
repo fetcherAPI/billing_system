@@ -70,6 +70,8 @@ export const RegistrationCompanyForm = forwardRef<FormRef, IProps>(
             dispatch(setRegisterProperty({ key, data: e.target.value, type: 'Company' }));
         };
 
+        console.log('formFields', formFields);
+
         return (
             <Form
                 initialValues={defaultValue || formFields}
@@ -98,17 +100,24 @@ export const RegistrationCompanyForm = forwardRef<FormRef, IProps>(
                         <Form.Item
                             name={'managerPosition'}
                             label={t('position')}
-                            rules={[{ required: true, message: t('loginPassRuleText') }]}
+                            rules={[{ required: true, message: t('required') }]}
                         >
                             <Input onChange={(e) => handleChangeInput(e, 'managerPosition')} />
                         </Form.Item>
-                        <Form.Item name={'website'} label={t('site')}>
+                        <Form.Item
+                            name={'website'}
+                            label={t('site')}
+                            rules={[{ type: 'url', message: t('url_rule_text') }]}
+                        >
                             <Input onChange={(e) => handleChangeInput(e, 'website')} />
                         </Form.Item>
                         <Form.Item
                             name={'workPhone'}
                             label={t('workPhone')}
-                            rules={[{ required: true, message: t('loginPassRuleText') }]}
+                            rules={[
+                                { required: true, message: t('required') },
+                                { min: 6, message: t(`min_rule_text`, { length: 6 }) },
+                            ]}
                         >
                             <Input onChange={(e) => handleChangeInput(e, 'workPhone')} />
                         </Form.Item>
@@ -121,7 +130,7 @@ export const RegistrationCompanyForm = forwardRef<FormRef, IProps>(
                             rules={[
                                 {
                                     required: true,
-                                    message: t('loginUsernameRuleText'),
+                                    message: t('required'),
                                 },
                             ]}
                         >
@@ -133,7 +142,7 @@ export const RegistrationCompanyForm = forwardRef<FormRef, IProps>(
                             rules={[
                                 {
                                     required: true,
-                                    message: t('loginUsernameRuleText'),
+                                    message: t('required'),
                                 },
                             ]}
                         >
@@ -146,7 +155,7 @@ export const RegistrationCompanyForm = forwardRef<FormRef, IProps>(
                             rules={[
                                 {
                                     required: true,
-                                    message: t('loginUsernameRuleText'),
+                                    message: t('required'),
                                 },
                             ]}
                         >

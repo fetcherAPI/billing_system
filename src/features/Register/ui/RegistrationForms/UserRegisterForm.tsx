@@ -71,7 +71,7 @@ export const UserRegisterForm = forwardRef<FormRef, IProps>(
         }, [formFields]);
 
         useEffect(() => {
-            if (companyId) {
+            if (companyId || Number.isInteger(companyId)) {
                 dispatch(setRegisterProperty({ key: 'companyId', data: companyId, type: 'User' }));
             }
         }, []);
@@ -97,21 +97,21 @@ export const UserRegisterForm = forwardRef<FormRef, IProps>(
                         <Form.Item
                             name={'position'}
                             label={t('position')}
-                            rules={[{ required: true, message: t('loginPassRuleText') }]}
+                            rules={[{ required: true, message: t('required') }]}
                         >
                             <Input onChange={(e) => handleChangeInput(e, 'position')} />
                         </Form.Item>
                         <Form.Item
                             name={'cellPhone'}
                             label={t('Сотовый телефон')}
-                            rules={[{ required: true, message: t('loginPassRuleText') }]}
+                            rules={[{ required: true, message: t('required') }]}
                         >
                             <Input onChange={(e) => handleChangeInput(e, 'cellPhone')} />
                         </Form.Item>
                         <Form.Item
                             name={'username'}
                             label={t('Имя пользователя (логин)')}
-                            rules={[{ required: true, message: t('loginPassRuleText') }]}
+                            rules={[{ required: true, message: t('required') }]}
                         >
                             <Input onChange={(e) => handleChangeInput(e, 'username')} />
                         </Form.Item>
@@ -125,20 +125,18 @@ export const UserRegisterForm = forwardRef<FormRef, IProps>(
                             rules={[
                                 {
                                     required: true,
-                                    message: t('loginUsernameRuleText'),
+                                    message: t('required'),
                                 },
                             ]}
                         >
                             <Input disabled={true} />
                         </Form.Item>
                         <Form.Item
-                            name={''}
+                            name={'workPhone'}
                             label={t('Рабочий телефон')}
                             rules={[
-                                {
-                                    required: true,
-                                    message: t('loginUsernameRuleText'),
-                                },
+                                { required: true, message: t('required') },
+                                { min: 6, message: t(`min_rule_text`, { length: 6 }) },
                             ]}
                         >
                             <Input onChange={(e) => handleChangeInput(e, 'workPhone')} />
@@ -149,7 +147,11 @@ export const UserRegisterForm = forwardRef<FormRef, IProps>(
                             rules={[
                                 {
                                     required: true,
-                                    message: t('loginUsernameRuleText'),
+                                    message: t('required'),
+                                },
+                                {
+                                    type: 'email',
+                                    message: t('email_rule_text'),
                                 },
                             ]}
                         >
@@ -158,7 +160,7 @@ export const UserRegisterForm = forwardRef<FormRef, IProps>(
                         <Form.Item
                             name={'password'}
                             label={t('Пароль')}
-                            rules={[{ required: true, message: t('loginPassRuleText') }]}
+                            rules={[{ required: true, message: t('required') }]}
                         >
                             <Input onChange={(e) => handleChangeInput(e, 'password')} />
                         </Form.Item>

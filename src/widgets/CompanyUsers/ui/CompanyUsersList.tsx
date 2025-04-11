@@ -8,9 +8,9 @@ import { useEffect, useState } from 'react';
 import { useAppDispatch } from 'app/providers/StoreProvider/index.ts';
 import { ActivateUser, DeactivateUser } from 'features/CompanyUsers/index.ts';
 import { Button1, ThemeButton } from 'shared/ui/Button1/index.ts';
-import { EditOutlined } from '@ant-design/icons';
+import { DeleteOutlined, EditOutlined, LoadingOutlined } from '@ant-design/icons';
 import { UpdateUserModal } from 'features/Register/ui/RegisterUserModal/RegisterUserModal.tsx';
-import { $companyUsers, getCompanyUsers } from 'entities/user/index.ts';
+import { $companyUsers, $isLoading, deleteUser, getCompanyUsers } from 'entities/user/index.ts';
 import cls from './CompanyUser.module.scss';
 
 interface ICompanyUsersList {
@@ -78,6 +78,9 @@ export const CompanyUsersList = ({ list, companyId }: ICompanyUsersList) => {
                             />
                         </Button1>
                     </Col>
+                    <Col>
+                        <DeleteUserBtn userId={record.id} />
+                    </Col>
                 </Row>
             ),
         },
@@ -135,4 +138,18 @@ export const CompanyUsersList = ({ list, companyId }: ICompanyUsersList) => {
             </BluredBackGround>
         );
     }
+};
+
+const DeleteUserBtn = ({ userId }: { userId: number }) => {
+    const dispatch = useAppDispatch();
+    const isLoading = useSelector($isLoading);
+    const handleDeleteUser = () => {
+        dispatch(deleteUser({ id: userId }));
+    };
+
+    return (
+        <Button1 theme={ThemeButton.CLEAR} onClick={handleDeleteUser}>
+            {isLoading ? <LoadingOutlined /> : <DeleteOutlined style={{ fontSize: '20px' }} />}
+        </Button1>
+    );
 };

@@ -1,13 +1,17 @@
 {
-  "companyInn": "Company INN",
-  "companyPin": "Company PIN",
-  "position": "Position",
-  "site": "Site",
-  "legalAddress": "Legal address",
-  "companyName": "Company name ",
-  "headFullname": "Head Fullname",
-  "eaddress": "E-address",
-  "locality": "Locality",
-  "actualAddress": "Actual address",
-  "workPhone": "Work phone"
+    "companyInn": "Company INN",
+    "companyPin": "Company PIN",
+    "position": "Position",
+    "site": "Site",
+    "legalAddress": "Legal address",
+    "companyName": "Company name ",
+    "headFullname": "Head Fullname",
+    "eaddress": "E-address",
+    "locality": "Locality",
+    "actualAddress": "Actual address",
+    "workPhone": "Work phone",
+    "required": "Required",
+    "min_rule_text": "Minimum {{length}} simbols",
+    "url_rule_text": "Invalid URL",
+    "email_rule_text": "Invalid email"
 }

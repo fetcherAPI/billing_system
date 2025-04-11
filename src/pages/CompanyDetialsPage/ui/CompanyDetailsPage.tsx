@@ -3,9 +3,9 @@ import { useParams } from 'react-router-dom';
 import { Col, Divider, Row } from 'antd';
 import { CompanyUsersList } from 'widgets/CompanyUsers';
 import { useDispatchToStore } from 'shared/lib/hooks/useDisaptchToStore';
-import { getCompanyUsers } from 'features/CompanyUsers/model/service/getCompanyUsers.ts';
 import { useEffect } from 'react';
 import { companyIdLocalStore } from 'shared/lib';
+import { getCompanyUsers } from 'entities/user';
 
 const CompanyDetailsPage = () => {
     const handleGetUsers = useDispatchToStore<{ id: number }>(getCompanyUsers);
