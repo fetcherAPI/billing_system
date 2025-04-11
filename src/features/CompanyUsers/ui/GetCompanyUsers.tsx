@@ -1,8 +1,7 @@
 import { useSelector } from 'react-redux';
 import { Button1, ThemeButton } from 'shared/ui/Button1';
 import { useDispatchToStore } from 'shared/lib/hooks/useDisaptchToStore';
-import { getCompanyUsers } from '../model/service/getCompanyUsers.ts';
-import { $isLoading } from '../model/selectors';
+import { $isLoading, getCompanyUsers } from 'entities/user';
 
 interface IProps {
     id: number;

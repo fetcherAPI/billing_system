@@ -22,13 +22,15 @@ export const SelectServiceParent = ({ required, defaultValue }: IProps) => {
 
     const fetchChildren = async (parentId?: string) => {
         const response = await ServiceApi.getSerivcesTree({ rows: 40, first: 0 }, parentId);
-        return response.data.content.map((item: IService) => ({
-            id: item.id,
-            pId: item.parentId,
-            value: item.id.toString(),
-            title: item.name,
-            isLeaf: item.isService,
-        }));
+        return response.data.content
+            .filter((el) => !el.isService)
+            .map((item: IService) => ({
+                id: item.id,
+                pId: item.parentId,
+                value: item.id.toString(),
+                title: item.name,
+                isLeaf: item.isService,
+            }));
     };
 
     const onLoadData: TreeSelectProps['loadData'] = async (node) => {

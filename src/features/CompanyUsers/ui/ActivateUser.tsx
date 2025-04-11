@@ -1,7 +1,7 @@
 import { Button1, ThemeButton } from 'shared/ui/Button1';
 import { useDispatchToStore } from 'shared/lib/hooks/useDisaptchToStore';
-import { activateUser, deactivateUser } from '../model/service/activateUser.ts';
 import { CheckCircleTwoTone, CloseCircleTwoTone } from '@ant-design/icons';
+import { activateUser, deactivateUser } from 'entities/user';
 
 interface IProps {
     id: number;

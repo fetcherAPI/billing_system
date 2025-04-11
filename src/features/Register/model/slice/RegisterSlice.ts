@@ -2,7 +2,7 @@ import { AxiosError } from 'axios';
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { errorHandler } from 'shared/lib';
 import { IRegisterSliceSchema, keyOfRegisterSliceSchema, keyOfUserRegister } from '../../types/SliceSchema';
-import { registerCompany, registerUser, updateCompany } from '../service/registerCompany.ts';
+import { registerCompany, updateCompany } from '../service/registerCompany.ts';
 import { ICompanyRegister, IUserRegister } from 'shared/types';
 
 interface IRegisterPayload<T> {
@@ -80,18 +80,6 @@ export const RegisterSlice = createSlice({
                 state.error = undefined;
             })
             .addCase(updateCompany.rejected, (state, action) => {
-                state.isLoading = false;
-                state.error = errorHandler(action.payload as AxiosError);
-            })
-            .addCase(registerUser.pending, (state) => {
-                state.isLoading = true;
-                state.error = undefined;
-            })
-            .addCase(registerUser.fulfilled, (state) => {
-                state.isLoading = false;
-                state.error = undefined;
-            })
-            .addCase(registerUser.rejected, (state, action) => {
                 state.isLoading = false;
                 state.error = errorHandler(action.payload as AxiosError);
             });

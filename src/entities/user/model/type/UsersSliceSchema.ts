@@ -1,6 +1,6 @@
 import { IUser } from 'shared/types';
 
-export interface ICompanyUsersSliceSchema {
+export interface IUsersSliceSchema {
     isLoading: boolean;
     error?: string | undefined;
     users: IUser[];

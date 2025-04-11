@@ -6,9 +6,9 @@ import { useDispatch } from 'react-redux';
 import { LoginSliceReducer } from 'features/Auth';
 import { RegisterSliceReducer } from 'features/Register';
 import { AdminSliceReducer } from 'entities/Admin/model/slice/AdminSlice.ts';
-import { CompanyUsersReducer } from 'features/CompanyUsers';
 import { ServiceSliceReducer } from 'entities/Service/model/slice/ServiceSlice';
 import { PaymentCodesSliceReducer } from 'entities/PaymentCodes/model/slice/PaymentCodesSlice';
+import { UsersReducer } from 'entities/user';
 
 export function createReduxStore(initialState?: StateSchema) {
     return configureStore({
@@ -16,7 +16,7 @@ export function createReduxStore(initialState?: StateSchema) {
             counter: counterReducer,
             login: LoginSliceReducer,
             register: RegisterSliceReducer,
-            users: CompanyUsersReducer,
+            users: UsersReducer,
             admin: AdminSliceReducer,
             service: ServiceSliceReducer,
             paymentCode: PaymentCodesSliceReducer,

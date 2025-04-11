@@ -1,7 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { RegisterApi } from '../../api/RegisterApi.ts';
-import { ICompanyRegister, IUserRegister } from 'shared/types';
-import { UserRoles } from 'shared/types/baseTypes.ts';
+import { ICompanyRegister } from 'shared/types';
 
 export const registerCompany = createAsyncThunk(
     'registerCompany',
@@ -20,18 +19,6 @@ export const updateCompany = createAsyncThunk(
     async ({ param, companyId }: { param: ICompanyRegister; companyId: number }, { rejectWithValue }) => {
         try {
             const response = await RegisterApi.updateCompany(param, companyId);
-            return response.data;
-        } catch (error) {
-            return rejectWithValue(error);
-        }
-    }
-);
-
-export const registerUser = createAsyncThunk(
-    'registerUser',
-    async ({ param, userRole }: { param: IUserRegister; userRole: UserRoles }, { rejectWithValue }) => {
-        try {
-            const response = await RegisterApi.registerUser(param, userRole);
             return response.data;
         } catch (error) {
             return rejectWithValue(error);

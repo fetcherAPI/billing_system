@@ -30,9 +30,12 @@ const ServiceSlice = createSlice({
                 state.isLoading = true;
                 state.error = undefined;
             })
-            .addCase(deleteService.fulfilled, (state) => {
+            .addCase(deleteService.fulfilled, (state, action) => {
+                console.log('action', action);
+                delete state.nodes[action.payload];
                 state.isLoading = false;
                 state.error = undefined;
+                state.nodes = { ...state.nodes };
                 state.servicesTotalCount = --state.servicesTotalCount;
             })
             .addCase(deleteService.rejected, (state, action) => {

@@ -30,7 +30,14 @@ const Services = () => {
                         Добавить услугу
                     </Button>
                     <Divider />
-                    <Modal title="" open={isModalOpen} onOk={handleOk} onCancel={handleCancel} footer={null}>
+                    <Modal
+                        title=""
+                        open={isModalOpen}
+                        onOk={handleOk}
+                        onCancel={handleCancel}
+                        destroyOnClose
+                        footer={null}
+                    >
                         <CreateServiceForm isInModal callbackAfterSuccesCreate={handleOk} />
                     </Modal>
                 </>

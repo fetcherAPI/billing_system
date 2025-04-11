@@ -38,9 +38,8 @@ export const RegistrationCompanyForm = forwardRef<FormRef, IProps>(
                 form.submit();
             },
         }));
-        console.log('formFields', defaultValue);
 
-        const handleFinish = (values) => {
+        const handleFinish = (values: any) => {
             const action = defaultValue?.inn
                 ? updateCompany({ param: values, companyId: companyId || 0 })
                 : registerCompany({ param: formFields });

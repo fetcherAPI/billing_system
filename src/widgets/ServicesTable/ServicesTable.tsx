@@ -77,12 +77,14 @@ export const ServicesTable = () => {
         dispatch(deleteService({ id }))
             .unwrap()
             .then(() => {
-                getServicesByParentId({
-                    first: 0,
-                    rows: 100,
-                    parentId: parentId,
-                    updated: true,
-                });
+                dispatch(
+                    getServicesByParentId({
+                        first: 0,
+                        rows: 100,
+                        parentId: parentId,
+                        updated: true,
+                    })
+                );
             })
             .catch((error) => console.error('Ошибка удаления:', error));
     };

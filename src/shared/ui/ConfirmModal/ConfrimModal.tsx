@@ -26,6 +26,7 @@ export const ConfirmModal = (props: IConfirmModalProps) => {
     return (
         <>
             <Modal
+                destroyOnClose
                 centered
                 title={title}
                 open={isOpen}

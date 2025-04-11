@@ -3,6 +3,7 @@ import { Button1, ThemeButton } from 'shared/ui/Button1';
 import { ConfirmModal } from 'shared/ui';
 import { UserRegisterForm } from 'features/Register';
 import { FormRef } from 'features/Register/ui/RegistrationSteps/RegistrationSteps.tsx';
+import { IUser } from 'shared/types';
 
 export interface IRegisterUserModalProps {
     companyId: number;
@@ -45,5 +46,40 @@ export const RegisterUserModal = ({ companyId }: IRegisterUserModalProps) => {
                 />
             </ConfirmModal>
         </>
+    );
+};
+
+interface IUpdateUserModalProps {
+    companyId: number;
+    closeModal: () => void;
+    isOpen: boolean;
+    user: IUser | null;
+}
+
+export const UpdateUserModal = ({ companyId, closeModal, isOpen, user }: IUpdateUserModalProps) => {
+    const formRef = useRef<FormRef>(null);
+
+    const handleConfirm = () => {
+        if (formRef.current) {
+            formRef.current.submit();
+        }
+    };
+
+    return (
+        <ConfirmModal
+            handleClose={closeModal}
+            onConfirm={handleConfirm}
+            onCancel={closeModal}
+            title="Регистрация"
+            isOpen={isOpen}
+        >
+            <UserRegisterForm
+                ref={formRef}
+                userRole={'merchant'}
+                companyId={companyId}
+                handleNext={closeModal}
+                defaultValue={user || undefined}
+            />
+        </ConfirmModal>
     );
 };

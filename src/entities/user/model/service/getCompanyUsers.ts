@@ -1,14 +1,14 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { CompanyUsersApi } from '../../api/CompanyUsersApi.ts';
+import { UsersApi } from '../api/UsersApi';
 
 export const getCompanyUsers = createAsyncThunk(
     'getCompanyUsers',
     async ({ id }: { id: number }, { rejectWithValue }) => {
         try {
-            const response = await CompanyUsersApi.getCompanyUsers(id);
+            const response = await UsersApi.getCompanyUsers(id);
             return response.data;
         } catch (error) {
             return rejectWithValue(error);
         }
-    },
+    }
 );

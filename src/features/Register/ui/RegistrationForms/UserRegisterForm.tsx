@@ -8,22 +8,23 @@ import { fieldsMaker } from 'shared/lib/fieldsMaker/fieldsMaker.ts';
 import { UserRoles } from 'shared/types/baseTypes.ts';
 import { keyOfUserRegister } from 'features/Register/types/SliceSchema';
 import { $registerUserData } from '../../model/selectors';
-import { registerUser } from '../../model/service/registerCompany.ts';
 import { Inn } from '../FormFields/Inn.tsx';
 import { setRegisterProperty } from '../../model/slice/RegisterSlice.ts';
 import cls from './style.module.scss';
 import { FormRef } from '../RegistrationSteps/RegistrationSteps.tsx';
-import { getCompanyUsers } from 'features/CompanyUsers/model/service/getCompanyUsers.ts';
+import { IUser } from 'shared/types/user.ts';
+import { getCompanyUsers, registerUser, updateUser } from 'entities/user/index.ts';
 
 interface IProps {
     className?: string;
     handleNext?: () => void;
     userRole: UserRoles;
     companyId?: number;
+    defaultValue?: IUser;
 }
 
 export const UserRegisterForm = forwardRef<FormRef, IProps>(
-    ({ className, handleNext, companyId, userRole }, ref) => {
+    ({ className, handleNext, companyId, userRole, defaultValue }, ref) => {
         const { t } = useTranslation('registration');
         const [form] = Form.useForm();
         const dispatch = useAppDispatch();
@@ -37,13 +38,29 @@ export const UserRegisterForm = forwardRef<FormRef, IProps>(
             },
         }));
 
-        const handleFinish = () => {
+        const handleRegister = () => {
             dispatch(registerUser({ param: formFields, userRole }))
                 .unwrap()
                 .then(() => {
                     if (companyId) dispatch(getCompanyUsers({ id: companyId }));
                     handleNext && handleNext();
                 });
+        };
+
+        const handleUpdate = () => {
+            dispatch(updateUser({ param: formFields, userId: defaultValue?.id || 0 }))
+                .unwrap()
+                .then(() => {
+                    handleNext && handleNext();
+                });
+        };
+
+        const handleFinish = () => {
+            if (!defaultValue?.id) {
+                handleRegister();
+            } else {
+                handleUpdate();
+            }
         };
         const handleChangeInput = (e: ChangeEvent<HTMLInputElement>, key: keyOfUserRegister) => {
             dispatch(setRegisterProperty({ key, data: e.target.value, type: 'User' }));
@@ -61,8 +78,8 @@ export const UserRegisterForm = forwardRef<FormRef, IProps>(
 
         return (
             <Form
-                initialValues={formFields}
-                fields={fieldsMaker(formFields)}
+                initialValues={defaultValue || formFields}
+                fields={!defaultValue?.id ? fieldsMaker(formFields) : []}
                 layout={'vertical'}
                 form={form}
                 onFinish={handleFinish}
