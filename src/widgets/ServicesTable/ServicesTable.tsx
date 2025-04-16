@@ -94,7 +94,9 @@ export const ServicesTable = () => {
     }, [parentId]);
 
     const renderList = filteredData?.length ? filteredData : nodes;
-
+    console.log('renderList', renderList);
+    console.log(' nodes', nodes);
+    console.log('filteredData', filteredData);
     return (
         <>
             {SearchComponent}

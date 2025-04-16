@@ -3,7 +3,7 @@ import { useState } from 'react';
 
 export const useSearch = <T,>(initialData: T[], searchFields: (keyof T)[]) => {
     const [, setSearchValue] = useState('');
-    const [filteredData, setFilteredData] = useState(initialData);
+    const [filteredData, setFilteredData] = useState<Array<T>>([]);
 
     const handleSearch = (value: string) => {
         setSearchValue(value);
@@ -11,7 +11,7 @@ export const useSearch = <T,>(initialData: T[], searchFields: (keyof T)[]) => {
 
         if (value.length) {
             setFilteredData(
-                initialData.filter((item) =>
+                initialData?.filter((item) =>
                     searchFields.some((field) => String(item[field]).toLowerCase().includes(lowerValue))
                 )
             );
@@ -26,7 +26,6 @@ export const useSearch = <T,>(initialData: T[], searchFields: (keyof T)[]) => {
             <br />
         </>
     );
-
     return {
         SearchComponent,
         filteredData,

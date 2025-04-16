@@ -59,7 +59,7 @@ export const GeneratePaymentCodeForm = () => {
                 onFinishFailed={onFinishFailed}
                 variant="filled"
             >
-                <SelectServiceParent required={true} />
+                <SelectServiceParent required={true} create />
                 <Form.Item
                     name="payerInn"
                     label="Инн"

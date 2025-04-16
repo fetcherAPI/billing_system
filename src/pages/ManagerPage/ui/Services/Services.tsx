@@ -1,4 +1,4 @@
-import { Button, Divider, Modal } from 'antd';
+import { Button, Modal } from 'antd';
 import { IService } from 'entities/Service/model/types/service';
 import { CreateServiceForm } from 'features/CreateService/ui/CreateServiceForm';
 import { useState } from 'react';
@@ -29,7 +29,8 @@ const Services = () => {
                     <Button type="primary" onClick={showModal}>
                         Добавить услугу
                     </Button>
-                    <Divider />
+                    <br />
+                    <br />
                     <Modal
                         title=""
                         open={isModalOpen}

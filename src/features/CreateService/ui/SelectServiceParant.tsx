@@ -9,11 +9,12 @@ import { getSplittersByChapterId } from 'entities/Service/model/service/getSplit
 type DefaultOptionType = GetProp<TreeSelectProps, 'treeData'>[number];
 
 interface IProps {
+    create?: boolean;
     defaultValue?: string;
     required?: boolean;
 }
 
-export const SelectServiceParent = ({ required, defaultValue }: IProps) => {
+export const SelectServiceParent = ({ required, defaultValue, create }: IProps) => {
     const [value, setValue] = useState<string>(defaultValue || '');
 
     const [treeData, setTreeData] = useState<Omit<DefaultOptionType, 'label'>[]>([]);
@@ -23,7 +24,7 @@ export const SelectServiceParent = ({ required, defaultValue }: IProps) => {
     const fetchChildren = async (parentId?: string) => {
         const response = await ServiceApi.getSerivcesTree({ rows: 40, first: 0 }, parentId);
         return response.data.content
-            .filter((el) => !el.isService)
+            .filter((el) => (create ? true : !el.isService))
             .map((item: IService) => ({
                 id: item.id,
                 pId: item.parentId,
