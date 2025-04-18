@@ -1,13 +1,13 @@
 import { Col, Layout, Row } from 'antd';
-import { LoginBtn } from 'features/Auth';
+import { LoginBtn, UserName } from 'features/Auth';
 import { Link } from 'react-router-dom';
 import { LangSwitcher } from 'shared/ui/LangSwitcher';
 import { RegisterBtn } from 'features/Register';
 import { BurgerMenu } from './BurgerMenu/ui/BurgerMenu';
 import { useEffect, useState } from 'react';
 import { HeaderLinks } from './HeaderLinks';
-import cls from './Header.module.scss';
 import { LogoutBtn } from 'features/Auth/ui/LogoutBtn';
+import cls from './Header.module.scss';
 
 const { Header: HeaderAntd } = Layout;
 
@@ -37,6 +37,9 @@ export const Header = () => {
                         <HeaderLinks />
 
                         <Row gutter={16}>
+                            <Col>
+                                <UserName />
+                            </Col>
                             <LangSwitcher />
                             <Col>
                                 <LogoutBtn />

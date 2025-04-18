@@ -40,9 +40,10 @@ export const RegistrationCompanyForm = forwardRef<FormRef, IProps>(
         }));
 
         const handleFinish = (values: any) => {
+            const { ateName, ...registerData } = formFields;
             const action = defaultValue?.inn
                 ? updateCompany({ param: values, companyId: companyId || 0 })
-                : registerCompany({ param: formFields });
+                : registerCompany({ param: registerData });
 
             createdCompanyId && handleNext
                 ? handleNext()
@@ -159,7 +160,9 @@ export const RegistrationCompanyForm = forwardRef<FormRef, IProps>(
                                 },
                             ]}
                         >
-                            <SelectLocality initialValue={defaultValue?.ateName || ''} />
+                            <SelectLocality
+                                initialValue={defaultValue?.ateName || formFields.ateName || ''}
+                            />
                         </Form.Item>
                         <Form.Item
                             name={'factAddress'}

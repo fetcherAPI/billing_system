@@ -88,7 +88,6 @@ export const PaymentCodesTable = () => {
     return (
         <>
             {SearchComponent}
-            <Divider />
             <Table
                 columns={columns}
                 dataSource={filteredData.length ? filteredData : codes}

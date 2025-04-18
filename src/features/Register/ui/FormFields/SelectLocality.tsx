@@ -36,11 +36,11 @@ export const SelectLocality = ({ initialValue }: { initialValue: string }) => {
         setTreeData((prevData) => [...prevData, ...children]);
     };
 
-    const onChange = (newValue: string) => {
+    const onChange = (newValue: string, node: any) => {
         dispatch(setRegisterProperty({ key: 'ateId', data: newValue, type: 'Company' }));
+        dispatch(setRegisterProperty({ key: 'ateName', data: node.title, type: 'Company' }));
         setValue(newValue);
     };
-
     return (
         <TreeSelect
             placeholder={initialValue}
@@ -48,7 +48,7 @@ export const SelectLocality = ({ initialValue }: { initialValue: string }) => {
             style={{ width: '100%' }}
             value={value || initialValue}
             dropdownStyle={{ maxHeight: 400, overflow: 'auto' }}
-            onChange={onChange}
+            onSelect={(data, node) => onChange(data, node)}
             loadData={onLoadData}
             treeData={treeData}
         />

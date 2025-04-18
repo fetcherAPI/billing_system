@@ -1,3 +1,5 @@
-export { LoginSliceReducer } from "./model/slice/AuthSlice.ts";
+export { UserName } from './ui/UserName.tsx';
 
-export { LoginBtn } from "./ui/LoginBtn";
+export { LoginSliceReducer } from './model/slice/AuthSlice.ts';
+
+export { LoginBtn } from './ui/LoginBtn';

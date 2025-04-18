@@ -25,7 +25,6 @@ const AuthSlice = createSlice({
                 state.userData = action.payload;
                 state.isLoading = false;
                 state.isAuth = true;
-                console.log('payload', action.payload);
                 onSuccessLogin(action.payload.token, action.payload.companyId);
             })
             .addCase(login.rejected, (state, action) => {
