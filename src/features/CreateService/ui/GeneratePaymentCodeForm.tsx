@@ -67,13 +67,6 @@ export const GeneratePaymentCodeForm = () => {
                 >
                     <Input />
                 </Form.Item>
-                <Form.Item
-                    name="payerName"
-                    label="Название"
-                    rules={[{ required: true }, { min: 3, message: 'Обязательно для заполнение' }]}
-                >
-                    <Input />
-                </Form.Item>
 
                 <Form.Item
                     name="destination"

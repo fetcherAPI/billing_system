@@ -5,7 +5,6 @@ import { LangSwitcher } from 'shared/ui/LangSwitcher';
 import { RegisterBtn } from 'features/Register';
 import { BurgerMenu } from './BurgerMenu/ui/BurgerMenu';
 import { useEffect, useState } from 'react';
-import { HeaderLinks } from './HeaderLinks';
 import { LogoutBtn } from 'features/Auth/ui/LogoutBtn';
 import cls from './Header.module.scss';
 
@@ -34,7 +33,7 @@ export const Header = () => {
                 </Link>
                 {!isMobile ? (
                     <>
-                        <HeaderLinks />
+                        {/* <HeaderLinks /> */}
 
                         <Row gutter={16}>
                             <Col>
