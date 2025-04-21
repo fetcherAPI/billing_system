@@ -31,7 +31,6 @@ const ServiceSlice = createSlice({
                 state.error = undefined;
             })
             .addCase(deleteService.fulfilled, (state, action) => {
-                console.log('action', action);
                 delete state.nodes[action.payload];
                 state.isLoading = false;
                 state.error = undefined;

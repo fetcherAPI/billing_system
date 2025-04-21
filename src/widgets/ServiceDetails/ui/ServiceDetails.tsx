@@ -6,6 +6,8 @@ import { BackButton } from 'shared/ui';
 export const ServiceDetailWidget = () => {
     const service = useSelector($service);
 
+    console.log('service', service);
+
     return (
         <>
             <Card title={`Service Details - ID: ${service?.id}`} bordered={true}>

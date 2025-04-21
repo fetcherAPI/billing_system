@@ -16,8 +16,9 @@ const SericeDetailPage = () => {
     const servicesList = useSelector($servicesList);
     const handleGetService = useDispatchToStore<{ id: number }>(getServiceById);
     const dispatch = useAppDispatch();
+
     useEffect(() => {
-        if (!servicesList.length && id) {
+        if (id) {
             handleGetService({ id: +id });
         }
         if (id) {

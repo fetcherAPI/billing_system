@@ -32,7 +32,6 @@ export const CompanyDetails = ({ companyId }: ICompanyDetails) => {
                         <Col span={18}>
                             <Descriptions title="Информация об организации" className={cls.detailsWrapper}>
                                 {[
-                                    { label: 'Форма собственности', value: companyDetails.inn },
                                     { label: 'ИНН Организации', value: companyDetails.inn },
                                     { label: 'Место', value: companyDetails.ateName },
                                     { label: 'Наименование орг', value: companyDetails.title },
@@ -96,9 +95,6 @@ UpdateModal.displayName = 'UpdateModal';
 const Skeleton = () => {
     return (
         <Descriptions title="Информация об организации" className={cls.detailsWrapper}>
-            <Descriptions.Item label="Форма собственности">
-                <SkeletonAnt.Input />
-            </Descriptions.Item>
             <Descriptions.Item label="ИНН Организации">
                 <SkeletonAnt.Input />
             </Descriptions.Item>
