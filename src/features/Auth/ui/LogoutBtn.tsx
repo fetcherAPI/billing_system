@@ -6,7 +6,7 @@ export const LogoutBtn = () => {
     const handleLogOut = () => {
         onFailedLogin();
         const url = window.location.origin;
-        window.location.replace(`${url}`);
+        window.location.replace(`${url}/billing/`);
         return;
     };
 

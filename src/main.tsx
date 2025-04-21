@@ -22,7 +22,7 @@ dayjs.extend(timezone);
 dayjs.extend(relativeTime);
 
 root.render(
-    <BrowserRouter>
+    <BrowserRouter basename="/billing">
         <StoreProvider>
             <ErrorBoundary>
                 <ConfigProvider

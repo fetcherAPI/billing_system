@@ -9,8 +9,7 @@ dotenv.config();
 
 // https://vitejs.dev/config/
 export default defineConfig({
-    base: '/',
-
+    base: '/billing',
     preview: {
         port: 3015,
         strictPort: false,
